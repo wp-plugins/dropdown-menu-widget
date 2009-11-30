@@ -10,7 +10,7 @@ Author URI: http://shailan.com
 
 define('SHAILAN_DM_VERSION','0.3');
 define('SHAILAN_DM_TITLE', 'Dropdown Menu');
-define('SHAILAN_DM_URL', '/dropdown-menu-widget/');
+define('SHAILAN_DM_FOLDER', 'dropdown-menu-widget');
 
 /**
  * Shailan Dropdown Widget Class
@@ -57,6 +57,7 @@ class shailan_DropdownWidget extends WP_Widget {
 	$themes = array(
 			'None'=>'NONE',
 			'Simple White'=>'simple',
+			'Wordpress Default'=>'wpdefault',
 			'Flickr theme'=>'flickr.com/default',
 			'Nvidia theme'=>'nvidia.com/default.advanced',
 			'Adobe theme'=>'adobe.com/default.advanced',
@@ -123,25 +124,26 @@ class shailan_DropdownWidget extends WP_Widget {
 			<div id="shailan-dropdown-menu-<?php echo $this->number; ?>" style="<?php echo $inline_style; ?>">
 				<div> 
 				  <table cellpadding="0" cellspacing="0"> 
-					<td> 
+					<tr><td> 
 					<ul class="dropdown dropdown-horizontal dropdown-upward">
 					
 					<li class="<?php if ( is_front_page() && !is_paged() ): ?>current_page_item<?php else: ?>page_item<?php endif; ?> blogtab"><a href="<?php echo get_option('home'); ?>/"><?php _e('Home'); ?></a></li>					
 		<?php wp_list_pages('sort_column=menu_order&depth=4&title_li=&exclude='.$exclude); ?>
-		<?php if($admin){ wp_register('<li class="admintab">','</li>'); } if($login){ ?><li class="page_item"><?php wp_loginout(); ?></a> <?php } ?>
+		<?php if($admin){ wp_register('<li class="admintab">','</li>'); } if($login){ ?><li class="page_item"><?php wp_loginout(); ?><?php } ?>
 		</ul></td>
-				  </table> 
+				  </tr></table> 
 				</div>
 			</div> 		
 		<?php } else { ?>
 			<div id="shailan-dropdown-menu<?php echo $this->number; ?>" style="background:<?php echo $background; ?>; <?php echo $additional_styles ?>">
 				<div> 
 				  <table cellpadding="0" cellspacing="0"> 
-					<td> 
+					<tr><td> 
 					<ul class="dropdown dropdown-horizontal dropdown-upward">
 		<?php wp_list_categories('order_by=name&depth=4&title_li=&exclude='.$exclude); ?>
+		<?php if($admin){ wp_register('<li class="admintab">','</li>'); } if($login){ ?><li class="page_item"><?php wp_loginout(); ?><?php } ?>		
 		</ul></td> 
-				  </table> 
+				  </tr></table> 
 				</div>
 			</div> 				
 		<?php } ?>
@@ -164,12 +166,13 @@ class shailan_DropdownWidget extends WP_Widget {
 		$login = (bool) $instance['login'];
 		$admin = (bool) $instance['admin'];
 		
-        ?>
-            <p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title (won\'t be shown):'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
+        ?>		
+		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title (won\'t be shown):'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
 			
-			<p><label for="<?php echo $this->get_field_id('type'); ?>"><?php _e('Type:'); ?><input type="radio" id="<?php echo $this->get_field_id('type'); ?>" name="<?php echo $this->get_field_name('type'); ?>" value="Pages" <?php if($type=='Pages'){ echo 'checked="checked"'; } ?> /><?php _e('Pages'); ?> <input type="radio" id="<?php echo $this->get_field_id('type'); ?>" name="<?php echo $this->get_field_name('type'); ?>" value="Categories" <?php if($type=='Categories'){ echo 'checked="checked"'; } ?>/><?php _e('Categories'); ?></label></p>
+		<p><?php _e('Type:'); ?> <label for="Pages"><input type="radio" id="Pages" name="<?php echo $this->get_field_name('type'); ?>" value="Pages" <?php if($type=='Pages'){ echo 'checked="checked"'; } ?> /> <?php _e('Pages'); ?></label> <label for="Categories"><input type="radio" id="Categories" name="<?php echo $this->get_field_name('type'); ?>" value="Categories" <?php if($type=='Categories'){ echo 'checked="checked"'; } ?>/> <?php _e('Categories'); ?></label></p>
 			
-			<p><label for="<?php echo $this->get_field_id('exclude'); ?>"><?php _e('Exclude:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('exclude'); ?>" name="<?php echo $this->get_field_name('exclude'); ?>" type="text" value="<?php echo $exclude; ?>" /></label></p>
+		<p><label for="<?php echo $this->get_field_id('exclude'); ?>"><?php _e('Exclude:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('exclude'); ?>" name="<?php echo $this->get_field_name('exclude'); ?>" type="text" value="<?php echo $exclude; ?>" /></label><br /> 
+		<small>Page IDs, separated by commas.</small></p>
 			
 		<p>
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('login'); ?>" name="<?php echo $this->get_field_name('login'); ?>"<?php checked( $login ); ?> />
@@ -177,12 +180,12 @@ class shailan_DropdownWidget extends WP_Widget {
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('admin'); ?>" name="<?php echo $this->get_field_name('admin'); ?>"<?php checked( $admin ); ?> />
 		<label for="<?php echo $this->get_field_id('admin'); ?>"><?php _e( 'Add Register/Site Admin' ); ?></label>
 		</p>
-			
-			<p><label for="<?php echo $this->get_field_id('style'); ?>"><?php _e('Inline Style:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('style'); ?>" name="<?php echo $this->get_field_name('style'); ?>" type="text" value="<?php echo $inline_style; ?>" /></label></p>
-			
+		
+		<p><label for="<?php echo $this->get_field_id('style'); ?>"><?php _e('Inline Style:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('style'); ?>" name="<?php echo $this->get_field_name('style'); ?>" type="text" value="<?php echo $inline_style; ?>" /></label><br /> 
+			<small>Applied to menu container &lt;div&gt;.</small></p>
 			
 <div class="widget-control-actions alignright">
-<p><a href="options-general.php?page=dropdown-menu">Menu Style</a> | <a href="http://shailan.com/wordpress/plugins/dropdown-menu">Visit plugin site</a></p>
+<p><small><a href="options-general.php?page=dropdown-menu">Menu Style</a> | <a href="http://shailan.com/wordpress/plugins/dropdown-menu">Visit plugin site</a></small></p>
 </div>
 			
         <?php 
@@ -194,11 +197,11 @@ class shailan_DropdownWidget extends WP_Widget {
 		$font_family = '"Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif';
 		$font_size = '12px';
 		
-		echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_URL.'/shailan.DropdownStyles.css" type="text/css">';
+		echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/shailan.DropdownStyles.css" type="text/css">';
 		//echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/shailan.DropDownMenu/dropdown.limited.css" type="text/css">';
 		
 		if($theme!='NONE'){
-			echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_URL.'/themes/'.$theme.'.css" type="text/css">';
+			echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/themes/'.$theme.'.css" type="text/css">';
 		}
 		echo '<style type="text/css" media="all">';
 		echo '    ul.dropdown {font-family: '.$font_family.' font-size:'.$font_size.'; }';
