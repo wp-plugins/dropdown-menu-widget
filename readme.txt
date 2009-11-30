@@ -46,3 +46,4 @@ This widget is intented for *wide header widget areas*, not regular sidebars. Yo
 
 * Add option to select vertical/linear.
 * Add some more themes.
+* Fix IE styles.
