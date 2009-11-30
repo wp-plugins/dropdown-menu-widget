@@ -3,26 +3,14 @@
 Plugin Name: Shailan Dropdown Menu Widget
 Plugin URI: http://shailan.com/wordpress/plugins/dropdown-menu
 Description: A multi widget to generate drop-down menus from your pages and categories. This widget is best used in <a href="http://shailan.com">Shailan.com</a> themes. You can find more widgets, plugins and themes at <a href="http://shailan.com">shailan.com</a>.
-Version: 0.2
+Version: 0.3
 Author: Matt Say
 Author URI: http://shailan.com
 */
 
-define('SHAILAN_DM_VERSION','0.1');
+define('SHAILAN_DM_VERSION','0.3');
 define('SHAILAN_DM_TITLE', 'Dropdown Menu');
-
-/**
-
-	== CHANGELOG ==
-	* 0.2 - Added login and register button options.
-	* 0.1 - First release.
-
-	== TODO == 
-	* add option to select vertical/linear.
-	* add some more themes.
-	* optimize.
-
-*/
+define('SHAILAN_DM_URL', '/dropdown-menu-widget/');
 
 /**
  * Shailan Dropdown Widget Class
@@ -68,11 +56,11 @@ class shailan_DropdownWidget extends WP_Widget {
 	
 	$themes = array(
 			'None'=>'NONE',
-			'Simple'=>'simple',
-			'Flickr'=>'flickr.com/default',
-			'Nvidia'=>'nvidia.com/default.advanced',
-			'Adobe'=>'adobe.com/default.advanced',
-			'MTV'=>'mtv.com/default.advanced'
+			'Simple White'=>'simple',
+			'Flickr theme'=>'flickr.com/default',
+			'Nvidia theme'=>'nvidia.com/default.advanced',
+			'Adobe theme'=>'adobe.com/default.advanced',
+			'MTV theme'=>'mtv.com/default.advanced'
 		);
 	
 	?>
@@ -206,11 +194,11 @@ class shailan_DropdownWidget extends WP_Widget {
 		$font_family = '"Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif';
 		$font_size = '12px';
 		
-		echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/shailan.DropDownMenu/shailan.DropdownStyles.css" type="text/css">';
+		echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_URL.'/shailan.DropdownStyles.css" type="text/css">';
 		//echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/shailan.DropDownMenu/dropdown.limited.css" type="text/css">';
 		
 		if($theme!='NONE'){
-			echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/shailan.DropDownMenu/themes/'.$theme.'.css" type="text/css">';
+			echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_URL.'/themes/'.$theme.'.css" type="text/css">';
 		}
 		echo '<style type="text/css" media="all">';
 		echo '    ul.dropdown {font-family: '.$font_family.' font-size:'.$font_size.'; }';

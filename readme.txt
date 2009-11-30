@@ -4,7 +4,7 @@ Donate link: http://shailan.com/donate
 Tags: css, dropdown, menu, widget, pages, categories
 Requires at least: 2.5
 Tested up to: 2.8.6
-Stable tag: 0.2
+Stable tag: 0.3
 
 This widget adds a beatiful, CSS only dropdown menu of pages OR categories of your blog.
 
@@ -30,5 +30,14 @@ This widget is intented for *wide header widget areas*, not regular sidebars. Yo
 
 == Changelog ==
 
+= 0.3 =
+* Fixed problems about styling. Now you can change dropdown menu style from the options page.
+
 = 0.2 = 
 * First public release.
+* Added login and register button options.
+
+== TODO == 
+
+* Add option to select vertical/linear.
+* Add some more themes.
