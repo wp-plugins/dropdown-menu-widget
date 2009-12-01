@@ -3,12 +3,12 @@
 Plugin Name: Shailan Dropdown Menu Widget
 Plugin URI: http://shailan.com/wordpress/plugins/dropdown-menu
 Description: A multi widget to generate drop-down menus from your pages and categories. This widget is best used in <a href="http://shailan.com">Shailan.com</a> themes. You can find more widgets, plugins and themes at <a href="http://shailan.com">shailan.com</a>.
-Version: 0.4.1
+Version: 0.4.2
 Author: Matt Say
 Author URI: http://shailan.com
 */
 
-define('SHAILAN_DM_VERSION','0.4.1');
+define('SHAILAN_DM_VERSION','0.4.2');
 define('SHAILAN_DM_TITLE', 'Dropdown Menu');
 define('SHAILAN_DM_FOLDER', 'dropdown-menu-widget');
 
@@ -135,7 +135,7 @@ class shailan_DropdownWidget extends WP_Widget {
 				</div>
 			</div> 		
 		<?php } else { ?>
-			<div id="shailan-dropdown-menu<?php echo $this->number; ?>" style="background:<?php echo $background; ?>; <?php echo $additional_styles ?>">
+			<div id="shailan-dropdown-menu<?php echo $this->number; ?>" style="<?php echo $inline_style; ?>">
 				<div> 
 				  <table cellpadding="0" cellspacing="0"> 
 					<tr><td> 
@@ -197,11 +197,10 @@ class shailan_DropdownWidget extends WP_Widget {
 		$font_family = '"Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif';
 		$font_size = '12px';
 		
-		echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/shailan.DropdownStyles.css" type="text/css">';
-		//echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/shailan.DropDownMenu/dropdown.limited.css" type="text/css">';
+		echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/shailan.DropdownStyles.css" type="text/css" />';
 		
 		if($theme!='NONE'){
-			echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/themes/'.$theme.'.css" type="text/css">';
+			echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/themes/'.$theme.'.css" type="text/css" />';
 		}
 		echo '<style type="text/css" media="all">';
 		echo '    ul.dropdown {font-family: '.$font_family.' font-size:'.$font_size.'; }';

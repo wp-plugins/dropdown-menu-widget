@@ -30,7 +30,12 @@ This widget is intented for *wide header widget areas*, not regular sidebars. Yo
 
 == Changelog ==
 
-= 0.4 =
+= 0.4.2 = 
+* Fixed XHTML error on link tags.
+* Fixed Inline Style error on categories dropdown menu.
+* Removed unnecessary files.
+
+= 0.4.1 =
 * Fixed XHTML issues.
 * Added WP Default theme.
 * Made some minor fixes to widget options form.
