@@ -4,7 +4,7 @@ Donate link: http://shailan.com/donate
 Tags: css, dropdown, menu, widget, pages, categories
 Requires at least: 2.5
 Tested up to: 2.8.6
-Stable tag: 0.4.2
+Stable tag: 0.4.3
 
 This widget adds a beatiful, CSS only dropdown menu of pages OR categories of your blog.
 
@@ -30,12 +30,15 @@ This widget is intented for *wide header widget areas*, not regular sidebars. Yo
 
 == Changelog ==
 
+= 0.4.3 =
+* New grayscale theme.
+* Template tag shailan_dropdown_menu() is available now. See usage for more info.
+* Template tag options added.
+
 = 0.4.2 = 
 * Fixed XHTML error on link tags.
 * Fixed Inline Style error on categories dropdown menu.
 * Removed unnecessary files.
-* Added template tag function.
-* Modified options page.
 
 = 0.4.1 =
 * Fixed XHTML issues.
