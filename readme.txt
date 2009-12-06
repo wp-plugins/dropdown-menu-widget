@@ -34,6 +34,8 @@ This widget is intented for *wide header widget areas*, not regular sidebars. Yo
 * Fixed XHTML error on link tags.
 * Fixed Inline Style error on categories dropdown menu.
 * Removed unnecessary files.
+* Added template tag function.
+* Modified options page.
 
 = 0.4.1 =
 * Fixed XHTML issues.

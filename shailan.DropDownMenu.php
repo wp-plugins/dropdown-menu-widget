@@ -22,7 +22,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		$this->WP_Widget('dropdown-menu', __('Dropdown Menu'), $widget_ops);
 		$this->alt_option_name = 'widget_dropdown_menu';
 		
-		if ( is_active_widget(false, false, $this->id_base) )
+		// if ( is_active_widget(false, false, $this->id_base) ) disabled for the_widget support.
 			add_action( 'wp_head', array(&$this, 'styles') );		
     }
 	
@@ -35,18 +35,40 @@ class shailan_DropdownWidget extends WP_Widget {
 	
 	function getOptionsPage(){	
 	// Option names
-	$theme_name = 'theme';
+	$theme_tag = 'theme';
+	
+	$type_tag = 'shailan_dm_type';
+	$exclude_tag = 'shailan_dm_exclude';
+	$inline_style_tag = 'shailan_dm_style';
+	$login_tag = 'shailan_dm_login';
+	$admin_tag = 'shailan_dm_admin';
+	
 	
 	// Read options 
-	$theme = get_option($theme_name);
+	$theme = get_option($theme_tag);
 	
-	
+	$type = get_option($type_tag);
+	$exclude = get_option($exclude_tag);
+	$inline_style = get_option($inline_style_tag);
+	$login = (bool) get_option($login_tag);
+	$admin = (bool) get_option($admin_tag);	
 	
 	if(wp_verify_nonce($_POST['_wpnonce'])){ // Form submitted. Save settings.
 		
-		$theme = $_POST[$theme_name];  //get_option('theme');
+		$theme = $_POST[$theme_tag];  //get_option('theme');
 		
-		update_option('theme', $theme);
+		$type = $_POST[$type_tag];
+		$exclude = $_POST[$exclude_tag];
+		$inline_style = $_POST[$inline_style_tag];
+		$login = (bool) $_POST[$login_tag];
+		$admin = (bool) $_POST[$admin_tag];	
+		
+		update_option($theme_tag, $theme);
+		update_option($type_tag, $type);
+		update_option($exclude_tag, $exclude);
+		update_option($inline_style_tag, $inline_style);
+		update_option($login_tag, $login);
+		update_option($admin_tag, $admin);
 		
 		?>
 		<div class="updated"><p><strong><?php _e('Options saved.', 'shailanDropdownMenu_domain'); ?></strong></p></div>
@@ -78,8 +100,8 @@ class shailan_DropdownWidget extends WP_Widget {
 
 <table class="form-table">
 <tr valign="top">
-<th scope="row"><label for="theme"><?php _e('Dropdown menu theme') ?></label></th>
-<td><select name="theme" id="theme">
+<th scope="row"><label for="<?php echo $theme_tag; ?>"><?php _e('Dropdown menu theme') ?></label></th>
+<td><select name="<?php echo $theme_tag; ?>" id="theme">
 
 <?php foreach($themes as $name=>$path){
 				$selected = ($theme == $path ? 'selected' : '');  
@@ -88,9 +110,33 @@ class shailan_DropdownWidget extends WP_Widget {
 
 </select><span class="description"><?php _e('You can choose a theme for your dropdown menu here.') ?></span></td>
 </tr>	
-
 </table>
-	
+
+<h2>Template tag options</h2>
+<p>You can use following template tag in your themes to display the dropdown menu. <br />
+<blockquote><code>&lt;?php if(function_exists('shailan_dropdown_menu'){ shailan_dropdown_menu(); } ?&gt;</code></blockquote> 
+Here you can set template tag options: 
+</p>
+
+<p><label for="<?php echo $title_tag; ?>"><?php _e('Title (won\'t be shown):'); ?> <input class="widefat" id="<?php echo $title_tag; ?>" name="<?php echo $title_tag; ?>" type="text" value="<?php echo $title; ?>" /></label></p>
+			
+		<p><?php _e('Type:'); ?> <label for="Pages"><input type="radio" id="Pages" name="<?php echo $type_tag; ?>" value="Pages" <?php if($type=='Pages'){ echo 'checked="checked"'; } ?> /> <?php _e('Pages'); ?></label> <label for="Categories"><input type="radio" id="Categories" name="<?php echo $type_tag; ?>" value="Categories" <?php if($type=='Categories'){ echo 'checked="checked"'; } ?>/> <?php _e('Categories'); ?></label></p>
+			
+		<p><label for="<?php echo $exclude_tag; ?>"><?php _e('Exclude:'); ?> <input class="widefat" id="<?php echo $exclude_tag; ?>" name="<?php echo $exclude_tag; ?>" type="text" value="<?php echo $exclude; ?>" /></label><br /> 
+		<small>Page IDs, separated by commas.</small></p>
+			
+		<p>
+		<input type="checkbox" class="checkbox" id="<?php echo $login_tag; ?>" name="<?php echo $login_tag; ?>"<?php checked( $login ); ?> />
+		<label for="<?php echo $login_tag; ?>"><?php _e( 'Add login/logout' ); ?></label><br />
+		<input type="checkbox" class="checkbox" id="<?php echo $admin_tag; ?>" name="<?php echo $admin_tag; ?>"<?php checked( $admin ); ?> />
+		<label for="<?php echo $admin_tag; ?>"><?php _e( 'Add Register/Site Admin' ); ?></label>
+		</p>
+		
+		<p><label for="<?php echo $inline_style_tag; ?>"><?php _e('Inline Style:'); ?> <input class="widefat" id="<?php echo $inline_style_tag; ?>" name="<?php echo $inline_style_tag; ?>" type="text" value="<?php echo $inline_style; ?>" /></label><br /> 
+			<small>Applied to menu container &lt;div&gt;.</small></p>
+			
+<p><small>NOTE: Widgets have their own options. Those options won't affect widgets.</small></p>
+
 	<p>NOTE : Onscreen theme edit will be available soon. Be sure to check <a href="http://shailan.com">shailan.com</a> regularly for updates.</p>
 </div>
 <p class="submit">
@@ -213,3 +259,21 @@ class shailan_DropdownWidget extends WP_Widget {
 // register widget
 add_action('widgets_init', create_function('', 'return register_widget("shailan_DropdownWidget");'));
 add_action('admin_menu', array('shailan_DropdownWidget', 'adminMenu'));
+
+function shailan_dropdown_menu(){
+	$type = get_option('shailan_dm_type');
+	$exclude = get_option('shailan_dm_exclude');
+	$inline_style = get_option('shailan_dm_style');
+	$login = (bool) get_option('shailan_dm_login');
+	$admin = (bool) get_option('shailan_dm_admin');
+	
+	$args = array(
+		'type' => $type,
+		'exclude' => $exclude,
+		'' => $inline_style,
+		'login' => $login,
+		'admin' => $admin
+		);
+
+	the_widget('shailan_DropdownWidget', $args);
+}
