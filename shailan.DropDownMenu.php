@@ -3,12 +3,12 @@
 Plugin Name: Shailan Dropdown Menu Widget
 Plugin URI: http://shailan.com/wordpress/plugins/dropdown-menu
 Description: A multi widget to generate drop-down menus from your pages and categories. This widget is best used in <a href="http://shailan.com">Shailan.com</a> themes. You can find more widgets, plugins and themes at <a href="http://shailan.com">shailan.com</a>.
-Version: 1.0
+Version: 1.0.0
 Author: Matt Say
 Author URI: http://shailan.com
 */
 
-define('SHAILAN_DM_VERSION','1.0');
+define('SHAILAN_DM_VERSION','1.0.0');
 define('SHAILAN_DM_TITLE', 'Dropdown Menu');
 define('SHAILAN_DM_FOLDER', 'dropdown-menu-widget');
 
@@ -98,6 +98,16 @@ class shailan_DropdownWidget extends WP_Widget {
 	
 <div class="wrap">
 <h2><?php echo esc_html( SHAILAN_DM_TITLE . ' ' . SHAILAN_DM_VERSION ); ?></h2>
+
+<div style="width:140px; padding:10px; border:1px solid #ddd; float:right;">
+Please support if you like this plugin:
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="10214058">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/tr_TR/i/scr/pixel.gif" width="1" height="1">
+</form>
+</div>
 
 <p>Dropdown menu creates a beautiful CSS only dropdown menu from your wordpress pages or categories. You can customize dropdown menu theme and settings here: </p>
 
