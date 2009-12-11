@@ -3,12 +3,12 @@
 Plugin Name: Shailan Dropdown Menu Widget
 Plugin URI: http://shailan.com/wordpress/plugins/dropdown-menu
 Description: A multi widget to generate drop-down menus from your pages and categories. This widget is best used in <a href="http://shailan.com">Shailan.com</a> themes. You can find more widgets, plugins and themes at <a href="http://shailan.com">shailan.com</a>.
-Version: 0.4.3
+Version: 1.0
 Author: Matt Say
 Author URI: http://shailan.com
 */
 
-define('SHAILAN_DM_VERSION','0.4.3');
+define('SHAILAN_DM_VERSION','1.0');
 define('SHAILAN_DM_TITLE', 'Dropdown Menu');
 define('SHAILAN_DM_FOLDER', 'dropdown-menu-widget');
 
@@ -18,7 +18,7 @@ define('SHAILAN_DM_FOLDER', 'dropdown-menu-widget');
 class shailan_DropdownWidget extends WP_Widget {
     /** constructor */
     function shailan_DropdownWidget() {
-		$widget_ops = array('classname' => 'shailan_DropdownWidget', 'description' => __( 'Dropdown page/category menu' ) );
+		$widget_ops = array('classname' => 'shailan-dropdown-menu', 'description' => __( 'Dropdown page/category menu' ) );
 		$this->WP_Widget('dropdown-menu', __('Dropdown Menu'), $widget_ops);
 		$this->alt_option_name = 'widget_dropdown_menu';
 		
@@ -42,7 +42,8 @@ class shailan_DropdownWidget extends WP_Widget {
 	$inline_style_tag = 'shailan_dm_style';
 	$login_tag = 'shailan_dm_login';
 	$admin_tag = 'shailan_dm_admin';
-	
+	$vertical_tag = 'shailan_dm_vertical';
+	$width_tag = 'shailan_dm_width';	
 	
 	// Read options 
 	$theme = get_option($theme_tag);
@@ -52,6 +53,8 @@ class shailan_DropdownWidget extends WP_Widget {
 	$inline_style = get_option($inline_style_tag);
 	$login = (bool) get_option($login_tag);
 	$admin = (bool) get_option($admin_tag);	
+	$vertical = (bool) get_option($vertical_tag);
+	$width = (int) get_option($width_tag);
 	
 	if(wp_verify_nonce($_POST['_wpnonce'])){ // Form submitted. Save settings.
 		
@@ -62,6 +65,8 @@ class shailan_DropdownWidget extends WP_Widget {
 		$inline_style = $_POST[$inline_style_tag];
 		$login = (bool) $_POST[$login_tag];
 		$admin = (bool) $_POST[$admin_tag];	
+		$vertical = (bool) $_POST[$vertical_tag];
+		$width = (int) $_POST[$width];
 		
 		update_option($theme_tag, $theme);
 		update_option($type_tag, $type);
@@ -69,6 +74,8 @@ class shailan_DropdownWidget extends WP_Widget {
 		update_option($inline_style_tag, $inline_style);
 		update_option($login_tag, $login);
 		update_option($admin_tag, $admin);
+		update_option($vertical_tag, $vertical);
+		update_option($width_tag, $width);
 		
 		?>
 		<div class="updated"><p><strong><?php _e('Options saved.', 'shailanDropdownMenu_domain'); ?></strong></p></div>
@@ -81,10 +88,10 @@ class shailan_DropdownWidget extends WP_Widget {
 			'Simple White'=>'simple',
 			'Wordpress Default'=>'wpdefault',
 			'Grayscale'=>'grayscale',
-			'Flickr theme'=>'flickr.com/default',
+			'Flickr theme'=>'flickr.com/default.ultimate',
 			'Nvidia theme'=>'nvidia.com/default.advanced',
 			'Adobe theme'=>'adobe.com/default.advanced',
-			'MTV theme'=>'mtv.com/default.advanced'
+			'MTV theme'=>'mtv.com/default.ultimate'
 		);
 	
 	?>
@@ -108,17 +115,18 @@ class shailan_DropdownWidget extends WP_Widget {
 				echo '<option value="'.$path.'" '.$selected.'>'.$name.'</option>';
 			} ?>
 
-</select><span class="description"><?php _e('You can choose a theme for your dropdown menu here.') ?></span></td>
-</tr>	
+</select> <span class="description"><?php _e('You can choose a theme for your dropdown menu here.') ?></span></td>
+</tr>
 </table>
 
+<fieldset width="400">
 <h2>Template tag options</h2>
 <p>You can use following template tag in your themes to display the dropdown menu. <br />
-<blockquote><code>&lt;?php if(function_exists('shailan_dropdown_menu'){ shailan_dropdown_menu(); } ?&gt;</code></blockquote> 
+<blockquote><code>&lt;?php if(function_exists('shailan_dropdown_menu')){ shailan_dropdown_menu(); } ?&gt;</code></blockquote> 
 Here you can set template tag options: 
 </p>
-
-<p><label for="<?php echo $title_tag; ?>"><?php _e('Title (won\'t be shown):'); ?> <input class="widefat" id="<?php echo $title_tag; ?>" name="<?php echo $title_tag; ?>" type="text" value="<?php echo $title; ?>" /></label></p>
+<div style="padding:10px; border:1px solid #ddd; width:275px; ">
+<!-- <p><label for="<?php echo $title_tag; ?>"><?php _e('Title (won\'t be shown):'); ?> <input class="widefat" id="<?php echo $title_tag; ?>" name="<?php echo $title_tag; ?>" type="text" value="<?php echo $title; ?>" /></label></p> -->
 			
 		<p><?php _e('Type:'); ?> <label for="Pages"><input type="radio" id="Pages" name="<?php echo $type_tag; ?>" value="Pages" <?php if($type=='Pages'){ echo 'checked="checked"'; } ?> /> <?php _e('Pages'); ?></label> <label for="Categories"><input type="radio" id="Categories" name="<?php echo $type_tag; ?>" value="Categories" <?php if($type=='Categories'){ echo 'checked="checked"'; } ?>/> <?php _e('Categories'); ?></label></p>
 			
@@ -129,13 +137,17 @@ Here you can set template tag options:
 		<input type="checkbox" class="checkbox" id="<?php echo $login_tag; ?>" name="<?php echo $login_tag; ?>"<?php checked( $login ); ?> />
 		<label for="<?php echo $login_tag; ?>"><?php _e( 'Add login/logout' ); ?></label><br />
 		<input type="checkbox" class="checkbox" id="<?php echo $admin_tag; ?>" name="<?php echo $admin_tag; ?>"<?php checked( $admin ); ?> />
-		<label for="<?php echo $admin_tag; ?>"><?php _e( 'Add Register/Site Admin' ); ?></label>
+		<label for="<?php echo $admin_tag; ?>"><?php _e( 'Add Register/Site Admin' ); ?></label><br />
+		<input type="checkbox" class="checkbox" id="<?php echo $vertical_tag; ?>" name="<?php echo $vertical_tag; ?>"<?php checked( $vertical ); ?> />
+		<label for="<?php echo $vertical_tag; ?>"><?php _e( 'Vertical menu' ); ?></label>
 		</p>
 		
 		<p><label for="<?php echo $inline_style_tag; ?>"><?php _e('Inline Style:'); ?> <input class="widefat" id="<?php echo $inline_style_tag; ?>" name="<?php echo $inline_style_tag; ?>" type="text" value="<?php echo $inline_style; ?>" /></label><br /> 
 			<small>Applied to menu container &lt;div&gt;.</small></p>
 			
 <p><small>NOTE: Widgets have their own options. Those options won't affect widgets.</small></p>
+</div>
+</fieldset>
 
 	<p>NOTE : Onscreen theme edit will be available soon. Be sure to check <a href="http://shailan.com">shailan.com</a> regularly for updates.</p>
 </div>
@@ -160,41 +172,32 @@ Here you can set template tag options:
 		$inline_style = $instance['style'];
 		$login = (bool) $instance['login'];
 		$admin = (bool) $instance['admin'];
+		$vertical = (bool) $instance['vertical'];
+		
+		$orientation = ($vertical ? 'dropdown-vertical' : 'dropdown-horizontal');
 		
         ?>
               <?php echo $before_widget; ?>
                 <?php /*if ( $title )
                         echo $before_title . $title . $after_title;*/  // Title is disabled for this widget 
 				?>
-		
-		<?php if($type == 'Pages'){ ?>
-			<div id="shailan-dropdown-menu-<?php echo $this->number; ?>" style="<?php echo $inline_style; ?>">
+
+			<div id="shailan-dropdown-wrapper-<?php echo $this->number; ?>" style="<?php echo $inline_style; ?>">
 				<div> 
 				  <table cellpadding="0" cellspacing="0"> 
 					<tr><td> 
-					<ul class="dropdown dropdown-horizontal dropdown-upward">
-					
-					<li class="<?php if ( is_front_page() && !is_paged() ): ?>current_page_item<?php else: ?>page_item<?php endif; ?> blogtab"><a href="<?php echo get_option('home'); ?>/"><?php _e('Home'); ?></a></li>					
-		<?php wp_list_pages('sort_column=menu_order&depth=4&title_li=&exclude='.$exclude); ?>
-		<?php if($admin){ wp_register('<li class="admintab">','</li>'); } if($login){ ?><li class="page_item"><?php wp_loginout(); ?><?php } ?>
-		</ul></td>
-				  </tr></table> 
-				</div>
-			</div> 		
-		<?php } else { ?>
-			<div id="shailan-dropdown-menu<?php echo $this->number; ?>" style="<?php echo $inline_style; ?>">
-				<div> 
-				  <table cellpadding="0" cellspacing="0"> 
-					<tr><td> 
-					<ul class="dropdown dropdown-horizontal dropdown-upward">
-		<?php wp_list_categories('order_by=name&depth=4&title_li=&exclude='.$exclude); ?>
-		<?php if($admin){ wp_register('<li class="admintab">','</li>'); } if($login){ ?><li class="page_item"><?php wp_loginout(); ?><?php } ?>		
-		</ul></td> 
+					<ul class="dropdown <?php echo $orientation; ?>">
+					<?php if($type == 'Pages'){ ?>
+						<li class="<?php if ( is_front_page() && !is_paged() ): ?>current_page_item<?php else: ?>page_item<?php endif; ?> blogtab"><a href="<?php echo get_option('home'); ?>/"><?php _e('Home'); ?></a></li>	
+						<?php wp_list_pages('sort_column=menu_order&depth=4&title_li=&exclude='.$exclude); ?>
+					<?php } else { ?>
+						<?php wp_list_categories('order_by=name&depth=4&title_li=&exclude='.$exclude); ?>			
+					<?php } ?>
+						<?php if($admin){ wp_register('<li class="admintab">','</li>'); } if($login){ ?><li class="page_item"><?php wp_loginout(); ?><?php } ?>
+					</ul></td>
 				  </tr></table> 
 				</div>
 			</div> 				
-		<?php } ?>
-		
               <?php echo $after_widget; ?>
         <?php
     }
@@ -212,6 +215,7 @@ Here you can set template tag options:
 		$inline_style = $instance['style'];
 		$login = (bool) $instance['login'];
 		$admin = (bool) $instance['admin'];
+		$vertical = (bool) $instance['vertical'];
 		
         ?>		
 		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title (won\'t be shown):'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
@@ -225,7 +229,9 @@ Here you can set template tag options:
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('login'); ?>" name="<?php echo $this->get_field_name('login'); ?>"<?php checked( $login ); ?> />
 		<label for="<?php echo $this->get_field_id('login'); ?>"><?php _e( 'Add login/logout' ); ?></label><br />
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('admin'); ?>" name="<?php echo $this->get_field_name('admin'); ?>"<?php checked( $admin ); ?> />
-		<label for="<?php echo $this->get_field_id('admin'); ?>"><?php _e( 'Add Register/Site Admin' ); ?></label>
+		<label for="<?php echo $this->get_field_id('admin'); ?>"><?php _e( 'Add Register/Site Admin' ); ?></label><br />
+		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('vertical'); ?>" name="<?php echo $this->get_field_name('vertical'); ?>"<?php checked( $vertical ); ?> />
+		<label for="<?php echo $this->get_field_id('vertical'); ?>"><?php _e( 'Vertical menu ' ); ?></label>
 		</p>
 		
 		<p><label for="<?php echo $this->get_field_id('style'); ?>"><?php _e('Inline Style:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('style'); ?>" name="<?php echo $this->get_field_name('style'); ?>" type="text" value="<?php echo $inline_style; ?>" /></label><br /> 
@@ -241,17 +247,19 @@ Here you can set template tag options:
 	function styles($instance){
 		$theme = get_option('theme');
 		
-		$font_family = '"Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif';
-		$font_size = '12px';
-		
 		echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/shailan.DropdownStyles.css" type="text/css" />';
 		
 		if($theme!='NONE'){
 			echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/themes/'.$theme.'.css" type="text/css" />';
 		}
+		
+		// Font family and font size
+		$font_family = '"Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif';
+		$font_size = '12px';
 		echo '<style type="text/css" media="all">';
 		echo '    ul.dropdown {font-family: '.$font_family.' font-size:'.$font_size.'; }';
 		echo '</style>';
+		
 	}
 
 } // class shailan_DropdownWidget
@@ -266,13 +274,15 @@ function shailan_dropdown_menu(){
 	$inline_style = get_option('shailan_dm_style');
 	$login = (bool) get_option('shailan_dm_login');
 	$admin = (bool) get_option('shailan_dm_admin');
+	$vertical = (bool) get_option('shailan_dm_vertical');
 	
 	$args = array(
 		'type' => $type,
 		'exclude' => $exclude,
 		'style' => $inline_style,
 		'login' => $login,
-		'admin' => $admin
+		'admin' => $admin,
+		'vertical' => $vertical
 		);
 
 	the_widget('shailan_DropdownWidget', $args);

@@ -15,10 +15,6 @@
  *
  */
 
-ul.dropdown li {
- line-height: 1.3em;
- vertical-align: middle;
-}
 ul.dropdown li.hover,
 ul.dropdown li:hover {
  z-index: 98;
@@ -42,14 +38,14 @@ ul.dropdown {
   font-size:1.1em;
 }
 	ul.dropdown li {
-	 padding: 7px 20px;
-	 border-style: solid;
-	 border-width: 0px 1px 0px 0px;
-	 border-color: #ddd;
-	 background-color: #f6f6f6;
-	 color: #000;
-         text-align:center;
+		border-style: solid;
+		border-width: 0px 1px 0px 0px;
+		border-color: #ddd;
+		background-color: #f6f6f6;
+		color: #000;
+		text-align:center;
 	}
+	ul.dropdown li a{ padding: 7px 20px; }
 	ul.dropdown li.hover,
 	ul.dropdown li:hover {
 	 background-color: #eee;
@@ -107,4 +103,4 @@ li.current_page_item ul a, li.current_page_item ul a:visited, li.current_page_it
 li.current_page_ancestor a,li.current_page_ancestor a:visited, li.current_page_ancestor a:link {text-decoration:underline;}
 li.current_page_ancestor ul a, li.current_page_ancestor ul a:visited, li.current_page_ancestor ul a:link {text-decoration:none;}
 
-.shailan_DropdownWidget{background-color:#efefef; border-bottom:1px solid #ddd; border-top:1px solid #ddd;}
+.shailan-dropdown-menu{background-color:#efefef; border-bottom:1px solid #ddd; border-top:1px solid #ddd;}

@@ -110,7 +110,7 @@
 		/* NON-FIRST LEVEL */
 
 		ul.dropdown ul {
-		 left: auto;
+		 /*left: auto;*/
 		 right: 0;
 		 width: 150px;
 		 margin-top: -1px;
@@ -128,7 +128,7 @@
 		 right: auto;
 		 left: 100%;
 		 margin-top: 0;
-		 border-top: none;
+		 /* border-top: none; */
 		 border-left: none;
 		 font-weight: normal;
 		}
@@ -174,4 +174,4 @@ ul.dropdown ul ul ul *.dir { border-color: #767676 #404040 #404040; }
 #n-movies ul ul a.dir { width: 111px; }
 #n-movies ul ul ul { left: 100%; }
 
-.shailan_DropdownWidget{background-color:#000;}
+.shailan-dropdown-menu{background-color: #3a3a3a;}

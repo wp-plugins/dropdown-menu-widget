@@ -30,9 +30,16 @@ This widget is intented for *wide header widget areas*, not regular sidebars. Yo
 
 == Changelog ==
 
+= 1.0 =
+* Added vertical dropdown menu functionality.
+* Fixed widget code.
+* Changed dropdown widget classname to : shailan-dropdown-menu
+* Changed wrapper div classname to : shailan-dropdown-wrapper
+* Moved li item paddings to anchor elements.
+
 = 0.4.3 =
 * New grayscale theme.
-* Template tag shailan_dropdown_menu() is available now. See usage for more info.
+* Template tag `shailan_dropdown_menu()` is available now. See usage for more info.
 * Template tag options added.
 
 = 0.4.2 = 
