@@ -3,12 +3,12 @@
 Plugin Name: Shailan Dropdown Menu Widget
 Plugin URI: http://shailan.com/wordpress/plugins/dropdown-menu
 Description: A multi widget to generate drop-down menus from your pages and categories. This widget is best used in <a href="http://shailan.com">Shailan.com</a> themes. You can find more widgets, plugins and themes at <a href="http://shailan.com">shailan.com</a>.
-Version: 1.0.0
+Version: 1.1.0
 Author: Matt Say
 Author URI: http://shailan.com
 */
 
-define('SHAILAN_DM_VERSION','1.0.0');
+define('SHAILAN_DM_VERSION','1.1.0');
 define('SHAILAN_DM_TITLE', 'Dropdown Menu');
 define('SHAILAN_DM_FOLDER', 'dropdown-menu-widget');
 
@@ -111,7 +111,7 @@ Please support if you like this plugin:
 
 <p>Dropdown menu creates a beautiful CSS only dropdown menu from your wordpress pages or categories. You can customize dropdown menu theme and settings here: </p>
 
-<form method="post" action="">
+<form id="frmShailanDm" name="frmShailanDm" method="post" action="">
 
 <?php wp_nonce_field(); ?>
 
@@ -199,7 +199,15 @@ Here you can set template tag options:
 					<ul class="dropdown <?php echo $orientation; ?>">
 					<?php if($type == 'Pages'){ ?>
 						<li class="<?php if ( is_front_page() && !is_paged() ): ?>current_page_item<?php else: ?>page_item<?php endif; ?> blogtab"><a href="<?php echo get_option('home'); ?>/"><?php _e('Home'); ?></a></li>	
-						<?php wp_list_pages('sort_column=menu_order&depth=4&title_li=&exclude='.$exclude); ?>
+						<?php 
+						$page_walker = new shailan_PageWalker();
+						wp_list_pages(array(
+							'walker'=>$page_walker,
+							'sort_column'=>'menu_order',
+							'depth'=>'4',
+							'title_li'=>'',
+							'exclude'=>$exclude
+							)); ?>
 					<?php } else { ?>
 						<?php wp_list_categories('order_by=name&depth=4&title_li=&exclude='.$exclude); ?>			
 					<?php } ?>
@@ -257,7 +265,7 @@ Here you can set template tag options:
 	function styles($instance){
 		$theme = get_option('theme');
 		
-		echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/shailan.DropdownStyles.css" type="text/css" />';
+		echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/shailan-dropdown.css" type="text/css" />';
 		
 		if($theme!='NONE'){
 			echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/themes/'.$theme.'.css" type="text/css" />';
@@ -277,6 +285,8 @@ Here you can set template tag options:
 // register widget
 add_action('widgets_init', create_function('', 'return register_widget("shailan_DropdownWidget");'));
 add_action('admin_menu', array('shailan_DropdownWidget', 'adminMenu'));
+
+include('shailan-page-walker.php'); // Load custom page walker
 
 function shailan_dropdown_menu(){
 	$type = get_option('shailan_dm_type');
