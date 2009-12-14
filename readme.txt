@@ -17,7 +17,7 @@ Dropdown Menu widget adds a beautiful, CSS only dropdown menu, listing pages OR 
 1. Upload the plugin to your `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Go to Appearance -> Widgets to add this widget to one of your sidebars
-1. You can also use `<?php shailan_dropdown_menu(); ?>` in your template tag to display the menu.
+1. You can also use `<?php shailan_dropdown_menu(); ?>` in your template to display the menu.
 
 == Frequently Asked Questions ==
 
