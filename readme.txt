@@ -4,19 +4,20 @@ Donate link: http://shailan.com/donate
 Tags: css, dropdown, menu, widget, pages, categories
 Requires at least: 2.5
 Tested up to: 2.8.6
-Stable tag: 0.4.3
+Stable tag: 1.1.0
 
-This widget adds a beatiful, CSS only dropdown menu of pages OR categories of your blog.
+This widget adds a beatiful vertical/horizontal CSS only dropdown menu of pages OR categories of your blog.
 
 == Description ==
 
-Dropdown Menu widget adds a beautiful, CSS only dropdown menu, listing pages OR categories of your blog. It supports multiple instances. You can select a theme for your widget from the Dropdown Menu Settings page. If you don't like ready-made templates you can create your own theme for the menus using CSS. Hope you like it.
+Dropdown Menu widget adds a beautiful, CSS only dropdown menu, listing pages OR categories of your blog. It allows you to chose vertical or horizontal. It supports multiple instances. You can select a theme for your widget from the Dropdown Menu Settings page. If you don't like ready-made templates you can create your own theme for the menus using CSS. Hope you like it.
 
 == Installation ==
 
-1. Upload `shailan.DropdownMenu` folder to your `/wp-content/plugins/` directory
+1. Upload the plugin to your `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Go to Appearance -> Widgets to add this widget to one of your sidebars
+1. You can also use `<?php shailan_dropdown_menu(); ?>` in your template tag to display the menu.
 
 == Frequently Asked Questions ==
 
@@ -30,12 +31,12 @@ This widget is intented for *wide header widget areas*, not regular sidebars. Yo
 
 == Changelog ==
 
-= 1.1 =
+= 1.1.0 =
 * Added custom walker class to disable title attributes on menu items.
 * Renamed class and style files.
 * Fixed default theme.
 
-= 1.0 =
+= 1.0.0 =
 * Added vertical dropdown menu functionality.
 * Fixed widget code.
 * Changed dropdown widget classname to : shailan-dropdown-menu
