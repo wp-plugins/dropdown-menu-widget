@@ -4,7 +4,7 @@ Donate link: http://shailan.com/donate
 Tags: css, dropdown, menu, widget, pages, categories
 Requires at least: 2.5
 Tested up to: 2.8.6
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 
 This widget adds a beatiful vertical/horizontal CSS only dropdown menu of pages OR categories of your blog.
 
@@ -30,6 +30,9 @@ This widget is intented for *wide header widget areas*, not regular sidebars. Yo
 1. A preview of the widget in action.
 
 == Changelog ==
+
+= 1.2.0 =
+* Removed title attributes for the categories dropdown menu items.
 
 = 1.1.0 =
 * Added custom walker class to disable title attributes on menu items.

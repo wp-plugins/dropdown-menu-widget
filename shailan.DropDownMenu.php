@@ -209,7 +209,15 @@ Here you can set template tag options:
 							'exclude'=>$exclude
 							)); ?>
 					<?php } else { ?>
-						<?php wp_list_categories('order_by=name&depth=4&title_li=&exclude='.$exclude); ?>			
+						<?php 
+						$cat_walker = new shailan_CategoryWalker();
+						wp_list_categories(array(
+							'walker'=>$cat_walker,
+							'order_by'=>'name',
+							'depth'=>'4'
+							'title_li'=>'',
+							'exclude'=>$exclude
+							)); ?>			
 					<?php } ?>
 						<?php if($admin){ wp_register('<li class="admintab">','</li>'); } if($login){ ?><li class="page_item"><?php wp_loginout(); ?><?php } ?>
 					</ul></td>
@@ -287,6 +295,7 @@ add_action('widgets_init', create_function('', 'return register_widget("shailan_
 add_action('admin_menu', array('shailan_DropdownWidget', 'adminMenu'));
 
 include('shailan-page-walker.php'); // Load custom page walker
+include('shailan-category-walker.php'); // Load custom category walker
 
 function shailan_dropdown_menu(){
 	$type = get_option('shailan_dm_type');
