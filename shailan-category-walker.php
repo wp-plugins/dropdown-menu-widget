@@ -3,7 +3,7 @@
 /**
  * Create HTML list of categories.
  *
- * @package WordPress
+ * @package Shailan Dropdown Menu Widget
  * @since 2.1.0
  * @uses Walker
  */
