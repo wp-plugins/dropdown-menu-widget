@@ -199,7 +199,7 @@ Here you can set template tag options:
 					<tr><td> 
 					<ul class="dropdown <?php echo $orientation; ?>">
 					<?php if($type == 'Pages'){ ?>
-						<li class="<?php if ( is_front_page() && !is_paged() ): ?>current_page_item<?php else: ?>page_item<?php endif; ?> blogtab"><a href="<?php echo get_option('home'); ?>/"><?php _e('Home'); ?></a></li>	
+						<li class="<?php if ( is_front_page() && !is_paged() ): ?>current_page_item<?php else: ?>page_item<?php endif; ?> blogtab"><a href="<?php echo get_option('home'); ?>/"><span><?php _e('Home'); ?></span></a></li>	
 						<?php 
 						$page_walker = new shailan_PageWalker();
 						wp_list_pages(array(
