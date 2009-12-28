@@ -89,6 +89,7 @@ class shailan_DropdownWidget extends WP_Widget {
 			'Wordpress Default'=>'wpdefault',
 			'Grayscale'=>'grayscale',
 			'Aqua'=>'aqua',
+			'Tabs Blue'=> 'tabs-blue',
 			'Flickr theme'=>'flickr.com/default.ultimate',
 			'Nvidia theme'=>'nvidia.com/default.advanced',
 			'Adobe theme'=>'adobe.com/default.advanced',
