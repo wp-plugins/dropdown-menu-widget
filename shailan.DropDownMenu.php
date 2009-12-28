@@ -185,6 +185,7 @@ Here you can set template tag options:
 		$login = (bool) $instance['login'];
 		$admin = (bool) $instance['admin'];
 		$vertical = (bool) $instance['vertical'];
+		$align = $instance['align'];
 		
 		$orientation = ($vertical ? 'dropdown-vertical' : 'dropdown-horizontal');
 		
@@ -195,7 +196,23 @@ Here you can set template tag options:
 				?>
 
 			<div id="shailan-dropdown-wrapper-<?php echo $this->number; ?>" style="<?php echo $inline_style; ?>">
-				<div> 
+				<div 
+				<?php 
+					switch($align){
+						case 'right':
+							echo ' align="right"';
+						break;
+						case 'center':
+							echo ' align="center"';
+						break;
+						
+						case 'left':
+						default:						
+					
+					}
+				
+				?>
+				> 
 				  <table cellpadding="0" cellspacing="0"> 
 					<tr><td> 
 					<ul class="dropdown <?php echo $orientation; ?>">
@@ -244,6 +261,7 @@ Here you can set template tag options:
 		$login = (bool) $instance['login'];
 		$admin = (bool) $instance['admin'];
 		$vertical = (bool) $instance['vertical'];
+		$align = $instance['align'];
 		
         ?>		
 		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title (won\'t be shown):'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
@@ -261,6 +279,8 @@ Here you can set template tag options:
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('vertical'); ?>" name="<?php echo $this->get_field_name('vertical'); ?>"<?php checked( $vertical ); ?> />
 		<label for="<?php echo $this->get_field_id('vertical'); ?>"><?php _e( 'Vertical menu ' ); ?></label>
 		</p>
+		
+		<p><?php _e('Align:'); ?> <label for="left"><input type="radio" id="left" name="<?php echo $this->get_field_name('align'); ?>" value="left" <?php if($align=='left'){ echo 'checked="checked"'; } ?> /> <?php _e('Left'); ?></label> <label for="center"><input type="radio" id="center" name="<?php echo $this->get_field_name('align'); ?>" value="center" <?php if($align=='center'){ echo 'checked="checked"'; } ?>/> <?php _e('Center'); ?></label> <label for="right"><input type="radio" id="right" name="<?php echo $this->get_field_name('align'); ?>" value="right" <?php if($align=='right'){ echo 'checked="checked"'; } ?>/> <?php _e('Right'); ?></label></p>
 		
 		<p><label for="<?php echo $this->get_field_id('style'); ?>"><?php _e('Inline Style:'); ?> <input class="widefat" id="<?php echo $this->get_field_id('style'); ?>" name="<?php echo $this->get_field_name('style'); ?>" type="text" value="<?php echo $inline_style; ?>" /></label><br /> 
 			<small>Applied to menu container &lt;div&gt;.</small></p>
