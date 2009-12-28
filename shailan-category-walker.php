@@ -89,7 +89,7 @@ class shailan_CategoryWalker extends Walker {
 			if ( empty($feed_image) )
 				$link .= '(';
 
-			$link .= '<a href="' . get_category_feed_link($category->term_id, $feed_type) . '"';
+			$link .= '<span><a href="' . get_category_feed_link($category->term_id, $feed_type) . '"';
 
 			if ( empty($feed) )
 				$alt = ' alt="' . sprintf(__( 'Feed for all posts filed under %s' ), $cat_name ) . '"';
@@ -100,7 +100,7 @@ class shailan_CategoryWalker extends Walker {
 				//$link .= $title; // @shailan: removed title
 			}
 
-			$link .= '>';
+			$link .= '></span>';
 
 			if ( empty($feed_image) )
 				$link .= $name;
