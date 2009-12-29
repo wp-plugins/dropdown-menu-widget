@@ -3,14 +3,14 @@ Contributors: mattsay
 Donate link: http://shailan.com/donate
 Tags: css, dropdown, menu, widget, pages, categories
 Requires at least: 2.5
-Tested up to: 2.8.6
+Tested up to: 2.9
 Stable tag: 1.2.3
 
 This widget adds a beatiful vertical/horizontal CSS only dropdown menu of pages OR categories of your blog.
 
 == Description ==
 
-Dropdown Menu widget adds a beautiful, CSS only dropdown menu, listing pages OR categories of your blog. It allows you to chose vertical or horizontal. It supports multiple instances. You can select a theme for your widget from the Dropdown Menu Settings page. If you don't like ready-made templates you can create your own theme for the menus using CSS. Hope you like it.
+Dropdown Menu widget adds a beautiful, CSS only dropdown menu, listing pages OR categories of your blog. It allows you to chose vertical or horizontal. It supports multiple instances. You can select a theme for your widget from the Dropdown Menu Settings page. If you don't like ready-made templates you can create your own theme for the menus using CSS. Hope you like it. Want your own dropdown theme? [Request theme](http://shailan.com)
 
 == Installation ==
 
@@ -18,12 +18,25 @@ Dropdown Menu widget adds a beautiful, CSS only dropdown menu, listing pages OR 
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. Go to Appearance -> Widgets to add this widget to one of your sidebars
 1. You can also use `<?php shailan_dropdown_menu(); ?>` in your template to display the menu.
+1. Don't forget to change menu settings from Settings -> Dropdown Menu panel.
 
 == Frequently Asked Questions ==
 
 = I added this widget but it looks all weird! =
 
 This widget is intented for *wide header widget areas*, not regular sidebars. You can add a sidebar to your theme or you can get a *all-widget* theme from [shailan.com](http://shailan.com).
+
+= Can i create my own theme? =
+
+Since this plugin works on CSS, if you are capable of writing CSS, you can customize the theme as you like it.
+
+= I don't know CSS, how can i customize it? = 
+
+Plugin comes with various themes already installed. If you want something different, then you can [request a new theme](http://shailan.com/contact). 
+
+= I found a bug! Where do i submit it? =
+
+You can submit errors and bugs using the [online form](http://shailan.com/contact).
 
 == Screenshots ==
 
@@ -35,6 +48,7 @@ This widget is intented for *wide header widget areas*, not regular sidebars. Yo
 * Added Aqua theme.
 * Added <span> elements in the menu so more advanced styling can be made.
 * Added alignment option. Now you can align your menu wherever you wanted!
+* Added Shiny Black theme.
 
 = 1.2.0 =
 * Removed title attributes for the categories dropdown menu items.
@@ -75,6 +89,6 @@ This widget is intented for *wide header widget areas*, not regular sidebars. Yo
 
 == TODO == 
 
-* Add option to select vertical/linear.
-* Add some more themes.
-* Fix IE styles.
+* Add option for custom menus.
+* Add option for including homepage link.
+* Add some more themes.. [Request a theme](http://shailan.com/contact)
