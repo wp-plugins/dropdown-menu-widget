@@ -1,117 +1,121 @@
-#TabMenu1 #active a
-{
-   background-position: 0% -84px;
-}
-#TabMenu1 #active a span
-{
-   background-position: 100% -84px;
-   color: #FFFFFF;
-   font-weight: bold;
-   text-decoration: none;
+/* --- Dropdown background --- */
+.shailan-dropdown-menu{ background:#000 url(images/btn3.jpg) repeat-x; height:31px;  }
+
+/* --- Dropdown basics ---*/
+
+ul.dropdown {
+	background-color:transparent;
+	border-width:0px;
+	padding:0px 0px 0px 0px;
 }
 
-ul.dropdown{
-	background:tranparent url(images/trans-white.png);
-	
+ul.dropdown li{
+	display:block;
+	font-size:0px;
+	margin:0px;
+}
+
+ul.dropdown ul li {
+	float:none;
+}
+
+ul.dropdown ul a {
+	text-align:left;
+	white-space:nowrap;
+}
+
+ul.dropdown li:hover{
+	position:relative;
+}
+
+ul.dropdown a:active, ul.dropdown a:focus {
+	outline-style:none;
+}
+
+ul.dropdown a {
+	display:block;
+	vertical-align:middle;
+	background-color:#FFFFFF;
+	text-align:center;
+	text-decoration:none;
+	padding:8px 5px 0px 5px;
+	font:normal 11px Tahoma;
+	color: #000;
+	text-decoration:none;
+}
+
+ul.dropdown li a{
+	height:100%;
+	border-width:0px;
+	font:normal 11px Tahoma;
+	color:#fff;
+}
+
+/*--- Top level ---*/
+
+ul.dropdown li a{
+	width:100px;
+	height:23px;
+	color:#fff;
+	background:transparent;
+}
+
+ul.dropdown li a:hover{
+	background:url('./images/btn4.jpg') no-repeat;
+	font:normal 11px Tahoma;
+	color:#eee;
+}
+
+
+/*--- Sub level ---*/
+
+ul.dropdown ul {
+	margin:0px;
+	list-style:none;
+	padding:0px;
+	background:#fff;
+	border:1px solid #808080;
+}
+
+ul.dropdown ul li a{
+	color:#444;
+	border:1px solid #fff;
+	width:auto;
+	min-width:100px;
+	padding:2px;
+	margin:2px;
+	height:auto;
+}
+
+ul.dropdown ul li a:hover {
+	background-image:none;
+	color:#444;
+	border:1px solid #45ADE4;
+	background-color:#DBF0F9;
+	font:normal 11px Tahoma;
+}
+
+ul.dropdown table {border-collapse:collapse} 
+
+ul.dropdown {
+	display:block;
+	zoom:1;
+	height:21px;
 	float: left;
-	width: 100%;
-	font-family: Arial;
-	font-size: 13px;
-	line-height: normal;
-	
-	margin: 0;
-	padding: 10px 10px 0px 10px;
-	list-style: none;
 }
 
-ul.dropdown li.hover,
-ul.dropdown li:hover {
- cursor: default;
+
+ul.dropdown ul li a:hover{
+	position:relative;
+	background-color:#DBF0F9;
+	border-color:#45ADE4;
+	border-style:solid;
+	font:normal 11px Tahoma;
+	color: #444;
+	text-decoration:none;
 }
 
-ul.dropdown ul ul {
- top: 1px;
- left: 99%;
-}
+ul.dropdown-vertical>li>a{
+	background:#000 url(images/btn3.jpg) repeat-x; height:22px; 
+} 
 
-	ul.dropdown li {
-		text-align:center;		
-		display: inline;
-		margin: 0;
-		padding: 0;
-	}
-	
-	ul.dropdown li+li{
-		
-	}
-	
-	ul.dropdown-vertical li+li{
-	
-	}
-	
-	ul.dropdown li.hover,
-	ul.dropdown li:hover {
-		background:transparent url(images/trans-white.png);
-		color: #000;
-	}
-    
-	ul.dropdown li a{ 
-		padding:3px 15px; 
-		
-		background: url("images/style03left.gif") no-repeat left top;
-		margin: 0;
-		padding: 0 0 0 4px;
-		text-decoration: none;
-		
-	}
-	
-	ul.dropdown a:hover
-	{
-	   background-position: 0% -42px;
-	}
-	
-	ul.dropdown li a span{
-	   float: none;
-	   display: block;
-	   background: url("images/style03right.gif") no-repeat right top;
-	   padding: 5px 15px 4px 6px;
-	   color: #FFFFFF;
-	   font-weight: bold;
-	   text-decoration: none;
-	}
-	
-	ul.dropdown a:hover span
-	{
-	   background-position: 100% -42px;
-	   color: #FFFFFF;
-	   font-weight: bold;
-	   font-style: normal;
-	   text-decoration: none;
-	}
-	
-	ul.dropdown a:link,
-	ul.dropdown a:visited	{ color: #666; text-decoration: none; display:block; }
-	ul.dropdown a:hover	{ color: #000; }
-	ul.dropdown a:active	{ color: #fff; }
-	
-	
-	/* -- level mark -- */
-	ul.dropdown ul {
-		margin-top: 0px;
-		margin-left:-1px;
-		display:none;
-	}
-		ul.dropdown ul li {
-
-		}
-		
-li.current_page_item a { color: #ddd; }
-li.current_page_item a:link, li.current_page_item a:visited { color: #000; }
-li.current_page_item ul a, li.current_page_item ul a:visited, li.current_page_item ul a:link { color: #000; }
-li.current_page_ancestor a,li.current_page_ancestor a:visited, li.current_page_ancestor a:link {text-decoration:underline;}
-li.current_page_ancestor ul a, li.current_page_ancestor ul a:visited, li.current_page_ancestor ul a:link {text-decoration:none;}
-
-.shailan-dropdown-menu{
-	background:#eaf3ff url(images/tabs-blue-bg.gif) bottom left repeat-x;
-	border:1px solid #2a54c2;
-	}
