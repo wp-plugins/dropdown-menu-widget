@@ -90,6 +90,7 @@ class shailan_DropdownWidget extends WP_Widget {
 			'Grayscale'=>'grayscale',
 			'Aqua'=>'aqua',
 			'Tabs Blue'=> 'tabs-blue',
+			'Shiny Black'=> 'shiny-black',
 			'Flickr theme'=>'flickr.com/default.ultimate',
 			'Nvidia theme'=>'nvidia.com/default.advanced',
 			'Adobe theme'=>'adobe.com/default.advanced',
