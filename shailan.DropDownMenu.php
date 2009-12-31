@@ -3,13 +3,13 @@
 Plugin Name: Shailan Dropdown Menu Widget
 Plugin URI: http://shailan.com/wordpress/plugins/dropdown-menu
 Description: A multi widget to generate drop-down menus from your pages and categories. This widget is best used in <a href="http://shailan.com">Shailan.com</a> themes. You can find more widgets, plugins and themes at <a href="http://shailan.com">shailan.com</a>.
-Version: 1.2.5
+Version: 1.2.6
 Author: Matt Say
 Author URI: http://shailan.com
 Text Domain: shailan-dropdown-menu
 */
 
-define('SHAILAN_DM_VERSION','1.2.5');
+define('SHAILAN_DM_VERSION','1.2.6');
 define('SHAILAN_DM_TITLE', 'Dropdown Menu');
 define('SHAILAN_DM_FOLDER', 'dropdown-menu-widget');
 
@@ -19,16 +19,12 @@ define('SHAILAN_DM_FOLDER', 'dropdown-menu-widget');
 class shailan_DropdownWidget extends WP_Widget {
     /** constructor */
     function shailan_DropdownWidget() {
-<<<<<<< .mine
 		$widget_ops = array('classname' => 'shailan-dropdown-menu', 'description' => __( 'Dropdown page/category menu', 'shailan-dropdown-menu' ) );
 		$this->WP_Widget('dropdown-menu', __('Dropdown Menu', 'shailan-dropdown-menu'), $widget_ops);
-=======
-		$widget_ops = array('classname' => 'shailan-dropdown-menu', 'description' => __( 'Dropdown page/category menu', 'shailan-dropdown-menu' ) );
-		$this->WP_Widget('dropdown-menu', __('Dropdown Menu'), $widget_ops);
->>>>>>> .r188379
 		$this->alt_option_name = 'widget_dropdown_menu';
 		
-		// if ( is_active_widget(false, false, $this->id_base) ) disabled for the_widget support.
+		// if ( is_active_widget(false, false, $this->id_base) ) 
+		// @shailan: disabled for the_widget support.
 			add_action( 'wp_head', array(&$this, 'styles') );		
     }
 	
