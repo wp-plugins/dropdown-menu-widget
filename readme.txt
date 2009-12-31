@@ -4,7 +4,7 @@ Donate link: http://shailan.com/donate
 Tags: css, dropdown, menu, widget, pages, categories  
 Requires at least: 2.5  
 Tested up to: 2.9  
-Stable tag: 1.2.4  
+Stable tag: 1.2.5  
 
 This widget adds a beatiful vertical/horizontal CSS only dropdown menu of pages OR categories of your blog.
 
