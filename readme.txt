@@ -1,16 +1,16 @@
-=== Plugin Name ===
-Contributors: mattsay
-Donate link: http://shailan.com/donate
-Tags: css, dropdown, menu, widget, pages, categories
-Requires at least: 2.5
-Tested up to: 2.9
-Stable tag: 1.2.3
+=== Shailan Dropdown Menu Widget ===
+Contributors: mattsay  
+Donate link: http://shailan.com/donate  
+Tags: css, dropdown, menu, widget, pages, categories  
+Requires at least: 2.5  
+Tested up to: 2.9  
+Stable tag: 1.2.4  
 
 This widget adds a beatiful vertical/horizontal CSS only dropdown menu of pages OR categories of your blog.
 
 == Description ==
 
-Dropdown Menu widget adds a beautiful, CSS only dropdown menu, listing pages OR categories of your blog. It allows you to chose vertical or horizontal. It supports multiple instances. You can select a theme for your widget from the Dropdown Menu Settings page. If you don't like ready-made templates you can create your own theme for the menus using CSS. Hope you like it. Want your own dropdown theme? [Request theme](http://shailan.com)
+Dropdown Menu widget adds a beautiful, CSS only dropdown menu, listing pages OR categories of your blog. It allows you to chose vertical or horizontal. It supports multiple instances. You can select a theme for your widget from the Dropdown Menu Settings page. If you don't like ready-made templates you can create your own theme for the menus using CSS. Hope you like it. Want your own dropdown theme? [Request theme](http://shailan.com/contact)
 
 == Installation ==
 
@@ -22,9 +22,9 @@ Dropdown Menu widget adds a beautiful, CSS only dropdown menu, listing pages OR 
 
 == Frequently Asked Questions ==
 
-= I added this widget but it looks all weird! =
+= I added this widget to my sidebar but it looks all weird! =
 
-This widget is intented for *wide header widget areas*, not regular sidebars. You can add a sidebar to your theme or you can get a *all-widget* theme from [shailan.com](http://shailan.com).
+This widget is intented for *wide header widget areas*, not regular sidebars. You can add a sidebar to your theme or you can get a *all-widget* theme from  [shailan.com](http://shailan.com). 
 
 = Can i create my own theme? =
 
@@ -36,13 +36,19 @@ Plugin comes with various themes already installed. If you want something differ
 
 = I found a bug! Where do i submit it? =
 
-You can submit errors and bugs using the [online form](http://shailan.com/contact).
+You can submit errors and bugs using the [online form](http://shailan.com/contact) on my site.
 
 == Screenshots ==
 
-1. A preview of the widget in action.
+1. A preview of the widget in action
+1. Shiny Black menu theme
+1. WP-Default menu theme
+1. Dropdown menu settings page
 
 == Changelog ==
+
+= 1.2.4 =
+* Fixed category walker for the advanced styling.
 
 = 1.2.3 =
 * Added Aqua theme.
