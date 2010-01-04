@@ -228,7 +228,7 @@ Please support if you like this plugin:
 					<ul class="dropdown <?php echo $orientation; ?>">
 					
 					<?php if($home){ ?>						
-						<li class="<?php if ( is_front_page() && !is_paged() ): ?>current_page_item current-cat<?php else: ?>page_item cat-item<?php endif; ?> blogtab"><a href="<?php echo get_option('home'); ?>/"><span><?php _e('Home', 'shailan-dropdown-menu'); ?></span></a></li>	
+						<li class="page_item cat-item blogtab <?php if ( is_front_page() && !is_paged() ){ ?>current_page_item current-cat<?php } ?>"><a href="<?php echo get_option('home'); ?>/"><span><?php _e('Home', 'shailan-dropdown-menu'); ?></span></a></li>	
 					<?php } ?>
 							
 					
