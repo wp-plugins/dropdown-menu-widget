@@ -42,6 +42,7 @@ class shailan_DropdownWidget extends WP_Widget {
 	$type_tag = 'shailan_dm_type';
 	$exclude_tag = 'shailan_dm_exclude';
 	$inline_style_tag = 'shailan_dm_style';
+	$home_tag = 'shailan_dm_home';
 	$login_tag = 'shailan_dm_login';
 	$admin_tag = 'shailan_dm_admin';
 	$vertical_tag = 'shailan_dm_vertical';
@@ -53,6 +54,7 @@ class shailan_DropdownWidget extends WP_Widget {
 	$type = get_option($type_tag);
 	$exclude = get_option($exclude_tag);
 	$inline_style = get_option($inline_style_tag);
+	$home = (bool) get_option($home_tag);
 	$login = (bool) get_option($login_tag);
 	$admin = (bool) get_option($admin_tag);	
 	$vertical = (bool) get_option($vertical_tag);
@@ -65,6 +67,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		$type = $_POST[$type_tag];
 		$exclude = $_POST[$exclude_tag];
 		$inline_style = $_POST[$inline_style_tag];
+		$home = (bool) $_POST[$home_tag];
 		$login = (bool) $_POST[$login_tag];
 		$admin = (bool) $_POST[$admin_tag];	
 		$vertical = (bool) $_POST[$vertical_tag];
@@ -74,6 +77,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		update_option($type_tag, $type);
 		update_option($exclude_tag, $exclude);
 		update_option($inline_style_tag, $inline_style);
+		update_option($home_tag, $home);
 		update_option($login_tag, $login);
 		update_option($admin_tag, $admin);
 		update_option($vertical_tag, $vertical);
@@ -149,6 +153,8 @@ Please support if you like this plugin:
 		<small><?php _e('Page IDs, separated by commas.', 'shailan-dropdown-menu'); ?></small></p>
 			
 		<p>
+		<input type="checkbox" class="checkbox" id="<?php echo $home_tag; ?>" name="<?php echo $home_tag; ?>"<?php checked( $home ); ?> />
+		<label for="<?php echo $home_tag; ?>"><?php _e( 'Add homepage link', 'shailan-dropdown-menu' ); ?></label><br />
 		<input type="checkbox" class="checkbox" id="<?php echo $login_tag; ?>" name="<?php echo $login_tag; ?>"<?php checked( $login ); ?> />
 		<label for="<?php echo $login_tag; ?>"><?php _e( 'Add login/logout', 'shailan-dropdown-menu' ); ?></label><br />
 		<input type="checkbox" class="checkbox" id="<?php echo $admin_tag; ?>" name="<?php echo $admin_tag; ?>"<?php checked( $admin ); ?> />
@@ -185,6 +191,7 @@ Please support if you like this plugin:
 		$type = $instance['type'];
 		$exclude = $instance['exclude'];
 		$inline_style = $instance['style'];
+		$home = (bool) $instance['home'];
 		$login = (bool) $instance['login'];
 		$admin = (bool) $instance['admin'];
 		$vertical = (bool) $instance['vertical'];
@@ -219,8 +226,14 @@ Please support if you like this plugin:
 				  <table cellpadding="0" cellspacing="0"> 
 					<tr><td> 
 					<ul class="dropdown <?php echo $orientation; ?>">
+					
+					<?php if($home){ ?>						
+						<li class="<?php if ( is_front_page() && !is_paged() ): ?>current_page_item cat-item current-cat<?php else: ?>page_item<?php endif; ?> blogtab"><a href="<?php echo get_option('home'); ?>/"><span><?php _e('Home', 'shailan-dropdown-menu'); ?></span></a></li>	
+					<?php } ?>
+							
+					
 					<?php if($type == 'Pages'){ ?>
-						<li class="<?php if ( is_front_page() && !is_paged() ): ?>current_page_item<?php else: ?>page_item<?php endif; ?> blogtab"><a href="<?php echo get_option('home'); ?>/"><span><?php _e('Home', 'shailan-dropdown-menu'); ?></span></a></li>	
+					
 						<?php 
 						$page_walker = new shailan_PageWalker();
 						wp_list_pages(array(
@@ -230,7 +243,9 @@ Please support if you like this plugin:
 							'title_li'=>'',
 							'exclude'=>$exclude
 							)); ?>
+							
 					<?php } else { ?>
+					
 						<?php 
 						$cat_walker = new shailan_CategoryWalker();
 						wp_list_categories(array(
@@ -240,8 +255,11 @@ Please support if you like this plugin:
 							'title_li'=>'',
 							'exclude'=>$exclude
 							)); ?>			
+							
 					<?php } ?>
+					
 						<?php if($admin){ wp_register('<li class="admintab">','</li>'); } if($login){ ?><li class="page_item"><?php wp_loginout(); ?><?php } ?>
+						
 					</ul></td>
 				  </tr></table> 
 				</div>
@@ -261,6 +279,7 @@ Please support if you like this plugin:
 		$type = $instance['type'];
 		$exclude = $instance['exclude'];
 		$inline_style = $instance['style'];
+		$home = (bool) $instance['home'];
 		$login = (bool) $instance['login'];
 		$admin = (bool) $instance['admin'];
 		$vertical = (bool) $instance['vertical'];
@@ -275,6 +294,8 @@ Please support if you like this plugin:
 		<small>Page IDs, separated by commas.</small></p>
 			
 		<p>
+		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('home'); ?>" name="<?php echo $this->get_field_name('home'); ?>"<?php checked( $home ); ?> />
+		<label for="<?php echo $this->get_field_id('home'); ?>"><?php _e( 'Add homepage link' , 'shailan-dropdown-menu' ); ?></label><br />
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('login'); ?>" name="<?php echo $this->get_field_name('login'); ?>"<?php checked( $login ); ?> />
 		<label for="<?php echo $this->get_field_id('login'); ?>"><?php _e( 'Add login/logout' , 'shailan-dropdown-menu' ); ?></label><br />
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('admin'); ?>" name="<?php echo $this->get_field_name('admin'); ?>"<?php checked( $admin ); ?> />
