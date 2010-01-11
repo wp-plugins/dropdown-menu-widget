@@ -357,6 +357,7 @@ function shailan_dropdown_menu(){
 	$login = (bool) get_option('shailan_dm_login');
 	$admin = (bool) get_option('shailan_dm_admin');
 	$vertical = (bool) get_option('shailan_dm_vertical');
+	$home = (bool) get_option('shailan_dm_home');
 	
 	$args = array(
 		'type' => $type,
@@ -364,7 +365,8 @@ function shailan_dropdown_menu(){
 		'style' => $inline_style,
 		'login' => $login,
 		'admin' => $admin,
-		'vertical' => $vertical
+		'vertical' => $vertical,
+		'home' => $home
 		);
 
 	the_widget('shailan_DropdownWidget', $args);
