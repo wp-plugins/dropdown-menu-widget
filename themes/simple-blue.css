@@ -50,7 +50,6 @@ ul.dropdown ul li a{
 ul.dropdown ul li a:hover{
 	position:relative;
 	background-color:#002f6a;
-	border-style:solid;
 	color: #fff;
 	text-decoration:none;
 }
