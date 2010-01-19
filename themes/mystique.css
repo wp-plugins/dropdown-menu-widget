@@ -1,0 +1,56 @@
+/* --- Dropdown background --- */
+.shailan-dropdown-menu{ 
+	background:#006 url(images/blue_menu_bg.gif) repeat-x; 
+	width:1000px; height:47px;  
+	font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif; 
+	font-size:14px;}
+ul.dropdown{padding-left:20px;}
+/* --- Dropdown basics ---*/
+ul.dropdown a {
+	display:block;
+	vertical-align:middle;
+	text-align:center;
+	padding:12px 10px 10px 12px;
+	color: #000;
+	text-decoration:none;
+	text-transform:uppercase;}
+/*--- Top level ---*/
+ul.dropdown li a{
+	height:100%;
+	color:#fff;
+}
+ul.dropdown li+li a{
+	background:url(images/blue_menu_sep.gif) left center no-repeat;
+}
+ul.dropdown li a:hover{
+	text-decoration:underline;
+	color:#eee;
+}
+/*--- Sub level ---*/
+ul.dropdown ul {
+	margin:0px;
+	list-style:none;
+	padding:0px;
+	background:#002055;
+	border:1px solid #000047;
+	text-align:left;
+}
+
+ul.dropdown ul li a{
+	color:#fff;
+	width:auto;
+	min-width:100px;
+	padding:2px 5px 3px 5px;
+	margin:0px;
+	height:auto;
+	text-align:left;
+	background:transparent;
+}
+
+ul.dropdown ul li a:hover{
+	position:relative;
+	background-color:#002f6a;
+	color: #fff;
+	text-decoration:none;
+}
+ul.dropdown li.current_page_item>a, ul.dropdown li.current-cat>a { font-weight:bold; }
