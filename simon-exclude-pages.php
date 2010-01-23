@@ -323,8 +323,9 @@ function sdep_admin_init()
 }
 
 // HOOK IT UP TO WORDPRESS
-
-add_action( 'init', 'sdep_init' );
-add_action( 'admin_init', 'sdep_admin_init' )
+if(!function_exists('sdep_exclude_pages')){
+	add_action( 'init', 'sdep_init' );
+	add_action( 'admin_init', 'sdep_admin_init' );
+};
 
 ?>
