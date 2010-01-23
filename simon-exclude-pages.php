@@ -276,12 +276,12 @@ function sdep_hec_show_dbx( $to_show )
 
 // PAUSE & RESUME FUNCTIONS
 
-function pause_exclude_pages()
+function sd_pause_exclude_pages()
 {
 	remove_filter('get_pages','sdep_exclude_pages');
 }
 
-function resume_exclude_pages()
+function sd_resume_exclude_pages()
 {
 	add_filter('get_pages','sdep_exclude_pages');
 }
