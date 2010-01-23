@@ -47,6 +47,10 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 
 == Changelog ==
 
+= 1.3.2 =
+* Bundled with "Exclude Pages" plugin by [Simon Wheatley](http://simonwheatley.co.uk/wordpress/)
+* You can now easily exclude pages from the navigation.
+
 = 1.3.1 = 
 * Added "Blue gradient" theme.
 
