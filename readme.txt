@@ -1,10 +1,10 @@
 === Shailan Dropdown Menu Widget ===
-Contributors: mattsay  
+Contributors: mattsay
 Donate link: http://shailan.com/donate  
 Tags: css, dropdown, menu, widget, pages, categories  
 Requires at least: 2.5  
-Tested up to: 2.9  
-Stable tag: 1.3.1  
+Tested up to: 2.9.1 
+Stable tag: 1.3.2
 
 This widget adds a beatiful vertical/horizontal CSS only dropdown menu of pages OR categories of your blog.
 
@@ -48,8 +48,7 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 == Changelog ==
 
 = 1.3.2 =
-* Bundled with "Exclude Pages" plugin by [Simon Wheatley](http://simonwheatley.co.uk/wordpress/)
-* You can now easily exclude pages from the navigation.
+* Bundled with "Exclude Pages" plugin by [Simon Wheatley](http://simonwheatley.co.uk/wordpress/). You can now easily exclude pages from the navigation. Just uncheck the the "Include page in menus" checkbox on the page edit screen. See [screenshots](http://wordpress.org/extend/plugins/dropdown-menu-widget/screenshots/) for more information.
 
 = 1.3.1 = 
 * Added "Blue gradient" theme.
@@ -116,5 +115,4 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 == TODO == 
 
 * Add option for custom menus.
-* Add option for including homepage link.
 * Add some more themes.. [Request a theme](http://shailan.com/contact)
