@@ -4,7 +4,7 @@ Donate link: http://shailan.com/donate
 Tags: css, dropdown, menu, widget, pages, categories  
 Requires at least: 2.5  
 Tested up to: 2.9.1 
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 
 This widget adds a beatiful vertical/horizontal CSS only dropdown menu of pages OR categories of your blog.
 
@@ -47,6 +47,9 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 1. New exclude pages metabox
 
 == Changelog ==
+
+= 1.3.3 =
+* Fixed function name collisions with "Exclude Pages" plugin. The plugin is fully functional now.
 
 = 1.3.2 =
 * Bundled with "Exclude Pages" plugin by [Simon Wheatley](http://simonwheatley.co.uk/wordpress/). You can now easily exclude pages from the navigation. Just uncheck the the "Include page in menus" checkbox on the page edit screen. See [screenshots](http://wordpress.org/extend/plugins/dropdown-menu-widget/screenshots/) for more information.
