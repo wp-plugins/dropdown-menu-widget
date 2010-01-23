@@ -44,6 +44,7 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 1. Shiny Black menu theme
 1. WP-Default menu theme
 1. Dropdown menu settings page
+1. New exclude pages metabox
 
 == Changelog ==
 
