@@ -348,6 +348,7 @@ load_plugin_textdomain( 'shailan-dropdown-menu', 'wp-content/plugins/' . $plugin
 // add admin menu
 add_action('admin_menu', array('shailan_DropdownWidget', 'adminMenu'));
 
+include_once('exclude_pages.php'); 
 include('shailan-page-walker.php'); // Load custom page walker
 include('shailan-category-walker.php'); // Load custom category walker
 
