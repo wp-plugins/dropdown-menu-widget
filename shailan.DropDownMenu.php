@@ -26,6 +26,8 @@ class shailan_DropdownWidget extends WP_Widget {
 		// if ( is_active_widget(false, false, $this->id_base) ) 
 		// @shailan: disabled for the_widget support.
 			add_action( 'wp_head', array(&$this, 'styles') );		
+			
+			wp_enqueue_script( 'dropdown-ie-support', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/include.js', 'jQuery' );
     }
 	
 	// Add settings page
@@ -323,6 +325,7 @@ Please support if you like this plugin:
 		
 		echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/shailan-dropdown.css" type="text/css" />';
 		
+		
 		if($theme!='NONE'){
 			echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/themes/'.$theme.'.css" type="text/css" />';
 		}
@@ -333,6 +336,12 @@ Please support if you like this plugin:
 		echo '<style type="text/css" media="all">';
 		echo '    ul.dropdown {font-family: '.$font_family.' font-size:'.$font_size.'; }';
 		echo '</style>';
+		
+		echo '<!--[if lte IE 7]>'
+		echo '<style type="text/css" media="screen">'
+		echo 'body { behavior:url("'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/csshover.htc"); }'
+		echo '</style>'
+		echo '<![endif]-->'
 		
 	}
 
