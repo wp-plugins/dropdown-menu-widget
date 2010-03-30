@@ -48,6 +48,9 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 
 == Changelog ==
 
+= 1.3.4 = 
+* Fixing the 
+
 = 1.3.3 =
 * Fixed function name collisions with "Exclude Pages" plugin. The plugin is fully functional now.
 
