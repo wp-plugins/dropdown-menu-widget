@@ -153,9 +153,6 @@ class shailan_MultiDropDown extends WP_Widget {
 		<label for="<?php echo $this->get_field_id('admin'); ?>"><?php _e( 'Register/Site Admin' , 'shailan-dropdown-menu' ); ?></label>
 		</p>
 		
-				<p><label for="<?php echo $this->get_field_id('exclude'); ?>"><?php _e('Exclude:', 'shailan-dropdown-menu'); ?> <input class="widefat" id="<?php echo $this->get_field_id('exclude'); ?>" name="<?php echo $this->get_field_name('exclude'); ?>" type="text" value="<?php echo $exclude; ?>" /></label><br /> 
-		<small>Page IDs, separated by commas.</small></p>
-		
 		<p>
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('vertical'); ?>" name="<?php echo $this->get_field_name('vertical'); ?>"<?php checked( $vertical ); ?> />
 		<label for="<?php echo $this->get_field_id('vertical'); ?>"><?php _e( 'Vertical menu' , 'shailan-dropdown-menu' ); ?></label>
