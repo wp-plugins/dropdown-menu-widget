@@ -139,10 +139,10 @@ class shailan_MultiDropDown extends WP_Widget {
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('pages'); ?>" name="<?php echo $this->get_field_name('pages'); ?>"<?php checked( $include_pages ); ?> />
 		<label for="<?php echo $this->get_field_id('pages'); ?>"><?php _e( 'Pages' , 'shailan-dropdown-menu' ); ?></label><br />
 		
-		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('categories'); ?>" name="<?php echo $this->get_field_name('categories'); ?>"<?php checked( $categories ); ?> />
+		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('categories'); ?>" name="<?php echo $this->get_field_name('categories'); ?>"<?php checked( $include_categories ); ?> />
 		<label for="<?php echo $this->get_field_id('categories'); ?>"><?php _e( 'Categories' , 'shailan-dropdown-menu' ); ?></label><br />
 		
-		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('links'); ?>" name="<?php echo $this->get_field_name('links'); ?>"<?php checked( $links ); ?> />
+		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('links'); ?>" name="<?php echo $this->get_field_name('links'); ?>"<?php checked( $include_links ); ?> />
 		<label for="<?php echo $this->get_field_id('links'); ?>"><?php _e( 'Links' , 'shailan-dropdown-menu' ); ?></label><br />		
 		
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('home'); ?>" name="<?php echo $this->get_field_name('home'); ?>"<?php checked( $home ); ?> />
