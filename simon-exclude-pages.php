@@ -301,12 +301,16 @@ function sdep_admin_init()
 {
 	// Add panels into the editing sidebar(s)
 	global $wp_version;
-	if ( version_compare( $wp_version, '2.7-beta', '>=' ) ) {
+	if (version_compare( $wp_version, '2.7-beta', '>=' ) ) {
+		// add_meta_box( $id, $title, $callback, $page, $context, $priority );
 		add_meta_box('sdep_admin_meta_box', __('Exclude Pages'), 'sdep_admin_sidebar_wp25', 'page', 'side', 'low');
 	} else {
 		add_action('dbx_page_sidebar', 'sdep_admin_sidebar'); // Pre WP2.5
 		add_action('submitpage_box', 'sdep_admin_sidebar_wp25'); // Post WP 2.5, pre WP 2.7
 	}
+	
+	do_meta_boxes('dropdown-menu-widget','advanced',null);
+
 
 	// Set the exclusion when the post is saved
 	add_action('save_post', 'sdep_update_exclusions');

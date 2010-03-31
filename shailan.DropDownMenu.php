@@ -27,7 +27,6 @@ class shailan_DropdownWidget extends WP_Widget {
 		// @shailan: disabled for the_widget support.
 			add_action( 'wp_head', array(&$this, 'styles') );		
 			
-			wp_enqueue_script( 'dropdown-ie-support', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/include.js', 'jQuery' );
     }
 	
 	// Add settings page
@@ -321,10 +320,10 @@ Please support if you like this plugin:
 	}
 	
 	function styles($instance){
+	
 		$theme = get_option('theme');
 		
 		echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/shailan-dropdown.css" type="text/css" />';
-		
 		
 		if($theme!='NONE'){
 			echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/themes/'.$theme.'.css" type="text/css" />';
@@ -357,9 +356,19 @@ load_plugin_textdomain( 'shailan-dropdown-menu', 'wp-content/plugins/' . $plugin
 // add admin menu
 add_action('admin_menu', array('shailan_DropdownWidget', 'adminMenu'));
 
-include_once('simon-exclude-pages.php'); 
-include('shailan-page-walker.php'); // Load custom page walker
-include('shailan-category-walker.php'); // Load custom category walker
+wp_enqueue_script( 'dropdown-ie-support', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/include.js', 'jQuery' );
+
+/* Includes */
+
+	include_once('simon-exclude-pages.php'); // Exclude page plugin
+	include('shailan-page-walker.php'); // Load custom page walker
+	include('shailan-category-walker.php'); // Load custom category walker
+
+/* Custom widget */
+	
+	include('shailan-multi-dropdown.php'); // Load multi-dropdown widget
+
+
 
 // template tag support
 function shailan_dropdown_menu(){
