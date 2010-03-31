@@ -4,7 +4,7 @@ class shailan_MultiDropDown extends WP_Widget {
     /** constructor */
     function shailan_MultiDropDown() {
 		$widget_ops = array('classname' => 'shailan-dropdown-menu', 'description' => __( 'Dropdown page & category menu', 'shailan-dropdown-menu' ) );
-		$this->WP_Widget('multi-dropdown-menu', __('Multi Dropdown', 'shailan-multi-dropdown'), $widget_ops);
+		$this->WP_Widget('multi-dropdown-menu', __('Dropdown Multi', 'shailan-multi-dropdown'), $widget_ops);
 		$this->alt_option_name = 'widget_multi_dropdown';	
 		
     }
@@ -14,9 +14,9 @@ class shailan_MultiDropDown extends WP_Widget {
         extract( $args );
         $title = apply_filters('widget_title', $instance['title']);
 		
-		$include_pages = $instance['pages'];
-		$include_categories = $instance['categories'];
-		$include_links = $instance['links'];
+		$include_pages = (bool) $instance['pages'];
+		$include_categories = (bool) $instance['categories'];
+		$include_links = (bool) $instance['links'];
 		
 		$exclude = $instance['exclude'];
 		
@@ -89,9 +89,11 @@ class shailan_MultiDropDown extends WP_Widget {
 					<?php }; ?>
 					
 					<?php if($include_links){ ?>
-					
-						<?php wp_list_bookmarks('title_li=&category_before=&category_after='); ?>
-					
+					<li> <a href="#"><span>Links</span></a>
+					<ul>
+						<?php wp_list_bookmarks('title_li=&category_before=&category_after=&categorize=0'); ?>
+					</ul>
+					</li>
 					<? } ?>
 					
 						<?php if($admin){ wp_register('<li class="admintab">','</li>'); } if($login){ ?><li class="page_item"><?php wp_loginout(); ?><?php } ?>
@@ -114,9 +116,9 @@ class shailan_MultiDropDown extends WP_Widget {
 	
         $title = apply_filters('widget_title', $instance['title']);
 		
-		$include_pages = $instance['include_pages'];
-		$include_categories = $instance['include_categories'];
-		$include_links = $instance['include_links'];
+		$include_pages = (bool) $instance['pages'];
+		$include_categories = (bool) $instance['categories'];
+		$include_links = (bool) $instance['links'];
 		
 		$exclude = $instance['exclude'];
 		
@@ -134,14 +136,14 @@ class shailan_MultiDropDown extends WP_Widget {
 		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title (won\'t be shown):', 'shailan-dropdown-menu'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
 			
 		<p> Includes: <br/>
-		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('include_pages'); ?>" name="<?php echo $this->get_field_name('include_pages'); ?>"<?php checked( $include_pages ); ?> />
-		<label for="<?php echo $this->get_field_id('include_pages'); ?>"><?php _e( 'include_pagespage link' , 'shailan-dropdown-menu' ); ?></label><br />
+		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('pages'); ?>" name="<?php echo $this->get_field_name('pages'); ?>"<?php checked( $include_pages ); ?> />
+		<label for="<?php echo $this->get_field_id('pages'); ?>"><?php _e( 'Pages' , 'shailan-dropdown-menu' ); ?></label><br />
 		
-		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('include_categories'); ?>" name="<?php echo $this->get_field_name('include_categories'); ?>"<?php checked( $include_categories ); ?> />
-		<label for="<?php echo $this->get_field_id('include_categories'); ?>"><?php _e( 'include_categoriespage link' , 'shailan-dropdown-menu' ); ?></label><br />
+		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('categories'); ?>" name="<?php echo $this->get_field_name('categories'); ?>"<?php checked( $categories ); ?> />
+		<label for="<?php echo $this->get_field_id('categories'); ?>"><?php _e( 'Categories' , 'shailan-dropdown-menu' ); ?></label><br />
 		
-		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('include_links'); ?>" name="<?php echo $this->get_field_name('include_links'); ?>"<?php checked( $include_links ); ?> />
-		<label for="<?php echo $this->get_field_id('include_links'); ?>"><?php _e( 'include_linkspage link' , 'shailan-dropdown-menu' ); ?></label><br />		
+		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('links'); ?>" name="<?php echo $this->get_field_name('links'); ?>"<?php checked( $links ); ?> />
+		<label for="<?php echo $this->get_field_id('links'); ?>"><?php _e( 'Links' , 'shailan-dropdown-menu' ); ?></label><br />		
 		
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('home'); ?>" name="<?php echo $this->get_field_name('home'); ?>"<?php checked( $home ); ?> />
 		<label for="<?php echo $this->get_field_id('home'); ?>"><?php _e( 'Homepage link' , 'shailan-dropdown-menu' ); ?></label><br />
