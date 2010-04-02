@@ -32,12 +32,14 @@ class shailan_MultiDropDown extends WP_Widget {
 		
 		$orientation = ($vertical ? 'dropdown-vertical' : 'dropdown-horizontal');
 		
+		$custom_walkers = (bool) get_option('shailan_dm_customwalkers');
+		$custom_walkers = !$custom_walkers;
+		
         ?>
            <?php echo $before_widget; ?>
 
 			<div id="shailan-dropdown-wrapper-<?php echo $this->number; ?>" style="<?php echo $inline_style; ?>">
-				<div 
-				<?php 
+				<div <?php 
 					switch($align){
 						case 'right':
 							echo ' align="right"';
@@ -51,8 +53,7 @@ class shailan_MultiDropDown extends WP_Widget {
 					
 					}
 				
-				?>
-				> 
+				?>> 
 				  <table cellpadding="0" cellspacing="0"> 
 					<tr><td> 
 					<ul class="dropdown <?php echo $orientation; ?>">
@@ -64,27 +65,44 @@ class shailan_MultiDropDown extends WP_Widget {
 					
 					<?php if($include_pages){ ?>
 					
-						<?php 
-						$page_walker = new shailan_PageWalker();
-						wp_list_pages(array(
-							'walker'=>$page_walker,
-							'sort_column'=>'menu_order',
-							'depth'=>'4',
-							'title_li'=>'',
-							'exclude'=>$exclude
-							)); ?>
+						<?php if($custom_walkers){						
+							$page_walker = new shailan_PageWalker();
+							wp_list_pages(array(
+								'walker'=>$page_walker,
+								'sort_column'=>'menu_order',
+								'depth'=>'4',
+								'title_li'=>'',
+								'exclude'=>$exclude
+								)); 
+						} else {
+							wp_list_pages(array(
+								'sort_column'=>'menu_order',
+								'depth'=>'4',
+								'title_li'=>'',
+								'exclude'=>$exclude
+								)); 						
+						} ?>
 							
 					<?php }; if($include_categories){ ?>
 					
 						<?php 
-						$cat_walker = new shailan_CategoryWalker();
-						wp_list_categories(array(
-							'walker'=>$cat_walker,
-							'order_by'=>'name',
-							'depth'=>'4',
-							'title_li'=>'',
-							'exclude'=>$exclude
-							)); ?>			
+						if($custom_walkers){	
+							$cat_walker = new shailan_CategoryWalker();
+							wp_list_categories(array(
+								'walker'=>$cat_walker,
+								'order_by'=>'name',
+								'depth'=>'4',
+								'title_li'=>'',
+								'exclude'=>$exclude
+								)); 
+						} else {
+							wp_list_categories(array(
+								'order_by'=>'name',
+								'depth'=>'4',
+								'title_li'=>'',
+								'exclude'=>$exclude
+								)); 								
+						} ?>			
 							
 					<?php }; ?>
 					

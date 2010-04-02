@@ -4,7 +4,7 @@ Donate link: http://shailan.com/donate
 Tags: css, dropdown, menu, widget, pages, categories  
 Requires at least: 2.8  
 Tested up to: 2.9.2 
-Stable tag: 1.3.7
+Stable tag: 1.3.8
 
 This widget adds a beatiful vertical/horizontal CSS only dropdown menu of pages OR categories of your blog.
 
@@ -47,6 +47,9 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 1. New exclude pages metabox
 
 == Changelog ==
+
+= 1.3.8 =
+* Added option for displaying title attributes. You may now turn title display on from the Settings page.
 
 = 1.3.7 =
 * Removed unnecessary extrude line from Dropdown Multi widget. 

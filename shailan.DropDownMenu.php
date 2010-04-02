@@ -3,13 +3,13 @@
 Plugin Name: Shailan Dropdown Menu Widget
 Plugin URI: http://shailan.com/wordpress/plugins/dropdown-menu
 Description: A multi widget to generate drop-down menus from your pages and categories. This widget is best used in <a href="http://shailan.com">Shailan.com</a> themes. You can find more widgets, plugins and themes at <a href="http://shailan.com">shailan.com</a>.
-Version: 1.3.7
+Version: 1.3.8
 Author: Matt Say
 Author URI: http://shailan.com
 Text Domain: shailan-dropdown-menu
 */
 
-define('SHAILAN_DM_VERSION','1.3.7');
+define('SHAILAN_DM_VERSION','1.3.8');
 define('SHAILAN_DM_TITLE', 'Dropdown Menu');
 define('SHAILAN_DM_FOLDER', 'dropdown-menu-widget');
 
@@ -48,6 +48,7 @@ class shailan_DropdownWidget extends WP_Widget {
 	$admin_tag = 'shailan_dm_admin';
 	$vertical_tag = 'shailan_dm_vertical';
 	$width_tag = 'shailan_dm_width';	
+	$custom_walkers_tag = 'shailan_dm_customwalkers';
 	
 	// Read options 
 	$theme = get_option($theme_tag);
@@ -60,10 +61,12 @@ class shailan_DropdownWidget extends WP_Widget {
 	$admin = (bool) get_option($admin_tag);	
 	$vertical = (bool) get_option($vertical_tag);
 	$width = (int) get_option($width_tag);
+	$custom_walkers = (bool) get_option($custom_walkers_tag);
 	
 	if(wp_verify_nonce($_POST['_wpnonce'])){ // Form submitted. Save settings.
 		
 		$theme = $_POST[$theme_tag];  //get_option('theme');
+		
 		
 		$type = $_POST[$type_tag];
 		$exclude = $_POST[$exclude_tag];
@@ -73,6 +76,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		$admin = (bool) $_POST[$admin_tag];	
 		$vertical = (bool) $_POST[$vertical_tag];
 		$width = (int) $_POST[$width];
+		$custom_walkers = (bool) $_POST[$custom_walkers_tag];
 		
 		update_option($theme_tag, $theme);
 		update_option($type_tag, $type);
@@ -83,6 +87,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		update_option($admin_tag, $admin);
 		update_option($vertical_tag, $vertical);
 		update_option($width_tag, $width);
+		update_option($custom_walkers_tag, $custom_walkers);
 		
 		?>
 		<div class="updated"><p><strong><?php _e('Options saved.', 'shailan-dropdown-menu'); ?></strong></p></div>
@@ -138,6 +143,15 @@ Please support if you like this plugin:
 			} ?>
 
 </select> <span class="description"><?php _e('You can choose a theme for your dropdown menu here.', 'shailan-dropdown-menu'); ?></span></td>
+</tr>
+
+<tr valign="top">
+<th scope="row"><label for="<?php echo $custom_walkers_tag; ?>"><?php _e('Display title attributes', 'shailan-dropdown-menu') ?></label></th>
+<td>
+
+<input type="checkbox" class="checkbox" id="<?php echo $custom_walkers_tag; ?>" name="<?php echo $custom_walkers_tag; ?>"<?php checked( $custom_walkers ); ?> />
+
+<span class="description"><?php _e('If checked menu will display title attributes.', 'shailan-dropdown-menu'); ?></span></td>
 </tr>
 </table>
 
@@ -202,6 +216,8 @@ Please support if you like this plugin:
 		
 		$orientation = ($vertical ? 'dropdown-vertical' : 'dropdown-horizontal');
 		
+		$custom_walkers = (bool) get_option('shailan_dm_customwalkers');
+		
         ?>
               <?php echo $before_widget; ?>
                 <?php /*if ( $title )
@@ -209,9 +225,7 @@ Please support if you like this plugin:
 				?>
 
 			<div id="shailan-dropdown-wrapper-<?php echo $this->number; ?>" style="<?php echo $inline_style; ?>">
-				<div 
-				<?php 
-					switch($align){
+				<div <?php switch($align){
 						case 'right':
 							echo ' align="right"';
 						break;
@@ -222,10 +236,7 @@ Please support if you like this plugin:
 						case 'left':
 						default:						
 					
-					}
-				
-				?>
-				> 
+					}; ?>> 
 				  <table cellpadding="0" cellspacing="0"> 
 					<tr><td> 
 					<ul class="dropdown <?php echo $orientation; ?>">
@@ -238,26 +249,49 @@ Please support if you like this plugin:
 					<?php if($type == 'Pages'){ ?>
 					
 						<?php 
-						$page_walker = new shailan_PageWalker();
-						wp_list_pages(array(
-							'walker'=>$page_walker,
-							'sort_column'=>'menu_order',
-							'depth'=>'4',
-							'title_li'=>'',
-							'exclude'=>$exclude
-							)); ?>
+						if($custom_walkers){
+							echo "<!-- custom walkers ON -->";
+						
+							$page_walker = new shailan_PageWalker();
+							wp_list_pages(array(
+								'walker'=>$page_walker,
+								'sort_column'=>'menu_order',
+								'depth'=>'4',
+								'title_li'=>'',
+								'exclude'=>$exclude
+								)); 
+						} else {
+						
+							echo "<!-- custom walkers OFF -->";
+						
+							wp_list_pages(array(
+								'sort_column'=>'menu_order',
+								'depth'=>'4',
+								'title_li'=>'',
+								'exclude'=>$exclude
+								)); 						
+						} ?>
 							
 					<?php } else { ?>
 					
 						<?php 
-						$cat_walker = new shailan_CategoryWalker();
-						wp_list_categories(array(
-							'walker'=>$cat_walker,
-							'order_by'=>'name',
-							'depth'=>'4',
-							'title_li'=>'',
-							'exclude'=>$exclude
-							)); ?>			
+						if($custom_walkers){	
+							$cat_walker = new shailan_CategoryWalker();
+							wp_list_categories(array(
+								'walker'=>$cat_walker,
+								'order_by'=>'name',
+								'depth'=>'4',
+								'title_li'=>'',
+								'exclude'=>$exclude
+								)); 
+						} else {
+							wp_list_categories(array(
+								'order_by'=>'name',
+								'depth'=>'4',
+								'title_li'=>'',
+								'exclude'=>$exclude
+								)); 								
+						} ?>			
 							
 					<?php } ?>
 					
