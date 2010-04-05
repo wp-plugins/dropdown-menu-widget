@@ -357,24 +357,24 @@ Please support if you like this plugin:
 	
 		$theme = get_option('theme');
 		
-		echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/shailan-dropdown.css" type="text/css" />';
+		echo '\n\t<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/shailan-dropdown.css" type="text/css" />';
 		
 		if($theme!='NONE'){
-			echo '<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/themes/'.$theme.'.css" type="text/css" />';
+			echo '\n\t<link rel="stylesheet" href="'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/themes/'.$theme.'.css" type="text/css" />';
 		}
 		
 		// Font family and font size
 		$font_family = '"Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif';
 		$font_size = '12px';
-		echo '<style type="text/css" media="all">';
-		echo '    ul.dropdown {font-family: '.$font_family.' font-size:'.$font_size.'; }';
-		echo '</style>';
+		echo '\n\t<style type="text/css" media="all">';
+		echo '\n\t\tul.dropdown {font-family: '.$font_family.' font-size:'.$font_size.'; }';
+		echo '\n\t</style>';
 		
-		echo '<!--[if lte IE 7]>';
-		echo '<style type="text/css" media="screen">';
-		echo 'body { behavior:url("'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/csshover.htc"); }';
-		echo '</style>';
-		echo '<![endif]-->';
+		echo '\n\t<!--[if lte IE 7]>';
+		echo '\n\t<style type="text/css" media="screen">';
+		echo '\n\t\tbody { behavior:url("'.WP_PLUGIN_URL.'/'.SHAILAN_DM_FOLDER.'/csshover.htc"); }';
+		echo '\n\t</style>';
+		echo '\n\t<![endif]-->';
 		
 	}
 
