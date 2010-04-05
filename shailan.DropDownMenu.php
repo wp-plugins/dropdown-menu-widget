@@ -390,7 +390,7 @@ add_action('widgets_init', create_function('', 'return register_widget("shailan_
 
 // load translations
 $plugin_dir = basename(dirname(__FILE__));
-load_plugin_textdomain( 'shailan-dropdown-menu', 'wp-content/plugins/' . $plugin_dir, $plugin_dir );
+load_plugin_textdomain( 'shailan-dropdown-menu', 'wp-content/plugins/' . $plugin_dir . '/lang');
 
 // add admin menu
 add_action('admin_menu', array('shailan_DropdownWidget', 'adminMenu'));
