@@ -3,13 +3,13 @@
 Plugin Name: Shailan Dropdown Menu Widget
 Plugin URI: http://shailan.com/wordpress/plugins/dropdown-menu
 Description: A multi widget to generate drop-down menus from your pages and categories. This widget is best used in <a href="http://shailan.com">Shailan.com</a> themes. You can find more widgets, plugins and themes at <a href="http://shailan.com">shailan.com</a>.
-Version: 1.3.8
+Version: 1.3.9
 Author: Matt Say
 Author URI: http://shailan.com
 Text Domain: shailan-dropdown-menu
 */
 
-define('SHAILAN_DM_VERSION','1.3.8');
+define('SHAILAN_DM_VERSION','1.3.9');
 define('SHAILAN_DM_TITLE', 'Dropdown Menu');
 define('SHAILAN_DM_FOLDER', 'dropdown-menu-widget');
 
@@ -390,7 +390,7 @@ load_plugin_textdomain( 'shailan-dropdown-menu', 'wp-content/plugins/' . $plugin
 // add admin menu
 add_action('admin_menu', array('shailan_DropdownWidget', 'adminMenu'));
 
-wp_enqueue_script( 'dropdown-ie-support', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/include.js', 'jQuery' );
+wp_enqueue_script( 'dropdown-ie-support', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/include.js', array('jquery') );
 
 /* Includes */
 

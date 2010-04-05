@@ -48,6 +48,9 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 
 == Changelog ==
 
+= 1.3.9 = 
+* Fixed errors for IE jquery support. 
+
 = 1.3.8 =
 * Added option for displaying title attributes. You may now turn title display on from the Settings page.
 
