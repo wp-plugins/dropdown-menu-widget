@@ -357,7 +357,7 @@ Please support if you like this plugin:
 	
 		$theme = get_option('theme');
 		
-		echo "\n<!-- Start of Wordpress Dropdown Menu Styles by shailan (http://shailan.com) -->";
+		echo "\n<!-- Start of Dropdown Menu Widget Styles by shailan (http://shailan.com) -->";
 		
 		echo "\n\t<link rel=\"stylesheet\" href=\"".WP_PLUGIN_URL."/".SHAILAN_DM_FOLDER."/shailan-dropdown.css\" type=\"text/css\" />";
 		
@@ -379,6 +379,7 @@ Please support if you like this plugin:
 		echo "\n\t<![endif]-->";
 		
 		echo "\n<!-- End of Wordpress Dropdown Menu Styles -->";
+		echo "\n ";
 		
 	}
 
