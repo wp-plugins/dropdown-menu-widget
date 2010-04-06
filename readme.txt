@@ -48,6 +48,9 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 
 == Changelog ==
 
+= 1.4.0 = 
+* Added option for multiline links. If checked a link with more than one word will be wrapped.
+
 = 1.3.9 = 
 * Fixed errors for IE jquery support. 
 * Added belorussian translation provided by [Marcis G.](http://pc.de)

@@ -80,7 +80,6 @@ ul.dropdown-vertical-rtl *.dir {
 
 ul.dropdown li.hover *.open {
  position: relative;
- z-index: 600;
  margin: -1px 0;
  padding-top: 5px;
  padding-bottom: 5px;
@@ -116,7 +115,6 @@ ul.dropdown-vertical ul li.hover *.open {
 
 ul.dropdown ul li.hover *.open {
  position: static;
- z-index: 0;
  float: none;
  margin: 0;
  padding-top: 4px;
@@ -174,7 +172,6 @@ ul.dropdown-vertical-rtl ul a.dir:hover {
 
 	ul.dropdown li:hover > *.dir {
 	 position: relative;
-	 z-index: 600;
 	 margin: -1px 0;
 	 padding-top: 5px;
 	 padding-bottom: 5px;
@@ -210,7 +207,6 @@ ul.dropdown-vertical-rtl ul a.dir:hover {
 
 	ul.dropdown ul li:hover > *.dir {
 	 position: static;
-	 z-index: 0;
 	 float: none;
 	 margin: 0;
 	 padding-top: 4px;

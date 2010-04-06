@@ -81,7 +81,6 @@ ul.dropdown *.dir {
 
 ul.dropdown li.hover *.open {
  position: relative;
- z-index: 600;
  float: left;
  margin: -1px -1px 0;
  border-width: 1px;
@@ -102,7 +101,6 @@ ul.dropdown ul li.hover *.open {
 
 	ul.dropdown li:hover > *.dir {
 	 position: relative;
-	 z-index: 600;
 	 float: left;
 	 margin: -1px -1px 0;
 	 border-width: 1px;

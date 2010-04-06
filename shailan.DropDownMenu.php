@@ -49,6 +49,7 @@ class shailan_DropdownWidget extends WP_Widget {
 	$vertical_tag = 'shailan_dm_vertical';
 	$width_tag = 'shailan_dm_width';	
 	$custom_walkers_tag = 'shailan_dm_customwalkers';
+	$allow_multiline_tag = 'shailan_dm_allowmultiline';
 	
 	// Read options 
 	$theme = get_option($theme_tag);
@@ -62,6 +63,7 @@ class shailan_DropdownWidget extends WP_Widget {
 	$vertical = (bool) get_option($vertical_tag);
 	$width = (int) get_option($width_tag);
 	$custom_walkers = (bool) get_option($custom_walkers_tag);
+	$allow_multiline = (bool) get_option($allow_multiline_tag);
 	
 	if(wp_verify_nonce($_POST['_wpnonce'])){ // Form submitted. Save settings.
 		
@@ -77,6 +79,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		$vertical = (bool) $_POST[$vertical_tag];
 		$width = (int) $_POST[$width];
 		$custom_walkers = (bool) $_POST[$custom_walkers_tag];
+		$allow_multiline = (bool) $_POST[$allow_multiline_tag];
 		
 		update_option($theme_tag, $theme);
 		update_option($type_tag, $type);
@@ -88,6 +91,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		update_option($vertical_tag, $vertical);
 		update_option($width_tag, $width);
 		update_option($custom_walkers_tag, $custom_walkers);
+		update_option($allow_multiline_tag, $allow_multiline);
 		
 		?>
 		<div class="updated"><p><strong><?php _e('Options saved.', 'shailan-dropdown-menu'); ?></strong></p></div>
@@ -153,6 +157,16 @@ Please support if you like this plugin:
 
 <span class="description"><?php _e('If checked menu will display title attributes.', 'shailan-dropdown-menu'); ?></span></td>
 </tr>
+
+<tr valign="top">
+<th scope="row"><label for="<?php echo $allow_multiline_tag; ?>"><?php _e('Allow multiline links', 'shailan-dropdown-menu') ?></label></th>
+<td>
+
+<input type="checkbox" class="checkbox" id="<?php echo $allow_multiline_tag; ?>" name="<?php echo $allow_multiline_tag; ?>"<?php checked( $allow_multiline ); ?> />
+
+<span class="description"><?php _e('If checked menu will wrap long menu items.', 'shailan-dropdown-menu'); ?></span></td>
+</tr>
+
 </table>
 
 <fieldset width="400">
@@ -187,13 +201,21 @@ Please support if you like this plugin:
 </div>
 </fieldset>
 
-	<p><?php _e('NOTE : Onscreen theme edit will be available soon. Be sure to check <a href="http://shailan.com">shailan.com</a> regularly for updates.', 'shailan-dropdown-menu'); ?></p>
+<p><?php _e('NOTE : Onscreen theme edit will be available soon. Be sure to check <a href="http://shailan.com">shailan.com</a> regularly for updates.', 'shailan-dropdown-menu'); ?></p>
 </div>
 <p class="submit">
 <input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Save Changes', 'shailan-dropdown-menu'); ?>" />
 </p>
 <p><?php _e('Visit <a href="http://shailan.com">shailan.com</a> for more wordpress themes, plugins and widgets.', 'shailan-dropdown-menu'); ?></p>
 </form>
+
+<h2><?php _e('Contributors', 'shailan-dropdown-menu'); ?></h2>
+<p>Translators: </p>
+<ul>
+	<li>Belorussian - <a href="http://pc.de/">Marcis G.</a></li>
+</ul>
+
+
 <p>
 <a href="http://shailan.com/wordpress/plugins/dropdown-menu">Dropdown Menu <?php echo SHAILAN_DM_VERSION; ?></a> by <a href="http://shailan.com">shailan</a></a> &copy; 2010
 </p>
@@ -356,6 +378,8 @@ Please support if you like this plugin:
 	function styles($instance){
 	
 		$theme = get_option('theme');
+		$allow_multiline = (bool) get_option($allow_multiline_tag);
+		
 		
 		echo "\n<!-- Start of Dropdown Menu Widget Styles by shailan (http://shailan.com) -->";
 		
@@ -370,6 +394,11 @@ Please support if you like this plugin:
 		$font_size = '12px';
 		echo "\n\t<style type=\"text/css\" media=\"all\">";
 		echo "\n\t\tul.dropdown {font-family:$font_family; font-size:$font_size; }";
+		
+		if(!$allow_multiline){
+			echo "\n\t\t.shailan-dropdown-menu ul.dropdown { white-space: nowrap;	}";
+		}
+		
 		echo "\n\t</style>";
 		
 		echo "\n\t<!--[if lte IE 7]>";
