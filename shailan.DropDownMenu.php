@@ -380,7 +380,6 @@ Please support if you like this plugin:
 		$theme = get_option('theme');
 		$allow_multiline = (bool) get_option($allow_multiline_tag);
 		
-		
 		echo "\n<!-- Start of Dropdown Menu Widget Styles by shailan (http://shailan.com) -->";
 		
 		echo "\n\t<link rel=\"stylesheet\" href=\"".WP_PLUGIN_URL."/".SHAILAN_DM_FOLDER."/shailan-dropdown.css\" type=\"text/css\" />";
@@ -390,8 +389,9 @@ Please support if you like this plugin:
 		}
 		
 		// Font family and font size
-		$font_family = '"Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif';
-		$font_size = '12px';
+		$font_family = get_option('shailan_dropdown_font'); //'"Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif';
+		$font_size = get_option('shailan_dropdown_fontsize'); //'12px';
+		
 		echo "\n\t<style type=\"text/css\" media=\"all\">";
 		echo "\n\t\tul.dropdown {font-family:$font_family; font-size:$font_size; }";
 		
@@ -435,8 +435,6 @@ wp_enqueue_script( 'dropdown-ie-support', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDE
 /* Custom widget */
 	
 	include('shailan-multi-dropdown.php'); // Load multi-dropdown widget
-
-
 
 // template tag support
 function shailan_dropdown_menu(){
