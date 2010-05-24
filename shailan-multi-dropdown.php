@@ -112,7 +112,7 @@ class shailan_MultiDropDown extends WP_Widget {
 						<?php wp_list_bookmarks('title_li=&category_before=&category_after=&categorize=0'); ?>
 					</ul>
 					</li>
-					<? } ?>
+					<?php } ?>
 					
 						<?php if($admin){ wp_register('<li class="admintab">','</li>'); } if($login){ ?><li class="page_item"><?php wp_loginout(); ?><?php } ?>
 						
