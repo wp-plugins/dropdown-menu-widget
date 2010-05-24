@@ -378,7 +378,7 @@ Please support if you like this plugin:
 	function styles($instance){
 	
 		$theme = get_option('theme');
-		$allow_multiline = (bool) get_option($allow_multiline_tag);
+		$allow_multiline = (bool) get_option('shailan_dm_allowmultiline');
 		
 		echo "\n<!-- Start of Dropdown Menu Widget Styles by shailan (http://shailan.com) -->";
 		
