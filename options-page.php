@@ -20,6 +20,7 @@ $i=0;
 <div id="message" class="error"><p><?php echo $errors[$_GET['error']]; ?></p></div>
 <?php } ?>
 
+<form id="frmShailanDm" name="frmShailanDm" method="post" action="">
 
 <div class="widget-liquid-left">
 <div id="widgets-left">
@@ -131,7 +132,7 @@ $i++;
 
 <form method="post">
 <p class="submit">
-<input name="reset" type="submit" value="Reset" />
+<input name="reset" type="submit" value="Reset Options" />
 <input type="hidden" name="action" value="reset" />
 </p>
 </form>
@@ -143,7 +144,7 @@ $i++;
 <div id="widgets-right"> 
 
 <div class="widgets-holder-wrap"> 
-	<div class="sidebar-name"><h3>Links</h3></div> 
+	<div class="sidebar-name"><h3>Help</h3></div> 
 
 	<div id='widgets-entry-bottom' class='widgets-sortables'> 
 	<div class='sidebar-description'><p class='description'>
@@ -152,22 +153,31 @@ $i++;
 			<li><a href="http://shailan.com/">Author website</a></li>
 			<li><a href="http://wordpress.org/tags/dropdown-menu-widget">Support</a></li>
 		</ul>
-		
+	</p></div> 
+	</div> 
+</div> 
+
+<div class="widgets-holder-wrap"> 
+	<div class="sidebar-name"><h3>Shailan.com</h3></div> 
+
+	<div id='widgets-entry-bottom' class='widgets-sortables'> 
+	<div class='sidebar-description'><p class='description'>
 		
 		<?php
+			//echo get_latest_tweet('mattsay');			
 			
 			$rss_options = array(
 				'link' => 'http://shailan.com',
 				'url' => 'http://feeds.feedburner.com/shailan',
-				'title' => 'Recent blog posts',
+				'title' => '',
 				'items' => 3,
 				'show_summary' => 0,
 				'show_author' => 0,
-				'show_date' => 1,
+				'show_date' => 0,
+				'before' => 'text'
 			);
 
-
-		the_widget('WP_Widget_RSS', $rss_options); ?>
+			wp_widget_rss_output( $rss_options ); ?>
 		
 		
 	</p></div> 
@@ -175,20 +185,29 @@ $i++;
 </div> 
 
 <div class="widgets-holder-wrap"> 
-	<div class="sidebar-name"><h3>Donate</h3></div> 
+	<div class="sidebar-name"><h3>Support</h3></div> 
 
 	<div id='widgets-entry-bottom' class='widgets-sortables'> 
 	<div class='sidebar-description'><p class='description'>
 		
-	<p>
-	Please support if you like this plugin:
-	<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-	<input type="hidden" name="cmd" value="_s-xclick">
-	<input type="hidden" name="hosted_button_id" value="10214058">
-	<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-	<img alt="" border="0" src="https://www.paypal.com/tr_TR/i/scr/pixel.gif" width="1" height="1">
-	</form>
-	</p>
+	<p>If you like this plugin you can use one of the following options to support it:</p>
+	
+	<ul style="padding:0px 15px; list-style:disc;">
+	<li>Commenting on <a href="http://shailan.com/wordpress/plugins/dropdown-menu/">plugin page</a></li>
+	<li>Rating it on <a href="http://wordpress.org/extend/plugins/dropdown-menu-widget/">wordpress plugin page</a></li>
+	<li>Posting a wordpress post about it</li>
+	<li>Clicking <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fshailan.com%2Fwordpress%2Fplugins%2Fdropdown-menu%2F&amp;layout=button_count&amp;show_faces=false&amp;width=150&amp;action=like&amp;font=segoe+ui&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:150px; height:21px;vertical-align:middle;" allowTransparency="true"></iframe> </li>
+	<li>Tweeting about it : <script type="text/javascript">
+tweetmeme_url = 'http://shailan.com/wordpress/plugins/dropdown-menu/'; tweetmeme_style = 'compact'; tweetmeme_source = 'mattsay';
+</script>
+<script type="text/javascript" src="http://tweetmeme.com/i/scripts/button.js"></script></li>
+	<li>And last option, if you are feeling generous, you can donate using the button below: <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="8F7M79S2PBU3G">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypal.com/tr_TR/i/scr/pixel.gif" width="1" height="1">
+</form></li>
+	</ul>
 			
 	</p></div> 
 	</div> 
@@ -196,9 +215,11 @@ $i++;
 
 </div>
 </div>
+
+<br class="clear">
 		
 		
-		<p>
+		<p class="aligncenter">
 		<a href="http://shailan.com/wordpress/plugins/dropdown-menu">Dropdown Menu <?php echo SHAILAN_DM_VERSION; ?></a> by <a href="http://shailan.com">shailan</a> &copy; 2010
 		</p>
 		

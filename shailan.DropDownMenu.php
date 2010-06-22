@@ -77,8 +77,6 @@ class shailan_DropdownWidget extends WP_Widget {
 
 		// Define plugin options	
 		$this->admin_options = array(
-			array( "name" => $this->pluginname." Options",
-			"type" => "title"),
 			
 			array(
 				"name" => "Menu options",
@@ -91,6 +89,12 @@ class shailan_DropdownWidget extends WP_Widget {
 			"std" => "None",
 			"options" => $themes,
 			"type" => "select"),
+			
+			array(  "name" => "Rename Homepage",
+			"desc" => "You can change your homepage link here",
+			"id" => $this->shortname."_home_tag",
+			"std" => __("Home"),
+			"type" => "text"),
 			
 			array( "type" => "close" ),
 			
@@ -107,11 +111,10 @@ class shailan_DropdownWidget extends WP_Widget {
 			"type" => "select"),
 			
 			array(  "name" => "Home link",
-			"desc" => "Display home link visibility",
+			"desc" => "If checked dropdown menu displays home link",
 			"id" => $this->shortname."_home",
 			"std" => true,
-			"options" => array(true=>'Visible', false=>'Hidden'),
-			"type" => "select"),
+			"type" => "checkbox"),
 			
 			array(  "name" => "Exclude Pages",
 			"desc" => "Excluded page IDs.",
@@ -179,12 +182,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		
 		$title = __('Dropdown Menu');
 		
-		?>
-		
-		<?php include_once('options-page.php'); ?>
-					
-		
-		<?php
+		include_once('options-page.php'); 
 	
 	}
 	
@@ -440,4 +438,13 @@ function shailan_dropdown_menu(){
 		);
 
 	the_widget('shailan_DropdownWidget', $args);
+}
+
+function get_latest_tweet($username)
+{
+    $url = "http://search.twitter.com/search.atom?q=from:$username&rpp=1";
+    $content = file_get_contents($url);
+    $content = explode('<content type="html">', $content);
+    $content = explode('</content>', $content[1]);
+    return html_entity_decode($content[0]);
 }
