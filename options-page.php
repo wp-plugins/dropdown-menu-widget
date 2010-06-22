@@ -147,13 +147,11 @@ $i++;
 	<div class="sidebar-name"><h3>Help</h3></div> 
 
 	<div id='widgets-entry-bottom' class='widgets-sortables'> 
-	<div class='sidebar-description'><p class='description'>
+	<div class='sidebar-description'>
 		<ul>
 			<li><a href="http://shailan.com/wordpress/plugins/dropdown-menu">Plugin page</a></li>
-			<li><a href="http://shailan.com/">Author website</a></li>
 			<li><a href="http://wordpress.org/tags/dropdown-menu-widget">Support</a></li>
-		</ul>
-	</p></div> 
+		</ul></div> 
 	</div> 
 </div> 
 
@@ -193,20 +191,20 @@ $i++;
 	<p>If you like this plugin you can use one of the following options to support it:</p>
 	
 	<ul style="padding:0px 15px; list-style:disc;">
-	<li>Commenting on <a href="http://shailan.com/wordpress/plugins/dropdown-menu/">plugin page</a></li>
-	<li>Rating it on <a href="http://wordpress.org/extend/plugins/dropdown-menu-widget/">wordpress plugin page</a></li>
-	<li>Posting a wordpress post about it</li>
-	<li>Clicking <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fshailan.com%2Fwordpress%2Fplugins%2Fdropdown-menu%2F&amp;layout=button_count&amp;show_faces=false&amp;width=150&amp;action=like&amp;font=segoe+ui&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:150px; height:21px;vertical-align:middle;" allowTransparency="true"></iframe> </li>
-	<li>Tweeting about it : <script type="text/javascript">
+	<li><a href="http://shailan.com/wordpress/plugins/dropdown-menu/">Commenting on plugin page</a></li>
+	<li><a href="http://wordpress.org/extend/plugins/dropdown-menu-widget/">Rating it on wordpress plugin page</a></li>
+	<li>Posting a wordpress post about it. (<a href="http://shailan.com/wordpress/plugins/dropdown-menu/">Trackback</a>)</li>
+	<li>Like on facebook :  <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fshailan.com%2Fwordpress%2Fplugins%2Fdropdown-menu%2F&amp;layout=button_count&amp;show_faces=false&amp;width=150&amp;action=like&amp;font=segoe+ui&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:150px; height:21px;vertical-align:middle;" allowTransparency="true"></iframe> </li>
+	<li>Tweet about it : <script type="text/javascript">
 tweetmeme_url = 'http://shailan.com/wordpress/plugins/dropdown-menu/'; tweetmeme_style = 'compact'; tweetmeme_source = 'mattsay';
 </script>
 <script type="text/javascript" src="http://tweetmeme.com/i/scripts/button.js"></script></li>
-	<li>And last option, if you are feeling generous, you can donate using the button below: <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+	<li>And last option you can <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="8F7M79S2PBU3G">
 <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 <img alt="" border="0" src="https://www.paypal.com/tr_TR/i/scr/pixel.gif" width="1" height="1">
-</form></li>
+</form> to this plugin.</li>
 	</ul>
 			
 	</p></div> 

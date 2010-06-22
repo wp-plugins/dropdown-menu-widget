@@ -5,3 +5,5 @@
 	width:200px;
 	display:block;
 	float:left;	}
+	
+#widgets-right .widgets-sortables{ min-height:0px; }
