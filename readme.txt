@@ -48,6 +48,11 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 
 == Changelog ==
 
+= 1.5 = 
+* Fixed issues with wordpress 3.0
+* Renamed plugin to dropdown menu
+* Removed inline style option
+
 = 1.4.1 = 
 * A minor fix for `Parse error: parse error, expecting `T_FUNCTION' in C:\wamp\www\wordpress\wp-content\plugins\dropdown-menu-widget\shailan-multi-dropdown.php on line 194` error. 
 
