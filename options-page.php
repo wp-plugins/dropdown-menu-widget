@@ -54,7 +54,7 @@ case "title":
 case 'text':
 ?>
 
-<div class="rm_input rm_text">
+<div class="shailan_dm_input shailan_dm_text">
 	<label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label>
  	<input name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" value="<?php if ( get_option( $value['id'] ) != "") { echo stripslashes(get_option( $value['id'])  ); } else { echo $value['std']; } ?>" />
  <small><?php echo $value['desc']; ?></small><div class="clearfix"></div>
@@ -66,7 +66,7 @@ break;
 case 'textarea':
 ?>
 
-<div class="rm_input rm_textarea">
+<div class="shailan_dm_input shailan_dm_textarea">
 	<label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label>
  	<textarea name="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" cols="" rows=""><?php if ( get_option( $value['id'] ) != "") { echo stripslashes(get_option( $value['id']) ); } else { echo $value['std']; } ?></textarea>
  <small><?php echo $value['desc']; ?></small><div class="clearfix"></div>
@@ -79,7 +79,7 @@ break;
 case 'select':
 ?>
 
-<div class="rm_input rm_select">
+<div class="shailan_dm_input shailan_dm_select">
 	<label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label>
 	
 	<!-- <pre>
@@ -99,7 +99,7 @@ break;
 case "checkbox":
 ?>
 
-<div class="rm_input rm_checkbox">
+<div class="shailan_dm_input shailan_dm_checkbox">
 	<label for="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></label>
 	
 <?php if(get_option($value['id'])){ $checked = "checked=\"checked\""; }else{ $checked = "";} ?>

@@ -1,2 +1,7 @@
 /** Dropdown Menu Widget Admin Styles */
-
+.shailan_dm_input{padding:10px;}
+.shailan_dm_input small{font-style:italic; font-size:smaller; color:#666;}
+.shailan_dm_input label{	font-size:12px;
+	width:200px;
+	display:block;
+	float:left;	}

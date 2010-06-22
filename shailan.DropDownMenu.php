@@ -30,7 +30,6 @@ class shailan_DropdownWidget extends WP_Widget {
 		
 		// Hook up styles
 		add_action( 'wp_head', array(&$this, 'styles') );		
-		wp_admin_css( 'widgets' );
 			
 		// Define themes
 		$available_themes = array(
@@ -67,9 +66,6 @@ class shailan_DropdownWidget extends WP_Widget {
 		$types = array_merge($types, $navmenus);
 		
 		// Option names
-		$home_tag = 'shailan_dm_home';
-		$login_tag = 'shailan_dm_login';
-		$admin_tag = 'shailan_dm_admin';
 		$vertical_tag = 'shailan_dm_vertical';
 		$width_tag = 'shailan_dm_width';	
 		$custom_walkers_tag = 'shailan_dm_customwalkers';
@@ -116,6 +112,24 @@ class shailan_DropdownWidget extends WP_Widget {
 			"std" => true,
 			"type" => "checkbox"),
 			
+			array(  "name" => "Login",
+			"desc" => "If checked dropdown menu displays login link",
+			"id" => $this->shortname."_login",
+			"std" => true,
+			"type" => "checkbox"),
+			
+			array(  "name" => "Admin",
+			"desc" => "If checked dropdown menu displays register/site admin link.",
+			"id" => $this->shortname."_login",
+			"std" => true,
+			"type" => "checkbox"),
+			
+			array(  "name" => "Vertical menu",
+			"desc" => "If checked dropdown menu is displayed vertical.",
+			"id" => $this->shortname."_vertical",
+			"std" => true,
+			"type" => "checkbox"),
+			
 			array(  "name" => "Exclude Pages",
 			"desc" => "Excluded page IDs.",
 			"id" => $this->shortname."_exclude",
@@ -139,6 +153,8 @@ class shailan_DropdownWidget extends WP_Widget {
 	// Add settings page
 	function adminMenu(){
 		global $pluginname, $shortname, $options;
+		
+		wp_register_style('dropdownMenuStyles', WP_PLUGIN_URL . '/dropdown-menu-widget/admin.css');
  
 		if ( @$_GET['page'] == 'dropdown-menu' ) {
 		
@@ -173,14 +189,15 @@ class shailan_DropdownWidget extends WP_Widget {
 	
 	
 		if (function_exists('add_options_page')) {
-			add_options_page(__('Settings for Dropdown Menu', 'shailan-dropdown-menu') , __('Dropdown Menu', 'shailan-dropdown-menu'), 'edit_themes', 'dropdown-menu', array('shailan_DropdownWidget', 'getOptionsPage'));
+			$page = add_options_page(__('Settings for Dropdown Menu', 'shailan-dropdown-menu') , __('Dropdown Menu', 'shailan-dropdown-menu'), 'edit_themes', 'dropdown-menu', array('shailan_DropdownWidget', 'getOptionsPage'));
+			add_action('admin_print_styles-' . $page, array('shailan_DropdownWidget', 'styles'));
 		}
 	}
 	
 	function getOptionsPage(){	
 		global $pluginname, $shortname, $options;
 		
-		$title = __('Dropdown Menu');
+		$title = __('Dropdown Menu Options');
 		
 		include_once('options-page.php'); 
 	
@@ -353,6 +370,8 @@ class shailan_DropdownWidget extends WP_Widget {
 	
 	function styles($instance){
 	
+		wp_enqueue_style('dropdownMenuStyles');
+	
 		if(!is_admin()){
 	
 			$theme = get_option('shailan_dm_active_theme');
@@ -388,10 +407,7 @@ class shailan_DropdownWidget extends WP_Widget {
 			echo "\n<!-- End of Wordpress Dropdown Menu Styles -->";
 			echo "\n ";
 		
-		} else {
-			echo "\n<link rel='stylesheet' href='".get_bloginfo('url')."/wp-admin/load-styles.php?load=widgets' type='text/css' media='all' />";	
-		}
-		
+		}	
 	}
 
 } // class shailan_DropdownWidget
@@ -406,6 +422,7 @@ load_plugin_textdomain( 'shailan-dropdown-menu', false, $plugin_dir . '/lang');
 // add admin menu
 add_action('admin_menu', array('shailan_DropdownWidget', 'adminMenu'));
 
+wp_admin_css( 'widgets' );
 wp_enqueue_script( 'dropdown-ie-support', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/include.js', array('jquery') );
 
 /* Includes */
