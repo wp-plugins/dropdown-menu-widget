@@ -118,7 +118,7 @@ class shailan_DropdownWidget extends WP_Widget {
 			"std" => true,
 			"type" => "checkbox"),
 			
-			array(  "name" => "Admin",
+			array(  "name" => "Register / Site Admin",
 			"desc" => "If checked dropdown menu displays register/site admin link.",
 			"id" => $this->shortname."_login",
 			"std" => true,
