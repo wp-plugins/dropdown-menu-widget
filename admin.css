@@ -5,5 +5,15 @@
 	width:200px;
 	display:block;
 	float:left;	}
+
+.shailan_dm_input input[type=text]{
+	width:280px;}
+
+.shailan_dm_input textarea{
+	width:400px; height:150px; }
 	
 #widgets-right .widgets-sortables{ min-height:0px; }
+
+.sidebar-name{overflow:auto; display:block;}
+.sidebar-name h3{float:left;}
+.sidebar-name span{float:right;}

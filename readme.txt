@@ -54,6 +54,7 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 * Removed inline style option.
 * Removed unnecessary screenshots.
 * Added support for wordpress 3.0 navigation menus.
+* Removed exclude pages plugin.
 
 = 1.4.1 = 
 * A minor fix for `Parse error: parse error, expecting `T_FUNCTION' in C:\wamp\www\wordpress\wp-content\plugins\dropdown-menu-widget\shailan-multi-dropdown.php on line 194` error. 

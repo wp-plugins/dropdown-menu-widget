@@ -3,7 +3,7 @@
 class shailan_MultiDropDown extends WP_Widget {
     /** constructor */
     function shailan_MultiDropDown() {
-		$widget_ops = array('classname' => 'shailan-dropdown-menu', 'description' => __( 'Dropdown page & category menu', 'shailan-dropdown-menu' ) );
+		$widget_ops = array('classname' => 'shailan-multi-dropdown', 'description' => __( 'Dropdown page & category menu', 'shailan-dropdown-menu' ) );
 		$this->WP_Widget('multi-dropdown-menu', __('Dropdown Multi', 'shailan-multi-dropdown'), $widget_ops);
 		$this->alt_option_name = 'widget_multi_dropdown';	
 		

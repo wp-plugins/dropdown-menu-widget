@@ -1,6 +1,6 @@
 <?php
 
-global $pluginname, $shortname, $options;
+global $pluginname, $shortname, $pluginoptions;
 
 $i=0;
  
@@ -26,7 +26,7 @@ $i=0;
 <div id="widgets-left">
 
 
-<?php foreach ($options as $value) {
+<?php foreach ($pluginoptions as $value) {
 switch ( $value['type'] ) {
  
 case "open":
@@ -116,8 +116,9 @@ $i++;
 ?>
 
 <div id="available-widgets" class="widgets-holder-wrap">
-<div class="sidebar-name"><h3><img src="<?php bloginfo('template_directory')?>/includes/functions/images/trans.png" class="inactive" alt="""><?php echo $value['name']; ?><span style="float:right;"><input name="save<?php echo $i; ?>" type="submit" class="button-primary menu-save" value="Save changes" />
-</span></h3><div class="clearfix"></div></div>
+
+<div class="sidebar-name"><h3><?php echo $value['name']; ?></h3> <span style="float:right;"><input name="save<?php echo $i; ?>" type="submit" class="button-primary menu-save" value="Save changes" />
+</span><br class="clear" /></div>
 <div class="widget-holder">
 
  
@@ -126,25 +127,18 @@ $i++;
 }
 }
 ?>
- 
-<input type="hidden" name="action" value="save" />
-</form>
-
-<form method="post">
-<p class="submit">
-<input name="reset" type="submit" value="Reset Options" />
-<input type="hidden" name="action" value="reset" />
-</p>
-</form>
 
 </div>
-</div> <!-- Left widgets -->
+</div>
 
-<div class="widget-liquid-right" style=""> 
+<div class="widget-liquid-right"> 
 <div id="widgets-right"> 
 
 <div class="widgets-holder-wrap"> 
-	<div class="sidebar-name"><h3>Help</h3></div> 
+	<div class="sidebar-name">
+	<div class="sidebar-name-arrow"><br /></div>
+	<h3>Help
+	<span><img src="<?php echo esc_url( admin_url( 'images/wpspin_dark.gif' ) ); ?>" class="ajax-feedback" title="" alt="" /></span></h3></div>
 
 	<div id='widgets-entry-bottom' class='widgets-sortables'> 
 	<div class='sidebar-description'>
@@ -156,7 +150,10 @@ $i++;
 </div> 
 
 <div class="widgets-holder-wrap"> 
-	<div class="sidebar-name"><h3>Shailan.com</h3></div> 
+	<div class="sidebar-name">
+	<div class="sidebar-name-arrow"><br /></div>
+	<h3>Shailan.com
+	<span><img src="<?php echo esc_url( admin_url( 'images/wpspin_dark.gif' ) ); ?>" class="ajax-feedback" title="" alt="" /></span></h3></div>
 
 	<div id='widgets-entry-bottom' class='widgets-sortables'> 
 	<div class='sidebar-description'><p class='description'>
@@ -183,7 +180,10 @@ $i++;
 </div> 
 
 <div class="widgets-holder-wrap"> 
-	<div class="sidebar-name"><h3>Support</h3></div> 
+	<div class="sidebar-name">
+	<div class="sidebar-name-arrow"><br /></div>
+	<h3>Support
+	<span><img src="<?php echo esc_url( admin_url( 'images/wpspin_dark.gif' ) ); ?>" class="ajax-feedback" title="" alt="" /></span></h3></div>
 
 	<div id='widgets-entry-bottom' class='widgets-sortables'> 
 	<div class='sidebar-description'><p class='description'>
@@ -215,13 +215,27 @@ tweetmeme_url = 'http://shailan.com/wordpress/plugins/dropdown-menu/'; tweetmeme
 </div>
 
 <br class="clear">
+
+<input type="hidden" name="action" value="save" />
+</form>
+
+<!-- <form method="post">
+<p class="submit">
+<input name="reset" type="submit" value="Reset Options" />
+<input type="hidden" name="action" value="reset" />
+</p>
+</form> -->
+
+<p class="aligncenter">
+<a href="http://shailan.com/wordpress/plugins/dropdown-menu">Dropdown Menu <?php echo SHAILAN_DM_VERSION; ?></a> by <a href="http://shailan.com">shailan</a> &copy; 2010
+</p>
+
+
+</div> <!-- wrap -->
 		
-		
-		<p class="aligncenter">
-		<a href="http://shailan.com/wordpress/plugins/dropdown-menu">Dropdown Menu <?php echo SHAILAN_DM_VERSION; ?></a> by <a href="http://shailan.com">shailan</a> &copy; 2010
-		</p>
-		
-		</div>
+
+
+
 		
 
 
