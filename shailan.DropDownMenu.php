@@ -65,6 +65,8 @@ class shailan_DropdownWidget extends WP_Widget {
 		$types = array('pages'=>'Pages', 'categories'=>'Categories');
 		$types = array_merge($types, $navmenus);
 		
+		$this->menu_types = $types; // Back it up
+		
 		// Option names
 		$vertical_tag = 'shailan_dm_vertical';
 		$width_tag = 'shailan_dm_width';	
@@ -144,6 +146,17 @@ class shailan_DropdownWidget extends WP_Widget {
 			
 		);
 		
+		$this->defaults = array(
+			'title' => '',
+			'type' => 'pages',
+			'exclude' => '',
+			'home' => false,
+			'login' => false,
+			'admin' => false,
+			'vertical' => false,
+			'align' => 'left'
+		);
+		
 		$pluginname = $this->pluginname;
 		$shortname = $this->shortname;
 		$options = $this->admin_options;
@@ -171,19 +184,6 @@ class shailan_DropdownWidget extends WP_Widget {
 			 
 			} 
 		
-		/* TODO: Add reset option
-		 
-			else if( @$_REQUEST['action'] && 'reset' == $_REQUEST['action'] ) {
-
-				foreach ($options as $value) {
-					delete_option( $value['id'] ); }
-			 
-				header("Location: admin.php?page=controlpanel.php&reset=true");
-			die;
-			 
-			}
-		*/
-		
 		}
 	
 	
@@ -206,29 +206,8 @@ class shailan_DropdownWidget extends WP_Widget {
     /** @see WP_Widget::widget */
     function widget($args, $instance) {		
         extract( $args );
-		
-		$defaults = array(
-			'title' => '',
-			'type' => 'pages',
-			'exclude' => '',
-			'home' => false,
-			'login' => false,
-			'admin' => false,
-			'vertical' => false,
-			'align' => ''
-		);
-		
-		$widget_options = wp_parse_args( $instance, $defaults );
+		$widget_options = wp_parse_args( $instance, $this->defaults );
 		extract( $widget_options, EXTR_SKIP );
-		
-        /*$title = isset( $instance['title'] ) ? apply_filters('widget_title', $instance['title']) : '';
-		$type = isset( $instance['type'] ) ? $instance['type'] : '';
-		$exclude = isset( $instance['exclude'] ) ? $instance['exclude'] : '';//$instance['exclude'];
-		$home = (bool) isset( $instance['home'] ) ? $instance['home'] : false;//  $instance['home'];
-		$login = (bool) isset( $instance['type'] ) ? $instance['type'] : ''; //$instance['login'];
-		$admin = (bool) isset( $instance['type'] ) ? $instance['type'] : ''; // $instance['admin'];
-		$vertical = (bool) isset( $instance['type'] ) ? $instance['type'] : ''; // $instance['vertical'];
-		$align = isset( $instance['type'] ) ? $instance['type'] : ''; //$instance['align'];*/
 		
 		$orientation = ($vertical ? 'dropdown-vertical' : 'dropdown-horizontal');
 		$custom_walkers = (bool) get_option('shailan_dm_customwalkers');
@@ -257,11 +236,12 @@ class shailan_DropdownWidget extends WP_Widget {
 					<ul class="dropdown <?php echo $orientation; ?>">
 					
 					<?php if($home){ ?>						
-						<li class="page_item cat-item blogtab <?php if ( is_front_page() && !is_paged() ){ ?>current_page_item current-cat<?php } ?>"><a href="<?php echo get_option('home'); ?>/"><span><?php _e('Home', 'shailan-dropdown-menu'); ?></span></a></li>	
+						<li class="page_item cat-item blogtab <?php if ( is_front_page() && !is_paged() ){ ?>current_page_item current-cat<?php } ?>"><a href="<?php echo get_option('home'); ?>/"><span><?php
+							$home_tag = get_option('shailan_dm_home_tag'); if(!empty($home_tag)){ echo $home_tag; } else { _e('Home'); };  ?></span></a></li>	
 					<?php } ?>
 							
 					
-					<?php if($type == 'Pages'){ ?>
+					<?php if($type == 'pages'){ ?>
 					
 						<?php 
 						if($custom_walkers){
@@ -287,7 +267,7 @@ class shailan_DropdownWidget extends WP_Widget {
 								)); 						
 						} ?>
 							
-					<?php } else { ?>
+					<?php } elseif($type == 'categories') { ?>
 					
 						<?php 
 						if($custom_walkers){	
@@ -326,21 +306,24 @@ class shailan_DropdownWidget extends WP_Widget {
     }
 
     /** @see WP_Widget::form */
-    function form($instance) {				
-        $title = esc_attr($instance['title']);
-		$type = $instance['type'];
-		$exclude = $instance['exclude'];
-		$inline_style = $instance['style'];
-		$home = (bool) $instance['home'];
-		$login = (bool) $instance['login'];
-		$admin = (bool) $instance['admin'];
-		$vertical = (bool) $instance['vertical'];
-		$align = $instance['align'];
+    function form($instance) {	
+		$widget_options = wp_parse_args( $instance, $this->defaults );
+		extract( $widget_options, EXTR_SKIP );
+		
+		$home = (bool) $home;
+		$login = (bool) $login;
+		$admin = (bool) $admin;
+		$vertical = (bool) $vertical;
 		
         ?>		
 		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title (won\'t be shown):', 'shailan-dropdown-menu'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
 			
-		<p><?php _e('Type:'); ?> <label for="Pages"><input type="radio" id="Pages" name="<?php echo $this->get_field_name('type'); ?>" value="Pages" <?php if($type=='Pages'){ echo 'checked="checked"'; } ?> /> <?php _e('Pages', 'shailan-dropdown-menu'); ?></label> <label for="Categories"><input type="radio" id="Categories" name="<?php echo $this->get_field_name('type'); ?>" value="Categories" <?php if($type=='Categories'){ echo 'checked="checked"'; } ?>/> <?php _e('Categories', 'shailan-dropdown-menu'); ?></label></p>
+		<p><label for="<?php echo $this->get_field_id('type'); ?>"><?php _e('Menu:'); ?>
+		<select name="<?php echo $this->get_field_name('type'); ?>" id="<?php echo $this->get_field_id('type'); ?>">
+		<?php foreach ($this->menu_types as $key=>$option) { ?>
+				<option <?php if ($type == $key) { echo 'selected="selected"'; } ?> value="<?php echo $key; ?>"><?php echo $option; ?></option><?php } ?>
+		</select>
+		</label></p>
 			
 		<p><label for="<?php echo $this->get_field_id('exclude'); ?>"><?php _e('Exclude:', 'shailan-dropdown-menu'); ?> <input class="widefat" id="<?php echo $this->get_field_id('exclude'); ?>" name="<?php echo $this->get_field_name('exclude'); ?>" type="text" value="<?php echo $exclude; ?>" /></label><br /> 
 		<small>Page IDs, separated by commas.</small></p>
@@ -357,9 +340,6 @@ class shailan_DropdownWidget extends WP_Widget {
 		</p>
 		
 		<p><?php _e('Align:', 'shailan-dropdown-menu'); ?> <label for="left"><input type="radio" id="left" name="<?php echo $this->get_field_name('align'); ?>" value="left" <?php if($align=='left'){ echo 'checked="checked"'; } ?> /> <?php _e('Left', 'shailan-dropdown-menu'); ?></label> <label for="center"><input type="radio" id="center" name="<?php echo $this->get_field_name('align'); ?>" value="center" <?php if($align=='center'){ echo 'checked="checked"'; } ?>/> <?php _e('Center', 'shailan-dropdown-menu'); ?></label> <label for="right"><input type="radio" id="right" name="<?php echo $this->get_field_name('align'); ?>" value="right" <?php if($align=='right'){ echo 'checked="checked"'; } ?>/> <?php _e('Right', 'shailan-dropdown-menu'); ?></label></p>
-		
-		<p><label for="<?php echo $this->get_field_id('style'); ?>"><?php _e('Inline Style:', 'shailan-dropdown-menu'); ?> <input class="widefat" id="<?php echo $this->get_field_id('style'); ?>" name="<?php echo $this->get_field_name('style'); ?>" type="text" value="<?php echo $inline_style; ?>" /></label><br /> 
-			<small><?php _e('Applied to menu container &lt;div&gt;.', 'shailan-dropdown-menu'); ?></small></p>
 			
 <div class="widget-control-actions alignright">
 <p><small><a href="options-general.php?page=dropdown-menu"><?php esc_attr_e('Menu Style', 'shailan-dropdown-menu'); ?></a> | <a href="http://shailan.com/wordpress/plugins/dropdown-menu"><?php esc_attr_e('Visit plugin site', 'shailan-dropdown-menu'); ?></a></small></p>
