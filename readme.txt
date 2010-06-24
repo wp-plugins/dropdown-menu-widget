@@ -4,13 +4,14 @@ Donate link: http://shailan.com/donate
 Tags: css, dropdown, menu, widget, pages, categories, multi
 Requires at least: 2.8  
 Tested up to: 3.0 
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 
-This widget adds a beatiful vertical/horizontal CSS only dropdown menu of pages OR categories of your blog.
+This widget adds a beatiful vertical/horizontal CSS only dropdown menu of Pages, Categories or Custom navigation menus of your blog.
 
 == Description ==
 
-Dropdown Menu widget adds a beautiful, CSS only dropdown menu, listing pages OR categories of your blog. It allows you to chose vertical or horizontal. It supports multiple instances. You can select a theme for your widget from the Dropdown Menu Settings page. If you don't like ready-made templates you can create your own theme for the menus using CSS. Hope you like it. Want your own dropdown theme? [Request theme](http://shailan.com/contact)
+Dropdown Menu widget adds a beautiful, CSS only dropdown menu, listing pages, categories of your blog. You can also turn your wordpress navigation menu into a beatiful dropdown menu using this plugin. 
+It allows you to chose vertical or horizontal layout. It supports multiple instances. You can select a theme for your widget from the Dropdown Menu Settings page. If you don't like ready-made templates you can create your own theme for the menus using CSS. If you want a custom dropdown theme you can [request ](http://shailan.com/contact) one. Please visit [plugin site](http://shailan.com/wordpress/plugins/dropdown-menu) for more information. 
 
 == Installation ==
 
@@ -36,17 +37,21 @@ Plugin comes with various themes already installed. If you want something differ
 
 = I found a bug! Where do i submit it? =
 
-You can submit errors and bugs using the [online form](http://shailan.com/contact) on my site.
+You can submit errors and bugs using the [online form](http://shailan.com/contact) on my site OR you can submit via [wordpress support tags here](http://wordpress.org/tags/dropdown-menu-widget).
 
 == Screenshots ==
 
 1. A preview of the widget in action
 1. Shiny Black menu theme
-1. WP-Default menu theme
-1. Dropdown menu settings page
-1. New exclude pages metabox
+1. Brand new dropdown menu options page.
 
 == Changelog ==
+
+= 1.5.2 = 
+* Fixed tested version number.
+* Added screenshot 2.
+* Added options page screenshot.
+* Now plugin allows you to rename the home link.
 
 = 1.5.1 = 
 * Removed custom walker support for now.
