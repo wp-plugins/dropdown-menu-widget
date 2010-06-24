@@ -161,8 +161,6 @@ ul.dropdown ul ul *.dir { border-color: #595959 #333 #333; }
 ul.dropdown ul ul ul li a,
 ul.dropdown ul ul ul *.dir { border-color: #767676 #404040 #404040; }
 
-
-
 /* Custom elements */
 
 #n-movies { width: 250px; text-align: center; }
@@ -174,4 +172,5 @@ ul.dropdown ul ul ul *.dir { border-color: #767676 #404040 #404040; }
 #n-movies ul ul a.dir { width: 111px; }
 #n-movies ul ul ul { left: 100%; }
 
-.shailan-dropdown-menu{background-color: #3a3a3a;}
+/** Container */
+.shailan-dropdown-menu .dropdown-horizontal-container{ background-color: #3a3a3a; }

@@ -56,13 +56,20 @@ class shailan_PageWalker extends Walker {
 	 * @param int $depth Depth of page in reference to parent pages. Used for padding.
 	 * @param array $args Uses 'selected' argument for selected page to set selected HTML attribute for option element.
 	 */
-	function start_el(&$output, $page, $depth, $args, $current_page) {
+	function start_el(&$output, $page, $depth, $args=array(), $current_page=NULL) {
 		if ( $depth )
 			$indent = str_repeat("\t", $depth);
 		else
 			$indent = '';
+			
+		$defaults = array(
+			'link_before' => '',
+			'link_after' => ''
+		);
 
+		$args = wp_parse_args( $args, $defaults );
 		extract($args, EXTR_SKIP);
+		
 		$css_class = array('page_item', 'page-item-'.$page->ID);
 		if ( !empty($current_page) ) {
 			$_current_page = get_page( $current_page );

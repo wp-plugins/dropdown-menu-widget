@@ -3,13 +3,13 @@
 Plugin Name: Dropdown Menu Widget
 Plugin URI: http://shailan.com/wordpress/plugins/dropdown-menu
 Description: A multi widget to generate drop-down menus from your pages and categories. This widget is best used in <a href="http://shailan.com">Shailan.com</a> themes. You can find more widgets, plugins and themes at <a href="http://shailan.com">shailan.com</a>.
-Version: 1.5.0
+Version: 1.5.1
 Author: Matt Say
 Author URI: http://shailan.com
 Text Domain: shailan-dropdown-menu
 */
 
-define('SHAILAN_DM_VERSION','1.5.0');
+define('SHAILAN_DM_VERSION','1.5.1');
 define('SHAILAN_DM_TITLE', 'Dropdown Menu');
 define('SHAILAN_DM_FOLDER', 'dropdown-menu-widget');
 
@@ -40,7 +40,7 @@ class shailan_DropdownWidget extends WP_Widget {
 			'Grayscale'=>'grayscale',
 			'Aqua'=>'aqua',
 			'Blue gradient'=>'simple-blue',
-			'Tabs Blue'=> 'tabs-blue',
+			/* 'Tabs Blue'=> 'tabs-blue', */
 			'Shiny Black'=> 'shiny-black',
 			'Flickr theme'=>'flickr.com/default.ultimate',
 			'Nvidia theme'=>'nvidia.com/default.advanced',
@@ -155,15 +155,15 @@ class shailan_DropdownWidget extends WP_Widget {
 			"type" => "checkbox"),
 			
 			array(  "name" => "Dropdown Menu Font",
-			"desc" => "Font family for the menu",
+			"desc" => "Font family for the menu<br />Please leave blank to use your wordpress theme font.",
 			"id" => $this->shortname."_font",
-			"std" => "'Segoe UI',Calibri,'Myriad Pro',Myriad,'Trebuchet MS',Helvetica,Arial,sans-serif",
+			"std" => '',
 			"type" => "text"),
 			
 			array(  "name" => "Dropdown Menu Font Size",
-			"desc" => "font size of the menu items (Default: 12px)",
+			"desc" => "Font size of the menu items (Eg: 12px OR 1em) <br />Please leave blank to use your wordpress theme font-size.",
 			"id" => $this->shortname."_fontsize",
-			"std" => '12px',
+			"std" => '',
 			"type" => "text"),
 			
 			array(  "name" => "Custom css",
@@ -175,8 +175,16 @@ class shailan_DropdownWidget extends WP_Widget {
 			array(  "name" => "Show Empty Categories",
 			"desc" => "If checked categories with no posts will be shown.",
 			"id" => $this->shortname."_show_empty",
-			"std" => true,
+			"std" => false,
 			"type" => "checkbox"),
+			
+			/*
+			array(  "name" => "Use custom walkers",
+			"desc" => "Custom walkers add more functionality for styling. <br />Some themes depend on this option.<br />Note: This option hides link titles.",
+			"id" => $this->shortname."_customwalkers",
+			"std" => false,
+			"type" => "checkbox"),
+			*/
 			
 			array( "type" => "close" ),
 			
@@ -196,6 +204,9 @@ class shailan_DropdownWidget extends WP_Widget {
 		$pluginname = $this->pluginname;
 		$shortname = $this->shortname;
 		$pluginoptions = $this->admin_options;
+		
+		/** Unused options */
+		update_option('shailan_dm_customwalkers', false);
 			
     }
 	
@@ -244,8 +255,8 @@ class shailan_DropdownWidget extends WP_Widget {
 		extract( $widget_options, EXTR_SKIP );
 		
 		$orientation = ($vertical ? 'dropdown-vertical' : 'dropdown-horizontal');
-		$custom_walkers = (bool) get_option('shailan_dm_customwalkers');
-		$show_empty = !(bool) get_option('shailan_dm_show_empty');
+		$custom_walkers = false; //(bool) get_option('shailan_dm_customwalkers');
+		$show_empty = (bool) get_option('shailan_dm_show_empty');
 		
         ?>
               <?php echo $args['before_widget']; ?>
@@ -258,25 +269,28 @@ class shailan_DropdownWidget extends WP_Widget {
 			
 			$dropdown_open = '<div id="shailan-dropdown-wrapper-' . $this->number . '" ><div class="'.$orientation.'-container" align="' . $align . '" >
 				  <table cellpadding="0" cellspacing="0"> 
-					<tr><td> 	
-					<ul class="dropdown '. $orientation . '">';
+					<tr><td>';
+					
+			$list_open = '<ul class="dropdown '. $orientation . ' dropdown-align-'.$align.'">';
 			
 			if($home && ($type == 'pages' || $type == 'categories')){ 
 			
 						$home_item = '<li class="page_item cat-item blogtab '. (is_front_page() && !is_paged() ? 'current_page_item current-cat' : '' ) . '">
-							<a href="'.get_option('home').'"><span>';
+							<a href="'.get_option('home').'">';
 
 						$home_tag = get_option('shailan_dm_home_tag'); 
 						if(empty($home_tag)){ $home_tag = __('Home'); }
 						
 						$home_item .= $home_tag;
-						$home_item .= '</span></a></li>';
+						$home_item .= '</a></li>';
 						
-						$dropdown_open .= $home_item;
+						$list_open .= $home_item;
 			}
 					
-			$dropdown_close = ($admin ? wp_register('<li class="admintab">','</li>', false) : '') . ($login ? '<li class="page_item">'. wp_loginout('', false) . '</li>' : '')  . '
-					</ul></td>
+			$list_close = ($admin ? wp_register('<li class="admintab">','</li>', false) : '') . ($login ? '<li class="page_item">'. wp_loginout('', false) . '</li>' : '')  . '
+					</ul>';
+					
+			$dropdown_close = '</td>
 				  </tr></table> 
 				</div>
 			</div> ';
@@ -298,7 +312,9 @@ class shailan_DropdownWidget extends WP_Widget {
 					$menu_defaults = wp_parse_args( array('walker'=>$page_walker) , $menu_defaults ); }
 					
 					echo $dropdown_open;
+					echo $list_open;
 					  wp_list_pages($menu_defaults);
+					echo $list_close;
 					echo $dropdown_close;
 				
 				break; 
@@ -313,7 +329,9 @@ class shailan_DropdownWidget extends WP_Widget {
 					if($show_empty){$menu_defaults = wp_parse_args( array('hide_empty'=>'0') , $menu_defaults ); }
 				
 					echo $dropdown_open;
+					echo $list_open;
 					  wp_list_categories($menu_defaults); 
+					echo $list_close;
 					echo $dropdown_close;
 
 				break;
@@ -327,7 +345,7 @@ class shailan_DropdownWidget extends WP_Widget {
 					  'container'       => false, 
 					  'container_class' => '', 
 					  'container_id'    => '', 
-					  'menu_class'      => 'dropdown ' . $orientation, 
+					  'menu_class'      => 'dropdown '. $orientation . ' dropdown-align-'.$align, 
 					  'menu_id'         => '',
 					  'echo'            => true,
 					  'fallback_cb'     => 'wp_page_menu',
@@ -338,8 +356,14 @@ class shailan_DropdownWidget extends WP_Widget {
 					  'depth'           => 0,
 					  'walker'          => '',
 					  'theme_location'  => '');
+					  
+				if($custom_walkers){
+					$page_walker = new shailan_PageWalker();
+					$menu_args = wp_parse_args( array('walker'=>$page_walker) , $menu_args ); }
 					
+					echo $dropdown_open;
 					wp_nav_menu($menu_args);
+					echo $dropdown_close;
 					
 				} // switch ($type)
 
@@ -400,8 +424,6 @@ class shailan_DropdownWidget extends WP_Widget {
 	
 	function styles($instance){
 	
-		wp_enqueue_style('dropdownMenuStyles');
-	
 		if(!is_admin()){
 	
 			$theme = get_option('shailan_dm_active_theme');
@@ -415,16 +437,29 @@ class shailan_DropdownWidget extends WP_Widget {
 				echo "\n\t<link rel=\"stylesheet\" href=\"".WP_PLUGIN_URL."/".SHAILAN_DM_FOLDER."/themes/".$theme.".css\" type=\"text/css\" />";
 			}
 			
-			// Font family and font size
-			$font_family = stripslashes(get_option('shailan_dm_font')); //'"Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif';
-			$font_size = get_option('shailan_dm_fontsize'); //'12px';
 			
 			echo "\n\t<style type=\"text/css\" media=\"all\">";
-			echo "\n\t\tul.dropdown li a {font-family:$font_family; font-size:$font_size; }";
+			
+			// Font family and font size
+			$font_family = stripslashes(get_option('shailan_dm_font')); //'"Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif';
+			
+			if(!empty($font_family)){ echo "\n\t\tul.dropdown li a { font-family:$font_family; } "; }
+			
+			$font_size = get_option('shailan_dm_fontsize'); //'12px';			
+			
+			if(!empty($font_size)){ echo "\n\t\tul.dropdown li a { font-size:$font_size; }"; }
 			
 			if(!$allow_multiline){
-				echo "\n\t\tul.dropdown { white-space: nowrap;	}";
+				echo "\n\t\tul.dropdown { white-space: nowrap;	}\n";
 			}
+			
+			// Custom css support
+			if($theme == 'custom'){
+				$custom_css = stripslashes(get_option('shailan_dm_custom_css'));
+				
+				if(!empty($custom_css)){ echo $custom_css; }
+			}
+			
 			
 			echo "\n\t</style>";
 			
@@ -437,7 +472,9 @@ class shailan_DropdownWidget extends WP_Widget {
 			echo "\n<!-- End of Wordpress Dropdown Menu Styles -->";
 			echo "\n ";
 		
-		}	
+		} else {
+			wp_enqueue_style('dropdownMenuStyles');
+		}
 	}
 
 } // class shailan_DropdownWidget

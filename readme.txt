@@ -4,7 +4,7 @@ Donate link: http://shailan.com/donate
 Tags: css, dropdown, menu, widget, pages, categories, multi
 Requires at least: 2.8  
 Tested up to: 2.9.2 
-Stable tag: 1.4.1
+Stable tag: 1.5.1
 
 This widget adds a beatiful vertical/horizontal CSS only dropdown menu of pages OR categories of your blog.
 
@@ -47,6 +47,13 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 1. New exclude pages metabox
 
 == Changelog ==
+
+= 1.5.1 = 
+* Removed custom walker support for now.
+* Removed blue tabs theme since it was using custom walkers.
+* Fixed all the styles to work with new css classes. 
+* Updated Shiny Black theme to work with wide links.
+* Complete support for custom css insert.
 
 = 1.5 = 
 * Fixed issues with wordpress 3.0.
