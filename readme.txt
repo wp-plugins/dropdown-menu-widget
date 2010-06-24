@@ -1,4 +1,4 @@
-=== Shailan Dropdown Menu Widget ===
+=== Dropdown Menu Widget ===
 Contributors: mattsay
 Donate link: http://shailan.com/donate  
 Tags: css, dropdown, menu, widget, pages, categories, multi
