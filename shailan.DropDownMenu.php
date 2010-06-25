@@ -463,11 +463,13 @@ class shailan_DropdownWidget extends WP_Widget {
 			
 			echo "\n\t</style>";
 			
+			/*
 			echo "\n\t<!--[if lte IE 7]>";
 			echo "\n\t<style type=\"text/css\" media=\"screen\">";
 			echo "\n\t\tbody { behavior:url(\"".WP_PLUGIN_URL."/".SHAILAN_DM_FOLDER."/csshover.htc\"); }";
 			echo "\n\t</style>";
 			echo "\n\t<![endif]-->";
+			*/
 			
 			echo "\n<!-- End of Wordpress Dropdown Menu Styles -->";
 			echo "\n ";

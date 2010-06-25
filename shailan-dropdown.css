@@ -3,8 +3,8 @@
 /** Remove list styling */
 ul.dropdown, ul.dropdown li, ul.dropdown ul { list-style: none; margin: 0; padding: 0; }
 
-ul.dropdown { position: relative; z-index: 597; float: left; }
-* html ul.dropdown, * html ul.dropdown li.hover, * html ul.dropdown li:hover { zoom:1; } /** Added as IE fix */
+ul.dropdown { position: relative; z-index: 597; float: left; display:inline; }
+* html ul.dropdown, * html ul.dropdown li.hover, * html ul.dropdown li:hover { display:inline; zoom:1; } /** Added as IE fix */
 ul.dropdown li { float: left; vertical-align: middle; zoom: 1; }
 * html ul.dropdown li {display:inline;} /** Added as IE fix */
 ul.dropdown li a{ padding: .3em .8em; }
