@@ -6,8 +6,8 @@
 ul.dropdown{ background-color:transparent;
 	border-width:0px;
 	padding:0px; }
-ul.dropdown li{ display:block; font-size:0px; margin:0px; }
-ul.dropdown li a{ margin-left:25px; display:block; height:23px; font-size:0px; vertical-align:middle; text-align:center; text-decoration:none; padding:8px 25px 0px 0px; font:normal 11px Tahoma; color: #fff; text-decoration:none; }
+ul.dropdown li{ display:block; margin:0px; }
+ul.dropdown li a{ margin-left:25px; display:block; height:23px; vertical-align:middle; text-align:center; text-decoration:none; padding:8px 25px 0px 0px; font:normal 11px Tahoma; color: #fff; text-decoration:none; }
 
 ul.dropdown li.hover, ul.dropdown li:hover { cursor: default; }
 

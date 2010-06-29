@@ -49,7 +49,7 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 
 = 1.5.3 =
 * Fixed `Call undefined function wp_nav_menu on 365` error.
-* 
+* Fixed font-size problems with `Shiny Black` theme.
 
 = 1.5.2 = 
 * Fixed tested version number.
