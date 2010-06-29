@@ -454,11 +454,11 @@ class shailan_DropdownWidget extends WP_Widget {
 			}
 			
 			// Custom css support
-			if($theme == 'custom'){
+			/* if($theme == 'custom'){ */
 				$custom_css = stripslashes(get_option('shailan_dm_custom_css'));
 				
 				if(!empty($custom_css)){ echo $custom_css; }
-			}
+			/*}*/
 			
 			
 			echo "\n\t</style>";

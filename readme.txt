@@ -48,6 +48,7 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 == Changelog ==
 
 = 1.5.3 =
+* Made Custom CSS area available even when a theme is selected. You can now use this area for your theme customizations.
 * Fixed `Call undefined function wp_nav_menu on 365` error.
 * Fixed font-size problems with `Shiny Black` theme.
 
