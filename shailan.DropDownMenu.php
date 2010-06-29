@@ -108,7 +108,7 @@ class shailan_DropdownWidget extends WP_Widget {
 			array(  "name" => "Menu Type",
 			"desc" => "Dropdown Menu Type",
 			"id" => $this->shortname."_type",
-			"std" => "Pages",
+			"std" => "pages",
 			"options" => $types,
 			"type" => "select"),
 			
@@ -362,7 +362,7 @@ class shailan_DropdownWidget extends WP_Widget {
 					$menu_args = wp_parse_args( array('walker'=>$page_walker) , $menu_args ); }
 					
 					echo $dropdown_open;
-					wp_nav_menu($menu_args);
+					  wp_nav_menu($menu_args);
 					echo $dropdown_close;
 					
 				} // switch ($type)

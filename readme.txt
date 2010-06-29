@@ -47,6 +47,10 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 
 == Changelog ==
 
+= 1.5.3 =
+* Fixed `Call undefined function wp_nav_menu on 365` error.
+* 
+
 = 1.5.2 = 
 * Fixed tested version number.
 * Added screenshot 2.
@@ -69,7 +73,7 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 * Removed exclude pages plugin.
 
 = 1.4.1 = 
-* A minor fix for `Parse error: parse error, expecting `T_FUNCTION' in C:\wamp\www\wordpress\wp-content\plugins\dropdown-menu-widget\shailan-multi-dropdown.php on line 194` error. 
+* A minor fix for `Parse error: parse error, expecting 'T_FUNCTION' in C:\wamp\www\wordpress\wp-content\plugins\dropdown-menu-widget\shailan-multi-dropdown.php on line 194` error. 
 
 = 1.4.0 = 
 * Added option for multiline links. If checked a link with more than one word will be wrapped.
