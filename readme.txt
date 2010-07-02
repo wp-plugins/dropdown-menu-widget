@@ -4,7 +4,7 @@ Donate link: http://shailan.com/donate
 Tags: css, dropdown, menu, widget, pages, categories, multi
 Requires at least: 2.8  
 Tested up to: 3.0 
-Stable tag: 1.5.2
+Stable tag: 1.5.3
 
 This widget adds a beatiful vertical/horizontal CSS only dropdown menu of Pages, Categories or Custom navigation menus of your blog.
 
@@ -51,6 +51,7 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 * Made Custom CSS area available even when a theme is selected. You can now use this area for your theme customizations.
 * Fixed `Call undefined function wp_nav_menu on 365` error.
 * Fixed font-size problems with `Shiny Black` theme.
+* Removed behaviour fix for IE. Now using only jquery as dropdown fix which comes packed with wordpress.
 
 = 1.5.2 = 
 * Fixed tested version number.
