@@ -47,6 +47,12 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 
 == Changelog ==
 
+= 1.5.4 = 
+* Added first-child & last-child selector for styling to dropdown menu. (available when jquery is active only)
+* Fixed IE display errors for shiny black theme.
+* Fixed not saving issues with the plugin options.
+
+
 = 1.5.3 =
 * Made Custom CSS area available even when a theme is selected. You can now use this area for your theme customizations.
 * Fixed `Call undefined function wp_nav_menu on 365` error.

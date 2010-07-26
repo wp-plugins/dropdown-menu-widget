@@ -1,6 +1,6 @@
 <?php
 
-global $pluginname, $shortname, $pluginoptions;
+global $pluginname, $pluginoptions;
 
 $i=0;
  
@@ -217,14 +217,10 @@ tweetmeme_url = 'http://shailan.com/wordpress/plugins/dropdown-menu/'; tweetmeme
 <br class="clear">
 
 <input type="hidden" name="action" value="save" />
-</form>
 
-<!-- <form method="post">
-<p class="submit">
-<input name="reset" type="submit" value="Reset Options" />
-<input type="hidden" name="action" value="reset" />
-</p>
-</form> -->
+<input name="save99" type="submit" class="button-primary menu-save" value="Save changes" />
+
+</form>
 
 <p class="aligncenter">
 <a href="http://shailan.com/wordpress/plugins/dropdown-menu">Dropdown Menu <?php echo SHAILAN_DM_VERSION; ?></a> by <a href="http://shailan.com">shailan</a> &copy; 2010

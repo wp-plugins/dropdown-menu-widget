@@ -19,7 +19,7 @@ define('SHAILAN_DM_FOLDER', 'dropdown-menu-widget');
 class shailan_DropdownWidget extends WP_Widget {
     /** constructor */
     function shailan_DropdownWidget() {
-		global $pluginname, $shortname, $pluginoptions;
+		global $pluginname, $pluginshortname, $pluginoptions;
 		
 		$widget_ops = array('classname' => 'shailan-dropdown-menu', 'description' => __( 'Dropdown page/category menu', 'shailan-dropdown-menu' ) );
 		$this->WP_Widget('dropdown-menu', __('Dropdown Menu', 'shailan-dropdown-menu'), $widget_ops);
@@ -87,14 +87,14 @@ class shailan_DropdownWidget extends WP_Widget {
 		
 			array(  "name" => "Dropdown Menu Theme",
 			"desc" => "Skin for the menu",
-			"id" => $this->shortname."_active_theme",
+			"id" => "shailan_dm_active_theme",
 			"std" => "None",
 			"options" => $themes,
 			"type" => "select"),
 			
 			array(  "name" => "Rename Homepage",
 			"desc" => "You can change your homepage link here",
-			"id" => $this->shortname."_home_tag",
+			"id" => "shailan_dm_home_tag",
 			"std" => __("Home"),
 			"type" => "text"),
 			
@@ -107,38 +107,38 @@ class shailan_DropdownWidget extends WP_Widget {
 			
 			array(  "name" => "Menu Type",
 			"desc" => "Dropdown Menu Type",
-			"id" => $this->shortname."_type",
+			"id" => "shailan_dm_type",
 			"std" => "pages",
 			"options" => $types,
 			"type" => "select"),
 			
 			array(  "name" => "Home link",
 			"desc" => "If checked dropdown menu displays home link",
-			"id" => $this->shortname."_home",
+			"id" => "shailan_dm_home",
 			"std" => true,
 			"type" => "checkbox"),
 			
 			array(  "name" => "Login",
 			"desc" => "If checked dropdown menu displays login link",
-			"id" => $this->shortname."_login",
+			"id" => "shailan_dm_login",
 			"std" => true,
 			"type" => "checkbox"),
 			
 			array(  "name" => "Register / Site Admin",
 			"desc" => "If checked dropdown menu displays register/site admin link.",
-			"id" => $this->shortname."_login",
+			"id" => "shailan_dm_login",
 			"std" => true,
 			"type" => "checkbox"),
 			
 			array(  "name" => "Vertical menu",
 			"desc" => "If checked dropdown menu is displayed vertical.",
-			"id" => $this->shortname."_vertical",
+			"id" => "shailan_dm_vertical",
 			"std" => true,
 			"type" => "checkbox"),
 			
 			array(  "name" => "Exclude Pages",
 			"desc" => "Excluded page IDs.",
-			"id" => $this->shortname."_exclude",
+			"id" => "shailan_dm_exclude",
 			"std" => "",
 			"type" => "text"),
 			
@@ -151,37 +151,37 @@ class shailan_DropdownWidget extends WP_Widget {
 			
 			array(  "name" => "Wrap long menu items",
 			"desc" => "If checked long menu items will wrap",
-			"id" => $this->shortname."_allowmultiline",
+			"id" => "shailan_dm_allowmultiline",
 			"type" => "checkbox"),
 			
 			array(  "name" => "Dropdown Menu Font",
 			"desc" => "Font family for the menu<br />Please leave blank to use your wordpress theme font.",
-			"id" => $this->shortname."_font",
+			"id" => "shailan_dm_font",
 			"std" => '',
 			"type" => "text"),
 			
 			array(  "name" => "Dropdown Menu Font Size",
 			"desc" => "Font size of the menu items (Eg: 12px OR 1em) <br />Please leave blank to use your wordpress theme font-size.",
-			"id" => $this->shortname."_fontsize",
+			"id" => "shailan_dm_fontsize",
 			"std" => '',
 			"type" => "text"),
 			
 			array(  "name" => "Custom css",
 			"desc" => "You can paste your own customization file here.",
-			"id" => $this->shortname."_custom_css",
+			"id" => "shailan_dm_custom_css",
 			"std" => '',
 			"type" => "textarea"),
 			
 			array(  "name" => "Show Empty Categories",
 			"desc" => "If checked categories with no posts will be shown.",
-			"id" => $this->shortname."_show_empty",
+			"id" => "shailan_dm_show_empty",
 			"std" => false,
 			"type" => "checkbox"),
 			
 			/*
 			array(  "name" => "Use custom walkers",
 			"desc" => "Custom walkers add more functionality for styling. <br />Some themes depend on this option.<br />Note: This option hides link titles.",
-			"id" => $this->shortname."_customwalkers",
+			"id" => "shailan_dm_customwalkers",
 			"std" => false,
 			"type" => "checkbox"),
 			*/
@@ -202,7 +202,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		);
 		
 		$pluginname = $this->pluginname;
-		$shortname = $this->shortname;
+		$pluginshortname = $this->shortname;
 		$pluginoptions = $this->admin_options;
 		
 		/** Unused options */
@@ -212,7 +212,7 @@ class shailan_DropdownWidget extends WP_Widget {
 	
 	// Add settings page
 	function adminMenu(){
-		global $pluginname, $shortname, $pluginoptions;
+		global $pluginname, $pluginshortname, $pluginoptions;
 		
 		wp_register_style('dropdownMenuStyles', WP_PLUGIN_URL . '/dropdown-menu-widget/admin.css');
  
@@ -240,7 +240,7 @@ class shailan_DropdownWidget extends WP_Widget {
 	}
 	
 	function getOptionsPage(){	
-		global $pluginname, $shortname, $pluginoptions;
+		global $pluginname, $pluginshortname, $pluginoptions;
 		
 		$title = __('Dropdown Menu Options');
 		
