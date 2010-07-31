@@ -312,9 +312,13 @@ class shailan_DropdownWidget extends WP_Widget {
 					$menu_defaults = wp_parse_args( array('walker'=>$page_walker) , $menu_defaults ); }
 					
 					echo $dropdown_open;
+					do_action('dropdown_before');
 					echo $list_open;
+					  do_action('dropdown_list_start');
 					  wp_list_pages($menu_defaults);
+					  do_action('dropdown_list_end');
 					echo $list_close;
+					do_action('dropdown_after');
 					echo $dropdown_close;
 				
 				break; 
@@ -329,9 +333,13 @@ class shailan_DropdownWidget extends WP_Widget {
 					if($show_empty){$menu_defaults = wp_parse_args( array('hide_empty'=>'0') , $menu_defaults ); }
 				
 					echo $dropdown_open;
+					do_action('dropdown_before');
 					echo $list_open;
+					  do_action('dropdown_list_start');
 					  wp_list_categories($menu_defaults); 
+					  do_action('dropdown_list_end');
 					echo $list_close;
+					do_action('dropdown_after');
 					echo $dropdown_close;
 
 				break;
@@ -362,7 +370,9 @@ class shailan_DropdownWidget extends WP_Widget {
 					$menu_args = wp_parse_args( array('walker'=>$page_walker) , $menu_args ); }
 					
 					echo $dropdown_open;
+					do_action('dropdown_before');
 					  wp_nav_menu($menu_args);
+					do_action('dropdown_after');
 					echo $dropdown_close;
 					
 				} // switch ($type)
