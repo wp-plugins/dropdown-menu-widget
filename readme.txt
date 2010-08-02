@@ -4,7 +4,7 @@ Donate link: http://shailan.com/donate
 Tags: css, dropdown, menu, widget, pages, categories, multi
 Requires at least: 2.8  
 Tested up to: 3.0 
-Stable tag: 1.5.4
+Stable tag: 1.5.5
 
 This widget adds a beatiful vertical/horizontal CSS only dropdown menu of Pages, Categories or Custom navigation menus of your blog.
 
@@ -46,6 +46,10 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 1. Brand new dropdown menu options page.
 
 == Changelog ==
+
+= 1.5.5 = 
+* New theme! Hulu style theme.
+* Added new action hooks to insert your items to the dropdown menu.
 
 = 1.5.4 = 
 * Added first-child & last-child selector for styling to dropdown menu. (available when jquery is active only)
