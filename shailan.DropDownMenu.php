@@ -40,12 +40,12 @@ class shailan_DropdownWidget extends WP_Widget {
 			'Grayscale'=>'grayscale',
 			'Aqua'=>'aqua',
 			'Blue gradient'=>'simple-blue',
-			/* 'Tabs Blue'=> 'tabs-blue', */
 			'Shiny Black'=> 'shiny-black',
 			'Flickr theme'=>'flickr.com/default.ultimate',
 			'Nvidia theme'=>'nvidia.com/default.advanced',
 			'Adobe theme'=>'adobe.com/default.advanced',
-			'MTV theme'=>'mtv.com/default.ultimate'
+			'MTV theme'=>'mtv.com/default.ultimate',
+			'Hulu'=>'hulu/hulu'
 		);
 		
 		// Swap array for options page
@@ -267,10 +267,9 @@ class shailan_DropdownWidget extends WP_Widget {
 				
 			<?php 
 			
-			$dropdown_open = '<div id="shailan-dropdown-wrapper-' . $this->number . '" ><div class="'.$orientation.'-container" align="' . $align . '" >
-				  <table cellpadding="0" cellspacing="0"> 
-					<tr><td>';
+			$dropdown_wrapper_open = '<div id="shailan-dropdown-wrapper-' . $this->number . '" >';
 					
+			$dropdown_open = '<div class="'.$orientation.'-container" align="' . $align . '" class="dm-align-'.$align.'"><table cellpadding="0" cellspacing="0"><tr><td>';
 			$list_open = '<ul class="dropdown '. $orientation . ' dropdown-align-'.$align.'">';
 			
 			if($home && ($type == 'pages' || $type == 'categories')){ 
@@ -289,11 +288,11 @@ class shailan_DropdownWidget extends WP_Widget {
 					
 			$list_close = ($admin ? wp_register('<li class="admintab">','</li>', false) : '') . ($login ? '<li class="page_item">'. wp_loginout('', false) . '</li>' : '')  . '
 					</ul>';
-					
 			$dropdown_close = '</td>
 				  </tr></table> 
-				</div>
-			</div> ';
+				</div>';
+					
+			$dropdown_wrapper_close = '</div> ';
 			
 			$menu_defaults = array(
 				'order_by'=>'name',
@@ -311,15 +310,17 @@ class shailan_DropdownWidget extends WP_Widget {
 					$page_walker = new shailan_PageWalker();
 					$menu_defaults = wp_parse_args( array('walker'=>$page_walker) , $menu_defaults ); }
 					
-					echo $dropdown_open;
+					echo $dropdown_wrapper_open;
 					do_action('dropdown_before');
+					echo $dropdown_open;
 					echo $list_open;
-					  do_action('dropdown_list_start');
+					  do_action('dropdown_list_before');
 					  wp_list_pages($menu_defaults);
-					  do_action('dropdown_list_end');
+					  do_action('dropdown_list_after');
 					echo $list_close;
-					do_action('dropdown_after');
 					echo $dropdown_close;
+					do_action('dropdown_after');
+					echo $dropdown_wrapper_close;
 				
 				break; 
 				
@@ -332,15 +333,17 @@ class shailan_DropdownWidget extends WP_Widget {
 					
 					if($show_empty){$menu_defaults = wp_parse_args( array('hide_empty'=>'0') , $menu_defaults ); }
 				
-					echo $dropdown_open;
+					echo $dropdown_wrapper_open;
 					do_action('dropdown_before');
+					echo $dropdown_open;
 					echo $list_open;
-					  do_action('dropdown_list_start');
+					  do_action('dropdown_list_before');
 					  wp_list_categories($menu_defaults); 
-					  do_action('dropdown_list_end');
+					  do_action('dropdown_list_after');
 					echo $list_close;
-					do_action('dropdown_after');
 					echo $dropdown_close;
+					do_action('dropdown_after');
+					echo $dropdown_wrapper_close;
 
 				break;
 				
@@ -369,11 +372,13 @@ class shailan_DropdownWidget extends WP_Widget {
 					$page_walker = new shailan_PageWalker();
 					$menu_args = wp_parse_args( array('walker'=>$page_walker) , $menu_args ); }
 					
-					echo $dropdown_open;
+					echo $dropdown_wrapper_open;
 					do_action('dropdown_before');
+					echo $dropdown_open;
 					  wp_nav_menu($menu_args);
-					do_action('dropdown_after');
 					echo $dropdown_close;
+					do_action('dropdown_after');
+					echo $dropdown_wrapper_close;
 					
 				} // switch ($type)
 
