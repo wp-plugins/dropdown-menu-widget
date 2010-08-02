@@ -3,6 +3,7 @@
 Plugin Name: Dropdown Menu Widget
 Plugin URI: http://shailan.com/wordpress/plugins/dropdown-menu
 Description: A multi widget to generate drop-down menus from your pages, categories & navigation menus. You can find more widgets, plugins and themes at <a href="http://shailan.com">shailan.com</a>.
+Tags: dropdown, menu, css, css-dropdown, navigation, widget, dropdown-menu, customization, theme
 Version: 1.5.4
 Author: Matt Say
 Author URI: http://shailan.com
@@ -45,7 +46,7 @@ class shailan_DropdownWidget extends WP_Widget {
 			'Nvidia theme'=>'nvidia.com/default.advanced',
 			'Adobe theme'=>'adobe.com/default.advanced',
 			'MTV theme'=>'mtv.com/default.ultimate',
-			'Hulu'=>'hulu/hulu'
+			'Hulu theme'=>'hulu/hulu'
 		);
 		
 		// Swap array for options page
