@@ -261,16 +261,12 @@ class shailan_DropdownWidget extends WP_Widget {
 		
         ?>
               <?php echo $args['before_widget']; ?>
-                <?php /*if ( $title )
-                        echo $before_title . $title . $after_title;*/  // Title is disabled for this widget 
-				?>
-				
 				
 			<?php 
 			
 			$dropdown_wrapper_open = '<div id="shailan-dropdown-wrapper-' . $this->number . '" >';
 					
-			$dropdown_open = '<div class="'.$orientation.'-container" align="' . $align . '" class="dm-align-'.$align.'"><table cellpadding="0" cellspacing="0"><tr><td>';
+			$dropdown_open = '<div align="' . $align . '" class="'.$orientation.'-container dm-align-'.$align.'"><table cellpadding="0" cellspacing="0"><tr><td>';
 			$list_open = '<ul class="dropdown '. $orientation . ' dropdown-align-'.$align.'">';
 			
 			if($home && ($type == 'pages' || $type == 'categories')){ 
