@@ -50,7 +50,12 @@ case "title":
 
  
 <?php break;
- 
+
+case 'picker':
+?>
+	<div id="picker"></div> 
+	
+<?php break;
 case 'text':
 ?>
 
