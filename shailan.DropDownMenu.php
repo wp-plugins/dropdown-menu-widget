@@ -102,6 +102,37 @@ class shailan_DropdownWidget extends WP_Widget {
 			array( "type" => "close" ),
 			
 			array(
+				"name" => "Color Scheme",
+				"type" => "section"
+			),
+			
+			array(  "name" => "Use custom colors",
+			"desc" => "If not checked custom colors won't work.",
+			"id" => "shailan_dm_custom_colors",
+			"std" => true,
+			"type" => "checkbox"),
+			
+			array(  "name" => "Wrapper Background Color",
+			"desc" => "Background color of the dropdown menu",
+			"id" => "shailan_dm_color_bg",
+			"std" => '',
+			"type" => "text"),
+			
+			array(  "name" => "Link Background Color",
+			"desc" => "Background color of list item link.",
+			"id" => "shailan_dm_color_linkbg",
+			"std" => '',
+			"type" => "text"),
+			
+			array(  "name" => "Link Text Color",
+			"desc" => "Text color for ",
+			"id" => "shailan_dm_color_link",
+			"std" => '',
+			"type" => "text"),
+			
+			array( "type" => "close" ),
+			
+			array(
 				"name" => "Template Tag Options",
 				"type" => "section"
 			),
@@ -503,8 +534,13 @@ load_plugin_textdomain( 'shailan-dropdown-menu', false, $plugin_dir . '/lang');
 // add admin menu
 add_action('admin_menu', array('shailan_DropdownWidget', 'adminMenu'));
 
-if(is_admin()){ wp_admin_css( 'widgets' ); 	wp_enqueue_script('admin-widgets'); };
-wp_enqueue_script( 'dropdown-ie-support', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/include.js', array('jquery') );
+	if(is_admin()){ 
+		wp_admin_css( 'widgets' ); 
+		wp_enqueue_script('admin-widgets'); 
+		wp_enqueue_script('farbtastic'); 
+		wp_enqueue_script( 'dropdown-colorpick', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/js/admin.js', array('jquery') );
+	};
+wp_enqueue_script( 'dropdown-ie-support', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/js/include.js', array('jquery') );
 
 /* Includes */
 	include('shailan-page-walker.php'); // Load custom page walker

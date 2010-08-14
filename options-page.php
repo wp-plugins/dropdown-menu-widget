@@ -117,8 +117,7 @@ $i++;
 
 <div id="available-widgets" class="widgets-holder-wrap">
 
-<div class="sidebar-name"><h3><?php echo $value['name']; ?></h3> <span style="float:right;"><input name="save<?php echo $i; ?>" type="submit" class="button-primary menu-save" value="Save changes" />
-</span><br class="clear" /></div>
+<div class="sidebar-name"><h3><?php echo $value['name']; ?></h3> <span style="float:right;"></span><br class="clear" /></div>
 <div class="widget-holder">
 
  
@@ -215,6 +214,8 @@ tweetmeme_url = 'http://shailan.com/wordpress/plugins/dropdown-menu/'; tweetmeme
 </div>
 
 <br class="clear">
+
+<div id="colorPickerDiv" style="z-index: 100; background:#eee; border:1px solid #ccc; position:absolute; display:none;"></div>
 
 <input type="hidden" name="action" value="save" />
 

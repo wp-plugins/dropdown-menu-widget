@@ -11,5 +11,5 @@ jQuery(document).ready(function($) {
 	// Add child classes to lists
 	$('ul li:first-child').addClass('first-child');
 	$('ul li:last-child').addClass('last-child');
-
+	
 });
