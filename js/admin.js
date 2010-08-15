@@ -12,7 +12,7 @@ jQuery(document).ready(function() {
 	var selected;
 
 	// Color selector areas:
-	var pickers = ["shailan_dm_color_bg", "shailan_dm_color_linkbg", "shailan_dm_color_link"];
+	var pickers = ["shailan_dm_color_lihover", "shailan_dm_color_menubg", "shailan_dm_color_link", "shailan_dm_color_hoverlink"];
 
 	jQuery.each(pickers, function() {		
 	

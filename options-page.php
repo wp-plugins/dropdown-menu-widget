@@ -36,7 +36,11 @@ case "open":
  
 case "close":
 ?>
- 
+
+<div class="shailan_dm_input alignright">
+<input type="hidden" name="action" value="save" />
+<input name="save99" type="submit" class="button-primary menu-save" value="Save changes" />
+</div>
 	<br class="clear">
 </div>
 </div>
@@ -220,12 +224,8 @@ tweetmeme_url = 'http://shailan.com/wordpress/plugins/dropdown-menu/'; tweetmeme
 
 <br class="clear">
 
-<div id="colorPickerDiv" style="z-index: 100; background:#eee; border:1px solid #ccc; position:absolute; display:none;"></div>
-
 <input type="hidden" name="action" value="save" />
-
 <input name="save99" type="submit" class="button-primary menu-save" value="Save changes" />
-
 </form>
 
 <p class="aligncenter">
