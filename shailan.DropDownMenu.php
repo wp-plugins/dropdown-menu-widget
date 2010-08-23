@@ -4,13 +4,13 @@ Plugin Name: Dropdown Menu Widget
 Plugin URI: http://shailan.com/wordpress/plugins/dropdown-menu
 Description: A multi widget to generate drop-down menus from your pages, categories & navigation menus. You can find more widgets, plugins and themes at <a href="http://shailan.com">shailan.com</a>.
 Tags: dropdown, menu, css, css-dropdown, navigation, widget, dropdown-menu, customization, theme
-Version: 1.5.5
+Version: 1.5.6alpha
 Author: Matt Say
 Author URI: http://shailan.com
 Text Domain: shailan-dropdown-menu
 */
 
-define('SHAILAN_DM_VERSION','1.5.5');
+define('SHAILAN_DM_VERSION','1.5.6alpha');
 define('SHAILAN_DM_TITLE', 'Dropdown Menu');
 define('SHAILAN_DM_FOLDER', 'dropdown-menu-widget');
 
@@ -56,6 +56,14 @@ class shailan_DropdownWidget extends WP_Widget {
 		$themes = array();
 		while(list($Key,$Val) = each($available_themes))
 			$themes[$Val] = $Key;
+		
+		$overlays = array(
+			'none'=>'none',
+			'glassy'=>'glassy',
+			'flat'=>'flat',
+			'shadow'=>'shadow',
+			'soft' =>'soft'
+		);
 			
 		$types = array('pages'=>'Pages', 'categories'=>'Categories');
 		
@@ -140,6 +148,13 @@ class shailan_DropdownWidget extends WP_Widget {
 			"id" => "shailan_dm_color_hoverlink",
 			"std" => '#FFFFFF',
 			"type" => "text"),
+			
+			array(  "name" => "Overlay",
+			"desc" => "Menu overlay (Works on browsers that support png transparency only.)",
+			"id" => "shailan_dm_overlay",
+			"std" => "glass",
+			"type" => "select",
+			"options" => $overlays ),
 			
 			array( "type" => "close" ),
 			
@@ -514,7 +529,40 @@ class shailan_DropdownWidget extends WP_Widget {
 			if(!$allow_multiline){
 				echo "\n\t\tul.dropdown { white-space: nowrap;	}\n";
 			}
-						
+				
+			// Overlay support 
+			$overlay = get_option('shailan_dm_overlay');
+			
+			echo "/** Overlay: ". $overlay . " */";
+			
+			if($overlay!='none' && $theme=='color-scheme' ){
+				$posvert = 0;
+				switch ( $overlay ) {
+					case "glass": 
+						$posvert = 0;
+					break; 
+					case "flat": 
+						$posvert = -100;
+					break; 
+					case "shadow": 
+						$posvert = -200;
+					break; 
+					case "soft": 
+						$posvert = -300;
+					break; 
+				}
+			
+			?>
+			
+			.shailan-dropdown-menu .dropdown-horizontal-container, 
+			ul.dropdown li, ul.dropdown li.hover, ul.dropdown li:hover, 
+			ul.dropdown li.hover a, ul.dropdown li:hover a{ background-position:0px <?php echo $posvert; ?>px; }
+			
+			<?php } elseif($overlay == 'none') { ?>
+			
+			.shailan-dropdown-menu .dropdown-horizontal-container, ul.dropdown li, ul.dropdown li.hover, ul.dropdown li:hover { background-image:none; }
+			
+			<?php } else {} 
 			
 			// Custom colors support !! Use with caution !!
 			?>
@@ -530,11 +578,12 @@ class shailan_DropdownWidget extends WP_Widget {
 			ul.dropdown li.hover ul li, ul.dropdown li:hover ul li{ background-color: <?php echo $shailan_dm_color_menubg; ?>;
 				color: <?php echo $shailan_dm_color_link; ?>; }
 				
-			ul.dropdown li.hover ul li.hover, ul.dropdown li:hover ul li:hover { background-image: none; background-color: <?php echo $shailan_dm_color_lihover; ?>; }
+			ul.dropdown li.hover ul li.hover, ul.dropdown li:hover ul li:hover { background-image: none; }
+			ul.dropdown li.hover ul li.hover a, ul.dropdown li:hover ul li:hover a { background-color: <?php echo $shailan_dm_color_lihover; ?>; }
+			
 			ul.dropdown ul{ background-image:none; background-color:<?php echo $shailan_dm_color_menubg; ?>; border:1px solid <?php echo $shailan_dm_color_menubg; ?>; }
-			
 			ul.dropdown-vertical li { border-bottom:1px solid <?php echo $shailan_dm_color_lihover; ?>; }
-			
+					
 			<?php
 			
 			// Custom css support

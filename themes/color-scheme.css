@@ -2,18 +2,19 @@
 
 .shailan-dropdown-menu .dropdown-horizontal-container{ background-image:url('images/overlay.png'); }
 
-ul.dropdown li a{padding:8px 15px;}
+ul.dropdown li a{padding:6px 12px;}
 ul.dropdown li.hover, ul.dropdown li:hover { cursor: default; }
 ul.dropdown ul { border:0 }
 ul.dropdown ul ul { top: 1px; left: 100%; }
 ul.dropdown-upward ul ul { /* bottom: 1px; */ }
-ul.dropdown li { border:0; background-image:url('images/overlay.png'); background-position:0px 0px; background-color: transparent; text-align:center; }
+ul.dropdown li { border:0; background-image:url('images/overlay.png'); background-color: transparent; text-align:center; }
 
 /** Right align fix */
 ul.dropdown-align-right li{ border-width: 0px 0px 0px 1px; }
 
 /** Hover effect */
-ul.dropdown li.hover, ul.dropdown li:hover { background-image:url('images/overlay.png'); color: #000; }
+ul.dropdown li.hover, ul.dropdown li:hover { background-image:url('images/overlay.png'); }
+ul.dropdown li.hover a, ul.dropdown li:hover a { background-image:url('images/overlay.png'); }
 ul.dropdown li.hover ul li a, ul.dropdown li:hover ul li a{ background: transparent; }
 
 /** Link colors */
