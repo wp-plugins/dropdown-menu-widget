@@ -38,6 +38,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		$available_themes = array(
 			'None'=>'NONE',
 			'Custom CSS' => 'custom',
+			'Color Scheme' => 'color-scheme',
 			'Simple White'=>'simple',
 			'Wordpress Default'=>'wpdefault',
 			'Grayscale'=>'grayscale',
@@ -104,7 +105,7 @@ class shailan_DropdownWidget extends WP_Widget {
 			array( "type" => "close" ),
 			
 			array(
-				"name" => "Color Scheme",
+				"name" => "Color Scheme (beta)",
 				"type" => "section"
 			),
 			
@@ -523,7 +524,16 @@ class shailan_DropdownWidget extends WP_Widget {
 			ul.dropdown a:visited	{ color: <?php echo $shailan_dm_color_link; ?>; }
 			ul.dropdown a:hover	{ color: <?php echo $shailan_dm_color_hoverlink; ?>; }
 			ul.dropdown a:active	{ color: <?php echo $shailan_dm_color_hoverlink; ?>; }
-			ul.dropdown li.hover, ul.dropdown li:hover { background-color: <?php echo $shailan_dm_color_lihover; ?>; color: <?php echo $shailan_dm_color_hoverlink; ?>; }
+			
+			ul.dropdown li.hover a, ul.dropdown li:hover a{ background-color: <?php echo $shailan_dm_color_lihover; ?>; 
+				color: <?php echo $shailan_dm_color_hoverlink; ?>; }
+			ul.dropdown li.hover ul li, ul.dropdown li:hover ul li{ background-color: <?php echo $shailan_dm_color_menubg; ?>;
+				color: <?php echo $shailan_dm_color_link; ?>; }
+				
+			ul.dropdown li.hover ul li.hover, ul.dropdown li:hover ul li:hover { background-image: none; background-color: <?php echo $shailan_dm_color_lihover; ?>; }
+			ul.dropdown ul{ background-image:none; background-color:<?php echo $shailan_dm_color_menubg; ?>; border:1px solid <?php echo $shailan_dm_color_menubg; ?>; }
+			
+			ul.dropdown-vertical li { border-bottom:1px solid <?php echo $shailan_dm_color_lihover; ?>; }
 			
 			<?php
 			
