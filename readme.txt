@@ -4,14 +4,14 @@ Donate link: http://shailan.com/donate
 Tags: css, dropdown, menu, widget, pages, categories, multi
 Requires at least: 2.8  
 Tested up to: 3.0.1 
-Stable tag: 1.5.6alpha
+Stable tag: 1.5.6alpha1
 
 This widget adds a beatiful vertical/horizontal CSS only dropdown menu of Pages, Categories or Custom navigation menus of your blog.
 
 == Description ==
 
 Dropdown Menu widget adds a beautiful, CSS only dropdown menu, listing pages, categories of your blog. You can also turn your wordpress navigation menu into a beatiful dropdown menu using this plugin. 
-It allows you to chose vertical or horizontal layout. It supports multiple instances. You can select a theme for your widget from the Dropdown Menu Settings page. If you don't like ready-made templates you can create your own theme for the menus using CSS. If you want a custom dropdown theme you can [request ](http://shailan.com/contact) one. Please visit [plugin site](http://shailan.com/wordpress/plugins/dropdown-menu) for more information. 
+It allows you to chose vertical or horizontal layout. It supports multiple instances. You can select a theme for your widget from the Dropdown Menu Settings page or you can CREATE  YOUR OWN THEME WITHIN SAME PLUGIN!! You can also customize your dropdown menu using CSS. If you want a custom dropdown theme you can [request](http://shailan.com/contact) one. Please visit [plugin site](http://shailan.com/wordpress/plugins/dropdown-menu) for more information. 
 
 == Installation ==
 
@@ -47,9 +47,14 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 
 == Changelog ==
 
+= 1.5.6alpha1 = 
+* Fixed sub menu display errors. 
+* Added alignment option to template tag support.
+
 = 1.5.6alpha = 
 * Fixed options page saving error.
-* Added a brand new color selection interface for custom "Color Scheme" (beta). Now you can easily select your own colors & plus overlays!
+* Added a brand new color selection interface for custom "Color Scheme" (beta). 
+* Now you can easily select your own colors & plus overlays!
 
 = 1.5.5 = 
 * New theme! Hulu style theme.

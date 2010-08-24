@@ -4,13 +4,13 @@ Plugin Name: Dropdown Menu Widget
 Plugin URI: http://shailan.com/wordpress/plugins/dropdown-menu
 Description: A multi widget to generate drop-down menus from your pages, categories & navigation menus. You can find more widgets, plugins and themes at <a href="http://shailan.com">shailan.com</a>.
 Tags: dropdown, menu, css, css-dropdown, navigation, widget, dropdown-menu, customization, theme
-Version: 1.5.6alpha
+Version: 1.5.6alpha1
 Author: Matt Say
 Author URI: http://shailan.com
 Text Domain: shailan-dropdown-menu
 */
 
-define('SHAILAN_DM_VERSION','1.5.6alpha');
+define('SHAILAN_DM_VERSION','1.5.6alpha1');
 define('SHAILAN_DM_TITLE', 'Dropdown Menu');
 define('SHAILAN_DM_FOLDER', 'dropdown-menu-widget');
 
@@ -64,6 +64,8 @@ class shailan_DropdownWidget extends WP_Widget {
 			'shadow'=>'shadow',
 			'soft' =>'soft'
 		);
+		
+		$alignment = array('left'=>'left', 'center' => 'center', 'right'=> 'right');
 			
 		$types = array('pages'=>'Pages', 'categories'=>'Categories');
 		
@@ -199,6 +201,13 @@ class shailan_DropdownWidget extends WP_Widget {
 			"id" => "shailan_dm_exclude",
 			"std" => "",
 			"type" => "text"),
+			
+			array(  "name" => "Alignment",
+			"desc" => "Menu alignment.",
+			"id" => "shailan_dm_align",
+			"std" => "left",
+			"options" => $alignment,
+			"type" => "select"),
 			
 			array( "type" => "close" ),
 			
@@ -508,32 +517,34 @@ class shailan_DropdownWidget extends WP_Widget {
 			$shailan_dm_color_link = get_option('shailan_dm_color_link');
 			$shailan_dm_color_hoverlink = get_option('shailan_dm_color_hoverlink');
 			
-			echo "\n<!-- Start of Dropdown Menu Widget Styles by shailan (http://shailan.com) -->";
-			echo "\n\t<link rel=\"stylesheet\" href=\"".WP_PLUGIN_URL."/".SHAILAN_DM_FOLDER."/shailan-dropdown.css\" type=\"text/css\" />";
+			echo "\n\n<!-- Dropdown Menu Widget Styles by shailan (http://shailan.com) v".SHAILAN_DM_VERSION." on wp".get_bloginfo( 'version' )." -->";
+			echo "\n<link rel=\"stylesheet\" href=\"".WP_PLUGIN_URL."/".SHAILAN_DM_FOLDER."/shailan-dropdown.css\" type=\"text/css\" />";
 			
 			if($theme!='NONE' || $theme != 'Custom'){
-				echo "\n\t<link rel=\"stylesheet\" href=\"".WP_PLUGIN_URL."/".SHAILAN_DM_FOLDER."/themes/".$theme.".css\" type=\"text/css\" />";
+				echo "\n<link rel=\"stylesheet\" href=\"".WP_PLUGIN_URL."/".SHAILAN_DM_FOLDER."/themes/".$theme.".css\" type=\"text/css\" />";
 			}
 			
-			echo "\n\t<style type=\"text/css\" media=\"all\">";
+			echo "\n<style type=\"text/css\" media=\"all\">";
+			
+			$indent = "\n\t";
 			
 			// Font family and font size
-			$font_family = stripslashes(get_option('shailan_dm_font')); //'"Segoe UI",Calibri,"Myriad Pro",Myriad,"Trebuchet MS",Helvetica,Arial,sans-serif';
+			$font_family = stripslashes(get_option('shailan_dm_font'));
 			
-			if(!empty($font_family)){ echo "\n\t\tul.dropdown li a { font-family:$font_family; } "; }
+			if(!empty($font_family)){ echo $indent. "ul.dropdown li a { font-family:$font_family; } "; }
 			
 			$font_size = get_option('shailan_dm_fontsize'); //'12px';			
 			
-			if(!empty($font_size)){ echo "\n\t\tul.dropdown li a { font-size:$font_size; }"; }
+			if(!empty($font_size)){ echo $indent. "ul.dropdown li a { font-size:$font_size; }"; }
 			
 			if(!$allow_multiline){
-				echo "\n\t\tul.dropdown { white-space: nowrap;	}\n";
+				echo $indent. "ul.dropdown { white-space: nowrap;	}";
 			}
 				
 			// Overlay support 
 			$overlay = get_option('shailan_dm_overlay');
 			
-			echo "/** Overlay: ". $overlay . " */";
+			echo $indent . "/* Selected overlay: ". $overlay . " */";
 			
 			if($overlay!='none' && $theme=='color-scheme' ){
 				$posvert = 0;
@@ -551,51 +562,41 @@ class shailan_DropdownWidget extends WP_Widget {
 						$posvert = -300;
 					break; 
 				}
-			
-			?>
-			
-			.shailan-dropdown-menu .dropdown-horizontal-container, 
-			ul.dropdown li, ul.dropdown li.hover, ul.dropdown li:hover, 
-			ul.dropdown li.hover a, ul.dropdown li:hover a{ background-position:0px <?php echo $posvert; ?>px; }
-			
-			<?php } elseif($overlay == 'none') { ?>
-			
-			.shailan-dropdown-menu .dropdown-horizontal-container, ul.dropdown li, ul.dropdown li.hover, ul.dropdown li:hover { background-image:none; }
-			
-			<?php } else {} 
-			
-			// Custom colors support !! Use with caution !!
-			?>
-			
-			.shailan-dropdown-menu .dropdown-horizontal-container, ul.dropdown li{ background-color:<?php echo $shailan_dm_color_menubg; ?>; }
-			ul.dropdown a:link,
-			ul.dropdown a:visited	{ color: <?php echo $shailan_dm_color_link; ?>; }
-			ul.dropdown a:hover	{ color: <?php echo $shailan_dm_color_hoverlink; ?>; }
-			ul.dropdown a:active	{ color: <?php echo $shailan_dm_color_hoverlink; ?>; }
-			
-			ul.dropdown li.hover a, ul.dropdown li:hover a{ background-color: <?php echo $shailan_dm_color_lihover; ?>; 
-				color: <?php echo $shailan_dm_color_hoverlink; ?>; }
-			ul.dropdown li.hover ul li, ul.dropdown li:hover ul li{ background-color: <?php echo $shailan_dm_color_menubg; ?>;
-				color: <?php echo $shailan_dm_color_link; ?>; }
 				
-			ul.dropdown li.hover ul li.hover, ul.dropdown li:hover ul li:hover { background-image: none; }
-			ul.dropdown li.hover ul li.hover a, ul.dropdown li:hover ul li:hover a { background-color: <?php echo $shailan_dm_color_lihover; ?>; }
+				$apos = $posvert - 2;
 			
-			ul.dropdown ul{ background-image:none; background-color:<?php echo $shailan_dm_color_menubg; ?>; border:1px solid <?php echo $shailan_dm_color_menubg; ?>; }
-			ul.dropdown-vertical li { border-bottom:1px solid <?php echo $shailan_dm_color_lihover; ?>; }
-					
-			<?php
+			?>
+			
+	.shailan-dropdown-menu .dropdown-horizontal-container, 
+	ul.dropdown li, ul.dropdown li.hover, ul.dropdown li:hover{ background-position:0px <?php echo $posvert; ?>px; }
+	ul.dropdown li.hover a, ul.dropdown li:hover a{ background-position:0px <?php echo $apos; ?>px; }
+	<?php } elseif($overlay == 'none') { ?>
+	.shailan-dropdown-menu .dropdown-horizontal-container, ul.dropdown li, ul.dropdown li.hover, ul.dropdown li:hover { background-image:none; }		
+	<?php } else {/* unidentified overlay */} ?>
+	
+	.shailan-dropdown-menu .dropdown-horizontal-container, ul.dropdown li{ background-color:<?php echo $shailan_dm_color_menubg; ?>; }
+	ul.dropdown a:link,
+	ul.dropdown a:visited	{ color: <?php echo $shailan_dm_color_link; ?>; }
+	ul.dropdown a:hover	{ color: <?php echo $shailan_dm_color_hoverlink; ?>; }
+	ul.dropdown a:active	{ color: <?php echo $shailan_dm_color_hoverlink; ?>; }
+			
+	ul.dropdown li.hover a, ul.dropdown li:hover a{ background-color: <?php echo $shailan_dm_color_lihover; ?>; }
+	ul.dropdown li.hover ul li, ul.dropdown li:hover ul li{ background-color: <?php echo $shailan_dm_color_menubg; ?>;
+		color: <?php echo $shailan_dm_color_link; ?>; }
+			
+	ul.dropdown li.hover ul li.hover, ul.dropdown li:hover ul li:hover { background-image: none; }
+	ul.dropdown li.hover a:hover, ul.dropdown li:hover a:hover { background-color: <?php echo $shailan_dm_color_lihover; ?>; }
+	
+	ul.dropdown ul{ background-image:none; background-color:<?php echo $shailan_dm_color_menubg; ?>; border:1px solid <?php echo $shailan_dm_color_menubg; ?>; }
+	ul.dropdown-vertical li { border-bottom:1px solid <?php echo $shailan_dm_color_lihover; ?>; }
+	<?php
 			
 			// Custom css support
 			/* if($theme == 'custom'){ */
-				$custom_css = stripslashes(get_option('shailan_dm_custom_css'));
-				
-				if(!empty($custom_css)){ echo $custom_css; }
-			/*}*/
-			
-			
-			echo "\n\t</style>";
-			
+			$custom_css = stripslashes(get_option('shailan_dm_custom_css'));
+			if(!empty($custom_css)){ echo $custom_css; }
+			/*}*/			
+			echo "\n</style>";
 			/*
 			echo "\n\t<!--[if lte IE 7]>";
 			echo "\n\t<style type=\"text/css\" media=\"screen\">";
@@ -604,7 +605,7 @@ class shailan_DropdownWidget extends WP_Widget {
 			echo "\n\t<![endif]-->";
 			*/
 			
-			echo "\n<!-- End of Wordpress Dropdown Menu Styles -->";
+			echo "\n<!-- /Dropdown Menu Widget Styles -->";
 			echo "\n ";
 		
 		} else {
@@ -640,6 +641,7 @@ function shailan_dropdown_menu(){
 	$admin = (bool) get_option('shailan_dm_admin');
 	$vertical = (bool) get_option('shailan_dm_vertical');
 	$home = (bool) get_option('shailan_dm_home');
+	$align = get_option('shailan_dm_align');
 	
 	$args = array(
 		'type' => $type,
@@ -648,8 +650,9 @@ function shailan_dropdown_menu(){
 		'login' => $login,
 		'admin' => $admin,
 		'vertical' => $vertical,
-		'home' => $home
-		);
+		'home' => $home,
+		'align' => $align
+	);
 
 	the_widget('shailan_DropdownWidget', $args);
 }

@@ -27,7 +27,7 @@ ul.dropdown a:active	{ color: #ed008c; }
 ul.dropdown ul { margin-top: 0px; margin-left:-1px; border:none; -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.496094); -moz-box-shadow:0 2px 5px rgba(40, 40, 40, 0.8) }
 ul.dropdown ul li { text-align: left; border:none; }
 ul.dropdown ul { margin:0px; padding:0px; }
-ul.dropdown ul li a{ margin:2px; height:auto; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
+ul.dropdown a{ margin:2px; height:auto; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; text-shadow: 0 1px 1px rgba(70, 70, 70, 0.7); }
 ul.dropdown li.hover ul li a:hover, ul.dropdown li:hover ul li a:hover{ background-image:none; text-decoration:none; }
 ul.dropdown ul li{ background-image: none; }
 
