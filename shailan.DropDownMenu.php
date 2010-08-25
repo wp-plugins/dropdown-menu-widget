@@ -372,7 +372,7 @@ class shailan_DropdownWidget extends WP_Widget {
 					
 			switch ( $type ) {
 
-				/* Pages menu */
+				/** Pages menu */
 				case "pages": 
 				
 				if($custom_walkers){
@@ -512,6 +512,7 @@ class shailan_DropdownWidget extends WP_Widget {
 			$theme = get_option('shailan_dm_active_theme');
 			$allow_multiline = (bool) get_option('shailan_dm_allowmultiline');
 			// Colors
+			$custom_colors = (bool) get_option('shailan_dm_custom_colors');
 			$shailan_dm_color_menubg = get_option('shailan_dm_color_menubg');
 			$shailan_dm_color_lihover = get_option('shailan_dm_color_lihover');
 			$shailan_dm_color_link = get_option('shailan_dm_color_link');
@@ -541,9 +542,11 @@ class shailan_DropdownWidget extends WP_Widget {
 				echo $indent. "ul.dropdown { white-space: nowrap;	}";
 			}
 				
+			if($custom_colors){
+			// Custom color scheme is active
+			
 			// Overlay support 
 			$overlay = get_option('shailan_dm_overlay');
-			
 			echo $indent . "/* Selected overlay: ". $overlay . " */";
 			
 			if($overlay!='none' && $theme=='color-scheme' ){
@@ -591,12 +594,14 @@ class shailan_DropdownWidget extends WP_Widget {
 	ul.dropdown-vertical li { border-bottom:1px solid <?php echo $shailan_dm_color_lihover; ?>; }
 	<?php
 			
-			// Custom css support
-			/* if($theme == 'custom'){ */
+			} // if($custom_colors)
+			
+			
+			// Insert Custom CSS last
 			$custom_css = stripslashes(get_option('shailan_dm_custom_css'));
 			if(!empty($custom_css)){ echo $custom_css; }
-			/*}*/			
 			echo "\n</style>";
+			
 			/*
 			echo "\n\t<!--[if lte IE 7]>";
 			echo "\n\t<style type=\"text/css\" media=\"screen\">";
