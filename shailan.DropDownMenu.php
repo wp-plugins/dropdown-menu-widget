@@ -521,7 +521,7 @@ class shailan_DropdownWidget extends WP_Widget {
 			echo "\n\n<!-- Dropdown Menu Widget Styles by shailan (http://shailan.com) v".SHAILAN_DM_VERSION." on wp".get_bloginfo( 'version' )." -->";
 			echo "\n<link rel=\"stylesheet\" href=\"".WP_PLUGIN_URL."/".SHAILAN_DM_FOLDER."/shailan-dropdown.css\" type=\"text/css\" />";
 			
-			if($theme!='NONE' || $theme != 'Custom'){
+			if($theme!='NONE' && $theme != 'custom'){
 				echo "\n<link rel=\"stylesheet\" href=\"".WP_PLUGIN_URL."/".SHAILAN_DM_FOLDER."/themes/".$theme.".css\" type=\"text/css\" />";
 			}
 			
@@ -601,15 +601,6 @@ class shailan_DropdownWidget extends WP_Widget {
 			$custom_css = stripslashes(get_option('shailan_dm_custom_css'));
 			if(!empty($custom_css)){ echo $custom_css; }
 			echo "\n</style>";
-			
-			/*
-			echo "\n\t<!--[if lte IE 7]>";
-			echo "\n\t<style type=\"text/css\" media=\"screen\">";
-			echo "\n\t\tbody { behavior:url(\"".WP_PLUGIN_URL."/".SHAILAN_DM_FOLDER."/csshover.htc\"); }";
-			echo "\n\t</style>";
-			echo "\n\t<![endif]-->";
-			*/
-			
 			echo "\n<!-- /Dropdown Menu Widget Styles -->";
 			echo "\n ";
 		
