@@ -1,10 +1,10 @@
 === Dropdown Menu Widget ===
 Contributors: mattsay
 Donate link: http://shailan.com/donate  
-Tags: css, dropdown, menu, widget, pages, categories, multi
+Tags: css, dropdown, menu, widget, pages, categories, multi, jquery, navigation
 Requires at least: 2.8  
-Tested up to: 3.0.1 
-Stable tag: 1.5.6beta
+Tested up to: 3.0.2
+Stable tag: 1.5.7
 
 This widget adds a beatiful vertical/horizontal CSS only dropdown menu of Pages, Categories or Custom navigation menus of your blog.
 
@@ -46,6 +46,12 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 1. Brand new dropdown menu options page.
 
 == Changelog ==
+
+= 1.5.7 =
+* Fixed various css issues.
+* Removed backgrounds for IE on certain themes.
+* Hopefully works with all browsers with javascript enabled (Tested with Chrome, Firefox, Safari, Opera and IE6).
+* Please submit any bugs you see on [dropdown menu plugin page](http://shailan.com/wordpress/plugins/dropdown-menu/)
 
 = 1.5.6beta =
 * Added hooks for inserting your own menu & other navigational elements.
