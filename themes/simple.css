@@ -1,7 +1,5 @@
-@charset "UTF-8";
-
 /** Container */
-.shailan-dropdown-menu .dropdown-horizontal-container{ background-color:#efefef; }
+.dropdown-horizontal-container{ width:100%; background-color:#efefef; }
 
 ul.dropdown li.hover, ul.dropdown li:hover { cursor: default; }
 ul.dropdown ul { border-bottom:1px solid #ddd; }

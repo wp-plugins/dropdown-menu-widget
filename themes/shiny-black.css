@@ -16,8 +16,6 @@ ul.dropdown ul { border-bottom:1px solid #ddd; }
 ul.dropdown ul li{display:block; text-align:left;}
 ul.dropdown ul li a{min-width:100px;}
 *html ul.dropdown ul li a{width:100px;}
-ul.dropdown ul ul { top: 1px; left: 99%; }
-ul.dropdown-upward ul ul { /* bottom: 1px; */ }
 
 /** Right align fix */
 ul.dropdown-align-right li{ border-width: 0px 0px 0px 1px; }

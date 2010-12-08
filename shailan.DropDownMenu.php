@@ -30,7 +30,8 @@ class shailan_DropdownWidget extends WP_Widget {
 		$this->shortname = "shailan_dm";
 		
 		// Hook up styles
-		add_action( 'wp_head', array(&$this, 'styles') );		
+		add_action( 'wp_head', array(&$this, 'styles') );
+		add_action( 'wp_footer', array(&$this, 'footer'), 10, 1 );			
 		
 		if(!is_admin()){ wp_enqueue_script( 'dropdown-ie-support', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/js/include.js', array('jquery') ); }
 			
@@ -245,14 +246,6 @@ class shailan_DropdownWidget extends WP_Widget {
 			"std" => false,
 			"type" => "checkbox"),
 			
-			/*
-			array(  "name" => "Use custom walkers",
-			"desc" => "Custom walkers add more functionality for styling. <br />Some themes depend on this option.<br />Note: This option hides link titles.",
-			"id" => "shailan_dm_customwalkers",
-			"std" => false,
-			"type" => "checkbox"),
-			*/
-			
 			array( "type" => "close" ),
 			
 		);
@@ -339,7 +332,7 @@ class shailan_DropdownWidget extends WP_Widget {
 			$dropdown_wrapper_open = '<div id="shailan-dropdown-wrapper-' . $this->number . '" >';
 					
 			$dropdown_open = '<div align="' . $align . '" class="'.$orientation.'-container dm-align-'.$align.'"><table cellpadding="0" cellspacing="0"><tr><td>';
-			$list_open = '<ul class="dropdown '. $orientation . ' dropdown-align-'.$align.'">';
+			$list_open = '<ul id="dropdown-'. $this->number .'" class="dropdown dropdown-'. $this->number .' '. $orientation . ' dropdown-align-'.$align.'">';
 			
 			if($home && ($type == 'pages' || $type == 'categories')){ 
 			
@@ -457,12 +450,10 @@ class shailan_DropdownWidget extends WP_Widget {
         <?php
     }
 
-    /** @see WP_Widget::update */
     function update($new_instance, $old_instance) {				
         return $new_instance;
     }
 
-    /** @see WP_Widget::form */
     function form($instance) {	
 		$widget_options = wp_parse_args( $instance, $this->defaults );
 		extract( $widget_options, EXTR_SKIP );
@@ -573,6 +564,7 @@ class shailan_DropdownWidget extends WP_Widget {
 	.shailan-dropdown-menu .dropdown-horizontal-container, 
 	ul.dropdown li, ul.dropdown li.hover, ul.dropdown li:hover{ background-position:0px <?php echo $posvert; ?>px; }
 	ul.dropdown li.hover a, ul.dropdown li:hover a{ background-position:0px <?php echo $apos; ?>px; }
+
 	<?php } elseif($overlay == 'none') { ?>
 	/* Clear background images */
 	.shailan-dropdown-menu .dropdown-horizontal-container, ul.dropdown li, ul.dropdown li.hover, ul.dropdown li:hover, ul.dropdown li.hover a, ul.dropdown li:hover a { background-image:none; }		
@@ -606,6 +598,20 @@ class shailan_DropdownWidget extends WP_Widget {
 		
 		} else {
 			wp_enqueue_style('dropdownMenuStyles');
+		}
+	} // end styles
+	
+	function footer($instance){
+		$all_widgets = $this->get_settings();		
+		foreach ($all_widgets as $key => $widget){
+			$widget_id = $this->id_base . '-' . $key;		
+			if(is_active_widget(false, $widget_id, $this->id_base)){
+				$dropdown = $all_widgets[$key];
+				echo "<script type=\"text\/javascript\">";
+				echo "	var menu=new menu.dd(\"dropdown-". $key. "\");";
+				echo "	menu.init(\"dropdown-". $key ."\",\"menuhover\");";
+				echo "</script>";
+			}
 		}
 	}
 
@@ -653,8 +659,7 @@ function shailan_dropdown_menu(){
 	the_widget('shailan_DropdownWidget', $args);
 }
 
-function get_latest_tweet($username)
-{
+function get_latest_tweet($username){
     $url = "http://search.twitter.com/search.atom?q=from:$username&rpp=1";
     $content = file_get_contents($url);
     $content = explode('<content type="html">', $content);

@@ -26,8 +26,7 @@
  * @level sep	ul
  */
 
-
-ul.dropdown {
+.dropdown-horizontal-container table{
  padding-bottom: 1px;
  background: url(images/pattern1.png) 0 100% repeat-x;
  font: bold 13px/normal Arial, Helvetica, sans-serif;
