@@ -324,10 +324,10 @@ class shailan_DropdownWidget extends WP_Widget {
 		$custom_walkers = false; //(bool) get_option('shailan_dm_customwalkers');
 		$show_empty = (bool) get_option('shailan_dm_show_empty');
 		
-        ?>
-              <?php echo $args['before_widget']; ?>
-				
-			<?php 
+        echo $args['before_widget']; 
+		
+		echo "\n\n<!-- Dropdown Menu Widget by shailan (http://shailan.com) -->";
+		echo "\n\n<!-- Menu Type : " . $type . " -->";
 			
 			$dropdown_wrapper_open = '<div id="shailan-dropdown-wrapper-' . $this->number . '" >';
 					
@@ -444,8 +444,8 @@ class shailan_DropdownWidget extends WP_Widget {
 					
 				} // switch ($type)
 
-				?>
-						
+			echo "\n\n<!--/ Dropdown Menu Widget -->";		?>
+			
               <?php echo $after_widget; ?>
         <?php
     }
@@ -602,17 +602,7 @@ class shailan_DropdownWidget extends WP_Widget {
 	} // end styles
 	
 	function footer($instance){
-		$all_widgets = $this->get_settings();		
-		foreach ($all_widgets as $key => $widget){
-			$widget_id = $this->id_base . '-' . $key;		
-			if(is_active_widget(false, $widget_id, $this->id_base)){
-				$dropdown = $all_widgets[$key];
-				echo "<script type=\"text\/javascript\">";
-				echo "	var menu=new menu.dd(\"dropdown-". $key. "\");";
-				echo "	menu.init(\"dropdown-". $key ."\",\"menuhover\");";
-				echo "</script>";
-			}
-		}
+		
 	}
 
 } // class shailan_DropdownWidget
