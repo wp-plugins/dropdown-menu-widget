@@ -47,6 +47,9 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 
 == Changelog ==
 
+= 1.5.8 = 
+* Added dropdown_menu_defaults filter for changing default options like order, depth etc.
+
 = 1.5.7 =
 * Fixed various css issues.
 * Removed backgrounds for IE on certain themes.
