@@ -355,14 +355,18 @@ class shailan_DropdownWidget extends WP_Widget {
 				</div>';
 					
 			$dropdown_wrapper_close = '</div> ';
-			
+								
 			$menu_defaults = array(
-				'order_by'=>'name',
-				'depth'=>'4',
-				'title_li'=>'',
-				'exclude'=>$exclude
+				'ID' => $this->number,
+				'sort_column' => 'menu_order, post_title',
+				'order_by' => 'name',
+				'depth' => '4',
+				'title_li' => '',
+				'exclude' => $exclude
 			);
-					
+			
+			$menu_defaults = apply_filters( 'dropdown_menu_defaults', $menu_defaults );
+			
 			switch ( $type ) {
 
 				/** Pages menu */
@@ -625,7 +629,7 @@ add_action('admin_menu', array('shailan_DropdownWidget', 'adminMenu'));
 	include('shailan-multi-dropdown.php'); // Load multi-dropdown widget
 
 // template tag support
-function shailan_dropdown_menu(){
+function shailan_dropdown_menu( $args = array() ){
 	$type = get_option('shailan_dm_type');
 	$exclude = get_option('shailan_dm_exclude');
 	$inline_style = get_option('shailan_dm_style');
@@ -635,7 +639,7 @@ function shailan_dropdown_menu(){
 	$home = (bool) get_option('shailan_dm_home');
 	$align = get_option('shailan_dm_align');
 	
-	$args = array(
+	$opts = array(
 		'type' => $type,
 		'exclude' => $exclude,
 		'style' => $inline_style,
@@ -645,6 +649,8 @@ function shailan_dropdown_menu(){
 		'home' => $home,
 		'align' => $align
 	);
+	
+	$args = array_merge( $args, $opts );
 
 	the_widget('shailan_DropdownWidget', $args);
 }
