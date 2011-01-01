@@ -34,6 +34,13 @@ class shailan_DropdownWidget extends WP_Widget {
 		add_action( 'wp_footer', array(&$this, 'footer'), 10, 1 );			
 		
 		if(!is_admin()){ wp_enqueue_script( 'dropdown-ie-support', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/js/include.js', array('jquery') ); }
+		
+		// Scripts
+		wp_enqueue_script( 'jquery' );
+		wp_enqueue_script( 'superfish', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/js/superfish.js', array('jquery') );
+		wp_enqueue_script( 'supersubs', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/js/supersubs.js', array('jquery') );
+		wp_enqueue_script( 'hoverIntent',WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/js/hoverIntent.js', array('jquery') );
+		wp_enqueue_script( 'bgiframe', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/js/jquery.bgiframe.min.js', array('jquery') );
 			
 		// Define themes
 		$available_themes = array(
