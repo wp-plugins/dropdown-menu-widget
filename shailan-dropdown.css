@@ -12,6 +12,8 @@ ul.dropdown li { /*z-index: 598;*/ }
 ul.dropdown ul { position:absolute; z-index: 597; } 
 ul.dropdown ul li { z-index: 598; } 
 
+ul.dropdown li.hover, ul.dropdown li:hover{ cursor: default; } 
+
 /* Top level */
 ul.dropdown li { display:inline; vertical-align: middle; zoom:1; }
 ul.dropdown > li { float:left; }
