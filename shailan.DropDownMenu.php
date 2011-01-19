@@ -74,8 +74,9 @@ class shailan_DropdownWidget extends WP_Widget {
 		);
 		
 		$alignment = array('left'=>'left', 'center' => 'center', 'right'=> 'right');
-			
 		$types = array('pages'=>'Pages', 'categories'=>'Categories');
+		$effects = array('fade'=>'Fade In/Out', 'slide'=>'Slide Up/Down');
+		$speed = array('400'=>'Normal', 'fast'=>'Fast', 'slow'=>'Slow');
 		
 		if(function_exists('wp_nav_menu')){
 			// Get available menus
@@ -119,6 +120,28 @@ class shailan_DropdownWidget extends WP_Widget {
 			"id" => "shailan_dm_home_tag",
 			"std" => __("Home"),
 			"type" => "text"),
+			
+			array(  "name" => "Enable dropdown effects",
+			"desc" => "If checked sub menus will use effects below",
+			"id" => "shailan_dm_effects",
+			"type" => "checkbox"),
+			
+			array(  "name" => "Effect",
+			"desc" => "Select effect you want to use",
+			"id" => "shailan_dm_effect",
+			"type" => "select",
+			"options" => $effects ),
+			
+			array(  "name" => "Effect Speed",
+			"desc" => "Select effect speed",
+			"id" => "shailan_dm_effect_speed",
+			"type" => "select",
+			"options" => $speed ),
+			
+			array(  "name" => "Wrap long menu items",
+			"desc" => "If checked long menu items will wrap",
+			"id" => "shailan_dm_allowmultiline",
+			"type" => "checkbox"),
 			
 			array( "type" => "close" ),
 			
@@ -169,8 +192,44 @@ class shailan_DropdownWidget extends WP_Widget {
 			array( "type" => "close" ),
 			
 			array(
+				"name" => "Advanced Options",
+				"type" => "section"
+			),
+			
+			array(  "name" => "Dropdown Menu Font",
+			"desc" => "Font family for the menu<br />Please leave blank to use your wordpress theme font.",
+			"id" => "shailan_dm_font",
+			"std" => '',
+			"type" => "text"),
+			
+			array(  "name" => "Dropdown Menu Font Size",
+			"desc" => "Font size of the menu items (Eg: 12px OR 1em) <br />Please leave blank to use your wordpress theme font-size.",
+			"id" => "shailan_dm_fontsize",
+			"std" => '',
+			"type" => "text"),
+			
+			array(  "name" => "Custom css",
+			"desc" => "You can paste your own customization file here.",
+			"id" => "shailan_dm_custom_css",
+			"std" => '',
+			"type" => "textarea"),
+			
+			array(  "name" => "Show Empty Categories",
+			"desc" => "If checked categories with no posts will be shown.",
+			"id" => "shailan_dm_show_empty",
+			"std" => false,
+			"type" => "checkbox"),
+			
+			array( "type" => "close" ),
+			
+			array(
 				"name" => "Template Tag Options",
 				"type" => "section"
+			),
+			
+			array(
+				"desc" => "Settings here only effect menus inserted with template tag : <code>&lt;?php shailan_dropdown_menu(); ?&gt;</code>. Widget settings are NOT affected by these settings. ",
+				"type" => "paragraph"
 			),
 			
 			array(  "name" => "Menu Type",
@@ -217,43 +276,7 @@ class shailan_DropdownWidget extends WP_Widget {
 			"options" => $alignment,
 			"type" => "select"),
 			
-			array( "type" => "close" ),
-			
-			array(
-				"name" => "Advanced Options",
-				"type" => "section"
-			),
-			
-			array(  "name" => "Wrap long menu items",
-			"desc" => "If checked long menu items will wrap",
-			"id" => "shailan_dm_allowmultiline",
-			"type" => "checkbox"),
-			
-			array(  "name" => "Dropdown Menu Font",
-			"desc" => "Font family for the menu<br />Please leave blank to use your wordpress theme font.",
-			"id" => "shailan_dm_font",
-			"std" => '',
-			"type" => "text"),
-			
-			array(  "name" => "Dropdown Menu Font Size",
-			"desc" => "Font size of the menu items (Eg: 12px OR 1em) <br />Please leave blank to use your wordpress theme font-size.",
-			"id" => "shailan_dm_fontsize",
-			"std" => '',
-			"type" => "text"),
-			
-			array(  "name" => "Custom css",
-			"desc" => "You can paste your own customization file here.",
-			"id" => "shailan_dm_custom_css",
-			"std" => '',
-			"type" => "textarea"),
-			
-			array(  "name" => "Show Empty Categories",
-			"desc" => "If checked categories with no posts will be shown.",
-			"id" => "shailan_dm_show_empty",
-			"std" => false,
-			"type" => "checkbox"),
-			
-			array( "type" => "close" ),
+			array( "type" => "close" )
 			
 		);
 		
@@ -265,7 +288,8 @@ class shailan_DropdownWidget extends WP_Widget {
 			'login' => false,
 			'admin' => false,
 			'vertical' => false,
-			'align' => 'left'
+			'align' => 'left',
+			'theme' => 'none'
 		);
 		
 		$pluginname = $this->pluginname;
@@ -283,8 +307,9 @@ class shailan_DropdownWidget extends WP_Widget {
 		
 		if(is_admin()){ 
 			wp_admin_css( 'widgets' ); 
-			wp_enqueue_script('admin-widgets'); 
-			wp_register_style('dropdownMenuStyles', WP_PLUGIN_URL . '/dropdown-menu-widget/admin.css');
+			wp_enqueue_script( 'admin-widgets' ); 
+			wp_enqueue_style( 'dropdownMenuStyles', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/css/admin.css' );
+			wp_enqueue_script( 'dropdown-widgets', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/js/widgets.js', array('jquery') );
 		};
  
 		if ( @$_GET['page'] == 'dropdown-menu' ) {
@@ -333,17 +358,19 @@ class shailan_DropdownWidget extends WP_Widget {
 		
         echo $args['before_widget']; 
 		
-		echo "\n\n<!-- Dropdown Menu Widget by shailan (http://shailan.com) -->";
-		echo "\n\n<!-- Menu Type : " . $type . " -->";
+		$nl = "\n"; $indent = "\n\t"; $indent2 = "\n\t\t";
+		
+		echo $nl . "<!-- Dropdown Menu Widget by shailan (http://shailan.com)  v".SHAILAN_DM_VERSION." on wp".get_bloginfo( 'version' )." -->";
+		echo $nl . "<!-- Menu Type : " . $type . " -->";
 			
-			$dropdown_wrapper_open = '<div id="shailan-dropdown-wrapper-' . $this->number . '" >';
+			$dropdown_wrapper_open = $nl . '<div id="shailan-dropdown-wrapper-' . $this->number . '" >';
 					
-			$dropdown_open = '<div align="' . $align . '" class="'.$orientation.'-container dm-align-'.$align.'"><table cellpadding="0" cellspacing="0"><tr><td>';
-			$list_open = '<ul id="dropdown-'. $this->number .'" class="dropdown dropdown-'. $this->number .' '. $orientation . ' dropdown-align-'.$align.'">';
+			$dropdown_open = $indent . '<div align="' . $align . '" class="'.$orientation.'-container dm-align-'.$align.'"><table cellpadding="0" cellspacing="0"><tr><td>';
+			$list_open = $indent2 . '<ul id="dropdown-'. $this->number .'" class="dropdown dropdown-'. $this->number .' '. $orientation . ' dropdown-align-'.$align.'">' . $nl . "<!-- Menu elements start -->\n";
 			
 			if($home && ($type == 'pages' || $type == 'categories')){ 
 			
-						$home_item = '<li class="page_item cat-item blogtab '. (is_front_page() && !is_paged() ? 'current_page_item current-cat' : '' ) . '">
+						$home_item = $nl . '<li class="page_item cat-item blogtab '. (is_front_page() && !is_paged() ? 'current_page_item current-cat' : '' ) . '">
 							<a href="'.get_option('home').'">';
 
 						$home_tag = get_option('shailan_dm_home_tag'); 
@@ -520,10 +547,12 @@ class shailan_DropdownWidget extends WP_Widget {
 			$shailan_dm_color_link = get_option('shailan_dm_color_link');
 			$shailan_dm_color_hoverlink = get_option('shailan_dm_color_hoverlink');
 			
-			echo "\n\n<!-- Dropdown Menu Widget Styles by shailan (http://shailan.com) v".SHAILAN_DM_VERSION." on wp".get_bloginfo( 'version' )." -->";
-			echo "\n<link rel=\"stylesheet\" href=\"".WP_PLUGIN_URL."/".SHAILAN_DM_FOLDER."/shailan-dropdown.css\" type=\"text/css\" />";
+			$is_fx_active = (bool) get_option('shailan_dm_effects');
 			
-			if($theme!='NONE' && $theme != 'custom'){
+			echo "\n\n<!-- Dropdown Menu Widget Styles by shailan (http://shailan.com) v".SHAILAN_DM_VERSION." on wp".get_bloginfo( 'version' )." -->";
+			echo "\n<link rel=\"stylesheet\" href=\"".WP_PLUGIN_URL."/".SHAILAN_DM_FOLDER."/css/shailan-dropdown.css\" type=\"text/css\" />";
+			
+			if( $theme!='NONE' && $theme != 'custom' ){
 				echo "\n<link rel=\"stylesheet\" href=\"".WP_PLUGIN_URL."/".SHAILAN_DM_FOLDER."/themes/".$theme.".css\" type=\"text/css\" />";
 			}
 			
@@ -600,20 +629,59 @@ class shailan_DropdownWidget extends WP_Widget {
 			
 			} // if($custom_colors)
 			
+			// If effects not active, embed CSS display:
+			if(! $is_fx_active){ ?>
+	
+	/** Show submenus */
+	ul.dropdown li:hover > ul, ul.dropdown li.hover ul{ display: block; }
+	
+	/** Show current submenu */
+	ul.dropdown li.hover ul, ul.dropdown ul li.hover ul, ul.dropdown ul ul li.hover ul, ul.dropdown ul ul ul li.hover ul, ul.dropdown ul ul ul ul li.hover ul , ul.dropdown li:hover ul, ul.dropdown ul li:hover ul, ul.dropdown ul ul li:hover ul, ul.dropdown ul ul ul li:hover ul, ul.dropdown ul ul ul ul li:hover ul { display: block; } 
+				
+			<?php }
+			
 			// Insert Custom CSS last
 			$custom_css = stripslashes(get_option('shailan_dm_custom_css'));
 			if(!empty($custom_css)){ echo $custom_css; }
 			echo "\n</style>";
 			echo "\n<!-- /Dropdown Menu Widget Styles -->";
-			echo "\n ";
+			echo "\n\n ";
 		
-		} else {
-			wp_enqueue_style('dropdownMenuStyles');
 		}
 	} // end styles
 	
 	function footer($instance){
+		$indent = "\n\t";
+		$is_fx_active = (bool) get_option('shailan_dm_effects');
+		$speed = get_option('shailan_dm_effect_speed', '400');
+		$effect = get_option('shailan_dm_effect', 'fade');
 		
+		if($is_fx_active){
+		echo "\n\n<!-- Dropdown Menu Widget Effects by shailan (http://shailan.com) v".SHAILAN_DM_VERSION." on wp".get_bloginfo( 'version' )." -->";
+		echo "\n<script type=\"text/javascript\">/* <![CDATA[ */";
+		echo "\njQuery(document).ready(function(){ \n";
+		if( 'fade' == $effect ){
+		?>
+  jQuery(".dropdown li").hover(function(){
+	jQuery(this).find("ul:first").fadeIn('<?php echo $speed; ?>');
+  },
+  function(){
+	jQuery(this).find("ul:first").fadeOut('<?php echo $speed; ?>');
+  }); 
+		<?php
+		} elseif( 'slide' == $effect ) { ?>
+  jQuery(".dropdown li").hover(function(){
+	jQuery(this).find("ul:first").slideDown('<?php echo $speed; ?>');
+  },
+  function(){
+	jQuery(this).find("ul:first").slideUp('<?php echo $speed; ?>');
+  }); 
+		<?php }
+		echo "\n});";
+		echo "\n/* ]]> */</script>";
+		echo "\n<!-- /Dropdown Menu Widget Styles -->";
+		echo "\n\n ";
+		}
 	}
 
 } // class shailan_DropdownWidget

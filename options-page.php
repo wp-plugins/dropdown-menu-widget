@@ -55,6 +55,14 @@ case "title":
  
 <?php break;
 
+case "paragraph":
+?>
+<div class="shailan_dm_input shailan_dm_paragraph">
+<p><?php echo $value['desc']; ?></p>
+</div>
+ 
+<?php break;
+
 case 'picker':
 ?>
 	<div id="picker"></div> 
@@ -136,8 +144,8 @@ $i++;
 }
 ?>
 
-</div>
-</div>
+</div><!-- Widget holder -->
+</div><!-- Widgets left -->
 
 <div class="widget-liquid-right"> 
 <div id="widgets-right"> 
@@ -229,9 +237,8 @@ tweetmeme_url = 'http://shailan.com/wordpress/plugins/dropdown-menu/'; tweetmeme
 </form>
 
 <p class="aligncenter">
-<a href="http://shailan.com/wordpress/plugins/dropdown-menu">Dropdown Menu <?php echo SHAILAN_DM_VERSION; ?></a> by <a href="http://shailan.com">shailan</a> &copy; 2010
+<a href="http://shailan.com/wordpress/plugins/dropdown-menu">Dropdown Menu <?php echo SHAILAN_DM_VERSION; ?></a> by <a href="http://shailan.com">shailan</a> &copy; 2011
 </p>
-
 
 </div> <!-- wrap -->
 		

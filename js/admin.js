@@ -6,7 +6,7 @@ function pickColor(obj, color) {
 }
 
 jQuery(document).ready(function() {
-
+	
 	var f = jQuery.farbtastic('#picker');
 	var p = jQuery('#picker').fadeOut();
 	var selected;

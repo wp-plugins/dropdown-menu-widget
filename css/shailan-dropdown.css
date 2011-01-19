@@ -24,7 +24,6 @@ ul.dropdown ul { position: absolute; top: 100%; left: 0; }
 ul.dropdown ul li { float: none; display: list-item; list-style: none; }
 
 ul.dropdown ul ul { top: 1px; left: 99%; }
-ul.dropdown li:hover > ul, ul.dropdown li.hover ul{ display: block; }
 ul.dropdown a:active, ul.dropdown a:focus { outline-style:none; }
 
 * html ul.dropdown li { height: 1px; }
@@ -32,11 +31,8 @@ ul.dropdown a:active, ul.dropdown a:focus { outline-style:none; }
 /* IE Submenu margin fix */
 ul.dropdown ul li, ul.dropdown-vertical { margin-left: -16px; mar\gin-left: 0; }
 
-/** Hide submenus */
+/* Hide submenus */
 ul.dropdown ul, ul.dropdown li.hover ul ul, ul.dropdown li.hover ul ul ul, ul.dropdown li.hover ul ul ul ul, ul.dropdown li.hover ul ul ul ul ul, ul.dropdown ul, ul.dropdown li:hover ul ul, ul.dropdown li:hover ul ul ul, ul.dropdown li:hover ul ul ul ul, ul.dropdown li:hover ul ul ul ul ul { display: none; }
-
-/** Show current submenu */
-ul.dropdown li.hover ul, ul.dropdown ul li.hover ul, ul.dropdown ul ul li.hover ul, ul.dropdown ul ul ul li.hover ul, ul.dropdown ul ul ul ul li.hover ul , ul.dropdown li:hover ul, ul.dropdown ul li:hover ul, ul.dropdown ul ul li:hover ul, ul.dropdown ul ul ul li:hover ul, ul.dropdown ul ul ul ul li:hover ul { display: block; }
 
 ul.dropdown ul ul ul ul ul ul { display: none !important; }
 
