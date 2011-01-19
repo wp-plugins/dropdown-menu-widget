@@ -143,6 +143,16 @@ class shailan_DropdownWidget extends WP_Widget {
 			"id" => "shailan_dm_allowmultiline",
 			"type" => "checkbox"),
 			
+			array(  "name" => "Remove title attributes from menu items",
+			"desc" => "This will remove 'View all posts under..' title attributes from menu links",
+			"id" => "shailan_dm_remove_title_attributes",
+			"type" => "checkbox"),
+			
+			array(  "name" => "Remove links from top levels",
+			"desc" => "This will remove links from top level pages/categories. So user can only click to sub-level menu.",
+			"id" => "shailan_dm_remove_top_level_links",
+			"type" => "checkbox"),
+			
 			array( "type" => "close" ),
 			
 			array(
@@ -549,7 +559,7 @@ class shailan_DropdownWidget extends WP_Widget {
 			
 			$is_fx_active = (bool) get_option('shailan_dm_effects');
 			
-			echo "\n\n<!-- Dropdown Menu Widget Styles by shailan (http://shailan.com) v".SHAILAN_DM_VERSION." on wp".get_bloginfo( 'version' )." -->";
+			echo "\n\n<!-- Dropdown Menu Widget Styles by shailan (http://shailan.com) v".SHAILAN_DM_VERSION." on wp".get_bloginfo( 'version' )." -->"; // For debug
 			echo "\n<link rel=\"stylesheet\" href=\"".WP_PLUGIN_URL."/".SHAILAN_DM_FOLDER."/css/shailan-dropdown.css\" type=\"text/css\" />";
 			
 			if( $theme!='NONE' && $theme != 'custom' ){
@@ -652,14 +662,37 @@ class shailan_DropdownWidget extends WP_Widget {
 	
 	function footer($instance){
 		$indent = "\n\t";
+		
+		$remove_title_attributes = (bool) get_option('shailan_dm_remove_title_attributes');
+		$remove_top_level_links = (bool) get_option('shailan_dm_remove_top_level_links');
 		$is_fx_active = (bool) get_option('shailan_dm_effects');
 		$speed = get_option('shailan_dm_effect_speed', '400');
 		$effect = get_option('shailan_dm_effect', 'fade');
 		
-		if($is_fx_active){
-		echo "\n\n<!-- Dropdown Menu Widget Effects by shailan (http://shailan.com) v".SHAILAN_DM_VERSION." on wp".get_bloginfo( 'version' )." -->";
+		if( $is_fx_active || $remove_title_attributes || $remove_top_level_links ){
+		
+		echo "\n\n<!-- Dropdown Menu Widget Effects by shailan (http://shailan.com) v".SHAILAN_DM_VERSION." on wp".get_bloginfo( 'version' )." -->"; // For debug
 		echo "\n<script type=\"text/javascript\">/* <![CDATA[ */";
 		echo "\njQuery(document).ready(function(){ \n";
+		
+		// Remove title attributes from categories
+		
+		if($remove_title_attributes){
+		?>
+  jQuery('ul.dropdown li a').removeAttr('title');
+		<?php
+		}
+		
+		// Remove links from top-level menus
+		
+		if($remove_top_level_links){
+		?>
+  jQuery('ul.children').parent().find('a:first').removeAttr('href');
+		<?php
+		}
+		
+		// Enable effects
+
 		if( 'fade' == $effect ){
 		?>
   jQuery(".dropdown li").hover(function(){
