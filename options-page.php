@@ -241,14 +241,3 @@ tweetmeme_url = 'http://shailan.com/wordpress/plugins/dropdown-menu/'; tweetmeme
 </p>
 
 </div> <!-- wrap -->
-		
-
-
-
-		
-
-
-
-
-
-
