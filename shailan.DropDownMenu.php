@@ -30,35 +30,33 @@ class shailan_DropdownWidget extends WP_Widget {
 		$this->shortname = "shailan_dm";
 		
 		// Hook up styles
-		add_action( 'wp_head', array(&$this, 'styles') );
+		add_action( 'wp_head', array(&$this, 'header') );
 		add_action( 'wp_footer', array(&$this, 'footer'), 10, 1 );			
 		
 		if(!is_admin()){ wp_enqueue_script( 'dropdown-ie-support', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/js/include.js', array('jquery') ); }
 		
-		// Scripts
-		wp_enqueue_script( 'jquery' );
-		wp_enqueue_script( 'superfish', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/js/superfish.js', array('jquery') );
-		wp_enqueue_script( 'supersubs', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/js/supersubs.js', array('jquery') );
-		wp_enqueue_script( 'hoverIntent',WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/js/hoverIntent.js', array('jquery') );
-		wp_enqueue_script( 'bgiframe', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/js/jquery.bgiframe.min.js', array('jquery') );
-			
 		// Define themes
 		$available_themes = array(
-			'None'=>'NONE',
+			'None' => '',
 			'Custom CSS' => 'custom',
-			'Color Scheme' => 'color-scheme',
-			'Simple White'=>'simple',
-			'Wordpress Default'=>'wpdefault',
-			'Grayscale'=>'grayscale',
-			'Aqua'=>'aqua',
-			'Blue gradient'=>'simple-blue',
-			'Shiny Black'=> 'shiny-black',
-			'Flickr theme'=>'flickr.com/default.ultimate',
-			'Nvidia theme'=>'nvidia.com/default.advanced',
-			'Adobe theme'=>'adobe.com/default.advanced',
-			'MTV theme'=>'mtv.com/default.ultimate',
-			'Hulu theme'=>'hulu/hulu'
+			'Color Scheme' => plugins_url('/themes/color-scheme.css', __FILE__),
+			'Simple White' =>  plugins_url('/themes/simple.css', __FILE__),
+			'Wordpress Default' => plugins_url('/themes/wpdefault.css', __FILE__),
+			'Grayscale' => plugins_url('/themes/grayscale.css', __FILE__),
+			'Aqua' => 'aqua',
+			'Blue gradient' => 'simple-blue',
+			'Shiny Black' => 'shiny-black',
+			'Flickr theme' => 'flickr.com/default.ultimate',
+			'Nvidia theme' => 'nvidia.com/default.advanced',
+			'Adobe theme' => 'adobe.com/default.advanced',
+			'MTV theme' => 'mtv.com/default.ultimate',
+			'Hulu theme' => 'hulu/hulu'
 		);
+		
+		// Check for theme style file
+		if( file_exists( trailingslashit( get_template_directory() ) . 'dropdown.css') ){
+			$available_themes['Dropdown.css (theme)'] = get_template_directory_uri() . '/dropdown.css';
+		}
 		
 		// Swap array for options page
 		$themes = array();
@@ -299,7 +297,8 @@ class shailan_DropdownWidget extends WP_Widget {
 			'admin' => false,
 			'vertical' => false,
 			'align' => 'left',
-			'theme' => 'none'
+			'theme' => 'none',
+			'show_title' => false
 		);
 		
 		$pluginname = $this->pluginname;
@@ -316,13 +315,18 @@ class shailan_DropdownWidget extends WP_Widget {
 		global $pluginname, $pluginshortname, $pluginoptions;
 		
 		if(is_admin()){ 
+		
+			// Styles
 			wp_admin_css( 'widgets' ); 
-			wp_enqueue_script( 'admin-widgets' ); 
 			wp_enqueue_style( 'dropdownMenuStyles', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/css/admin.css' );
+			
+			// Scripts
+			wp_enqueue_script( 'admin-widgets' ); 
 			wp_enqueue_script( 'dropdown-widgets', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/js/widgets.js', array('jquery') );
+			
 		};
  
-		if ( @$_GET['page'] == 'dropdown-menu' ) {
+		if ( isset($_GET['page']) && $_GET['page'] == 'dropdown-menu' ) {
 		
 			wp_enqueue_style('farbtastic'); 
 			wp_enqueue_script('farbtastic'); 
@@ -349,9 +353,9 @@ class shailan_DropdownWidget extends WP_Widget {
 		}
 	}
 	
+	// Render options page
 	function getOptionsPage(){	
 		global $pluginname, $pluginshortname, $pluginoptions;
-		
 		$title = __('Dropdown Menu Options');
 		include_once('options-page.php'); 
 	}
@@ -362,11 +366,16 @@ class shailan_DropdownWidget extends WP_Widget {
 		$widget_options = wp_parse_args( $instance, $this->defaults );
 		extract( $widget_options, EXTR_SKIP );
 		
-		$orientation = ($vertical ? 'dropdown-vertical' : 'dropdown-horizontal');
-		$custom_walkers = false; //(bool) get_option('shailan_dm_customwalkers');
+		// On and off
+		$show_title = (bool) $show_title;		
+		$orientation = ($is_vertical ? 'dropdown-vertical' : 'dropdown-horizontal');
+		$custom_walkers = false; // (bool) get_option('shailan_dm_customwalkers'); disabled
 		$show_empty = (bool) get_option('shailan_dm_show_empty');
 		
         echo $args['before_widget']; 
+		
+		// Show title if option checked
+		if ( $title && $show_title ){ echo $before_title . $title . $after_title; }
 		
 		$nl = "\n"; $indent = "\n\t"; $indent2 = "\n\t\t";
 		
@@ -506,13 +515,18 @@ class shailan_DropdownWidget extends WP_Widget {
 		$widget_options = wp_parse_args( $instance, $this->defaults );
 		extract( $widget_options, EXTR_SKIP );
 		
+		$show_title = (bool) $show_title;
 		$home = (bool) $home;
 		$login = (bool) $login;
 		$admin = (bool) $admin;
-		$vertical = (bool) $vertical;
+		$is_vertical = (bool) $is_vertical;
 		
         ?>		
-		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title (won\'t be shown):', 'shailan-dropdown-menu'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
+		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title :', 'shailan-dropdown-menu'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
+		
+		<p>
+		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('show_title'); ?>" name="<?php echo $this->get_field_name('show_title'); ?>"<?php checked( $home ); ?> />
+		<label for="<?php echo $this->get_field_id('show_title'); ?>"><?php _e( 'Show widget title' , 'shailan-dropdown-menu' ); ?></label><br />
 			
 		<p><label for="<?php echo $this->get_field_id('type'); ?>"><?php _e('Menu:'); ?>
 		<select name="<?php echo $this->get_field_name('type'); ?>" id="<?php echo $this->get_field_id('type'); ?>">
@@ -531,7 +545,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		<label for="<?php echo $this->get_field_id('login'); ?>"><?php _e( 'Add login/logout' , 'shailan-dropdown-menu' ); ?></label><br />
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('admin'); ?>" name="<?php echo $this->get_field_name('admin'); ?>"<?php checked( $admin ); ?> />
 		<label for="<?php echo $this->get_field_id('admin'); ?>"><?php _e( 'Add Register/Site Admin' , 'shailan-dropdown-menu' ); ?></label><br />
-		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('vertical'); ?>" name="<?php echo $this->get_field_name('vertical'); ?>"<?php checked( $vertical ); ?> />
+		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('vertical'); ?>" name="<?php echo $this->get_field_name('vertical'); ?>"<?php checked( $is_vertical ); ?> />
 		<label for="<?php echo $this->get_field_id('vertical'); ?>"><?php _e( 'Vertical menu' , 'shailan-dropdown-menu' ); ?></label>
 		</p>
 		
@@ -545,7 +559,7 @@ class shailan_DropdownWidget extends WP_Widget {
         <?php 
 	}
 	
-	function styles($instance){
+	function header($instance){
 		global $pluginname, $pluginshortname, $pluginoptions;
 		if(!is_admin()){
 			$theme = get_option('shailan_dm_active_theme');
@@ -658,8 +672,9 @@ class shailan_DropdownWidget extends WP_Widget {
 			echo "\n\n ";
 		
 		}
-	} // end styles
+	} // -- End Header
 	
+	// Footer scripts
 	function footer($instance){
 		$indent = "\n\t";
 		
@@ -743,7 +758,7 @@ function shailan_dropdown_menu( $args = array() ){
 	$inline_style = get_option('shailan_dm_style');
 	$login = (bool) get_option('shailan_dm_login');
 	$admin = (bool) get_option('shailan_dm_admin');
-	$vertical = (bool) get_option('shailan_dm_vertical');
+	$is_vertical = (bool) get_option('shailan_dm_vertical');
 	$home = (bool) get_option('shailan_dm_home');
 	$align = get_option('shailan_dm_align');
 	
@@ -753,7 +768,7 @@ function shailan_dropdown_menu( $args = array() ){
 		'style' => $inline_style,
 		'login' => $login,
 		'admin' => $admin,
-		'vertical' => $vertical,
+		'vertical' => $is_vertical,
 		'home' => $home,
 		'align' => $align
 	);
