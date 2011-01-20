@@ -4,13 +4,13 @@ Plugin Name: Dropdown Menu Widget
 Plugin URI: http://shailan.com/wordpress/plugins/dropdown-menu
 Description: A multi widget to generate drop-down menus from your pages, categories & navigation menus. You can find more widgets, plugins and themes at <a href="http://shailan.com">shailan.com</a>.
 Tags: dropdown, menu, css, css-dropdown, navigation, widget, dropdown-menu, customization, theme
-Version: 1.5.8
+Version: 1.6
 Author: Matt Say
 Author URI: http://shailan.com
 Text Domain: shailan-dropdown-menu
 */
 
-define('SHAILAN_DM_VERSION','1.5.8');
+define('SHAILAN_DM_VERSION','1.6');
 define('SHAILAN_DM_TITLE', 'Dropdown Menu');
 define('SHAILAN_DM_FOLDER', 'dropdown-menu-widget');
 
@@ -37,20 +37,20 @@ class shailan_DropdownWidget extends WP_Widget {
 		
 		// Define themes
 		$available_themes = array(
-			'None' => '',
-			'Custom CSS' => 'custom',
+			'None' => '*none*',
+			'Custom CSS' => '*custom*',
 			'Color Scheme' => plugins_url('/themes/color-scheme.css', __FILE__),
-			'Simple White' =>  plugins_url('/themes/simple.css', __FILE__),
+			'Simple White' => plugins_url('/themes/simple.css', __FILE__),
 			'Wordpress Default' => plugins_url('/themes/wpdefault.css', __FILE__),
 			'Grayscale' => plugins_url('/themes/grayscale.css', __FILE__),
-			'Aqua' => 'aqua',
-			'Blue gradient' => 'simple-blue',
-			'Shiny Black' => 'shiny-black',
-			'Flickr theme' => 'flickr.com/default.ultimate',
-			'Nvidia theme' => 'nvidia.com/default.advanced',
-			'Adobe theme' => 'adobe.com/default.advanced',
-			'MTV theme' => 'mtv.com/default.ultimate',
-			'Hulu theme' => 'hulu/hulu'
+			'Aqua' => plugins_url('/themes/aqua.css', __FILE__),
+			'Blue gradient' => plugins_url('/themes/simple-blue.css', __FILE__),
+			'Shiny Black' => plugins_url('/themes/shiny-black.css', __FILE__),
+			'Flickr theme' =>  plugins_url('/themes/flickr.com/default.ultimate.css', __FILE__),
+			'Nvidia theme' =>  plugins_url('/themes/nvidia.com/default.advanced.css', __FILE__),
+			'Adobe theme' => plugins_url('/themes/adobe.com/default.advanced.css', __FILE__),
+			'MTV theme' =>  plugins_url('/themes/mtv.com/default.ultimate.css', __FILE__),
+			'Hulu theme' =>  plugins_url('/themes/hulu/hulu.css', __FILE__)
 		);
 		
 		// Check for theme style file
@@ -349,7 +349,7 @@ class shailan_DropdownWidget extends WP_Widget {
 	
 		if (function_exists('add_options_page')) {
 			$page = add_options_page(__('Settings for Dropdown Menu', 'shailan-dropdown-menu') , __('Dropdown Menu', 'shailan-dropdown-menu'), 'edit_themes', 'dropdown-menu', array('shailan_DropdownWidget', 'getOptionsPage'));
-			add_action('admin_print_styles-' . $page, array('shailan_DropdownWidget', 'styles'));
+			add_action('admin_print_styles-' . $page, array('shailan_DropdownWidget', 'header'));
 		}
 	}
 	
@@ -368,7 +368,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		
 		// On and off
 		$show_title = (bool) $show_title;		
-		$orientation = ($is_vertical ? 'dropdown-vertical' : 'dropdown-horizontal');
+		$orientation = ($vertical ? 'dropdown-vertical' : 'dropdown-horizontal');
 		$custom_walkers = false; // (bool) get_option('shailan_dm_customwalkers'); disabled
 		$show_empty = (bool) get_option('shailan_dm_show_empty');
 		
@@ -519,13 +519,13 @@ class shailan_DropdownWidget extends WP_Widget {
 		$home = (bool) $home;
 		$login = (bool) $login;
 		$admin = (bool) $admin;
-		$is_vertical = (bool) $is_vertical;
+		$vertical = (bool) $vertical;
 		
         ?>		
 		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title :', 'shailan-dropdown-menu'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
 		
 		<p>
-		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('show_title'); ?>" name="<?php echo $this->get_field_name('show_title'); ?>"<?php checked( $home ); ?> />
+		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('show_title'); ?>" name="<?php echo $this->get_field_name('show_title'); ?>"<?php checked( $show_title ); ?> />
 		<label for="<?php echo $this->get_field_id('show_title'); ?>"><?php _e( 'Show widget title' , 'shailan-dropdown-menu' ); ?></label><br />
 			
 		<p><label for="<?php echo $this->get_field_id('type'); ?>"><?php _e('Menu:'); ?>
@@ -545,7 +545,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		<label for="<?php echo $this->get_field_id('login'); ?>"><?php _e( 'Add login/logout' , 'shailan-dropdown-menu' ); ?></label><br />
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('admin'); ?>" name="<?php echo $this->get_field_name('admin'); ?>"<?php checked( $admin ); ?> />
 		<label for="<?php echo $this->get_field_id('admin'); ?>"><?php _e( 'Add Register/Site Admin' , 'shailan-dropdown-menu' ); ?></label><br />
-		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('vertical'); ?>" name="<?php echo $this->get_field_name('vertical'); ?>"<?php checked( $is_vertical ); ?> />
+		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('vertical'); ?>" name="<?php echo $this->get_field_name('vertical'); ?>"<?php checked( $vertical ); ?> />
 		<label for="<?php echo $this->get_field_id('vertical'); ?>"><?php _e( 'Vertical menu' , 'shailan-dropdown-menu' ); ?></label>
 		</p>
 		
@@ -577,7 +577,11 @@ class shailan_DropdownWidget extends WP_Widget {
 			echo "\n<link rel=\"stylesheet\" href=\"".WP_PLUGIN_URL."/".SHAILAN_DM_FOLDER."/css/shailan-dropdown.css\" type=\"text/css\" />";
 			
 			if( $theme!='NONE' && $theme != 'custom' ){
-				echo "\n<link rel=\"stylesheet\" href=\"".WP_PLUGIN_URL."/".SHAILAN_DM_FOLDER."/themes/".$theme.".css\" type=\"text/css\" />";
+				if( false === strpos($theme, 'http') ){
+					echo "\n<link rel=\"stylesheet\" href=\"". plugins_url( '/themes/' . $theme . '.css', __FILE__)."\" type=\"text/css\" />";
+				} else {
+					echo "\n<link rel=\"stylesheet\" href=\"".$theme."\" type=\"text/css\" />";
+				}
 			}
 			
 			echo "\n<style type=\"text/css\" media=\"all\">";
@@ -758,7 +762,7 @@ function shailan_dropdown_menu( $args = array() ){
 	$inline_style = get_option('shailan_dm_style');
 	$login = (bool) get_option('shailan_dm_login');
 	$admin = (bool) get_option('shailan_dm_admin');
-	$is_vertical = (bool) get_option('shailan_dm_vertical');
+	$vertical = (bool) get_option('shailan_dm_vertical');
 	$home = (bool) get_option('shailan_dm_home');
 	$align = get_option('shailan_dm_align');
 	
@@ -768,7 +772,7 @@ function shailan_dropdown_menu( $args = array() ){
 		'style' => $inline_style,
 		'login' => $login,
 		'admin' => $admin,
-		'vertical' => $is_vertical,
+		'vertical' => $vertical,
 		'home' => $home,
 		'align' => $align
 	);

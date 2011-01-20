@@ -1,10 +1,10 @@
 === Dropdown Menu Widget ===
 Contributors: mattsay
 Donate link: http://shailan.com/donate  
-Tags: css, dropdown, menu, widget, pages, categories, multi, jquery, navigation
+Tags: css, dropdown, menu, widget, pages, categories, multi, jquery, navigation, category list, themes, custom-styles, options-page, animations, effects
 Requires at least: 2.8  
-Tested up to: 3.0.2
-Stable tag: 1.5.8
+Tested up to: 3.1
+Stable tag: 1.6
 
 This widget adds a beatiful vertical/horizontal CSS only dropdown menu of Pages, Categories or Custom navigation menus of your blog.
 
@@ -46,6 +46,14 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 1. Brand new dropdown menu options page.
 
 == Changelog ==
+
+= 1.6 =
+* Added option to show title on widget.
+* Added capability to find dropdown.css on your theme folder.
+* Added jQuery dropdown effects.
+* Added remove title attributes option.
+* Added remove links from top level option.
+* Many more to come..
 
 = 1.5.8 = 
 * Added dropdown_menu_defaults filter for changing default options like order, depth etc.
