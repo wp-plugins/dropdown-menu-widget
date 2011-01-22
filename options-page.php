@@ -4,8 +4,8 @@ global $pluginname, $pluginoptions;
 
 $i=0;
  
-//if ( @$_REQUEST['saved'] ) echo '<div id="message" class="updated fade"><p><strong>'.$pluginname.' settings saved.</strong></p></div>';
-//if ( @$_REQUEST['reset'] ) echo '<div id="message" class="updated fade"><p><strong>'.$pluginname.' settings reset.</strong></p></div>';
+if ( @$_REQUEST['saved'] ) echo '<div id="message" class="updated fade"><p><strong>'.$pluginname.' settings saved.</strong></p></div>';
+if ( @$_REQUEST['reset'] ) echo '<div id="message" class="updated fade"><p><strong>'.$pluginname.' settings reset.</strong></p></div>';
  
 ?>
 
@@ -61,6 +61,11 @@ case "paragraph":
 <p><?php echo $value['desc']; ?></p>
 </div>
  
+<?php break;
+
+case "splitter":
+?>
+<div class="shailan_dm_input shailan_dm_splitter"></div> 
 <?php break;
 
 case 'picker':
@@ -150,6 +155,14 @@ $i++;
 <div class="widget-liquid-right"> 
 <div id="widgets-right"> 
 
+<!--
+<div class="ads">
+	<div class="ad">
+		<span><a href="http://shailan.com/contact">Advertise here</a></span>
+	</div>
+</div>
+-->
+
 <div class="widgets-holder-wrap"> 
 	<div class="sidebar-name">
 	<div class="sidebar-name-arrow"><br /></div>
@@ -216,7 +229,7 @@ tweetmeme_url = 'http://shailan.com/wordpress/plugins/dropdown-menu/'; tweetmeme
 </script><script type="text/javascript" src="http://tweetmeme.com/i/scripts/button.js"></script></li> -->
 	</ul>
 
-	<p>You can also donate a few bugs using the button below: <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+	<p>You can also buy me a coffee here: <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="8F7M79S2PBU3G">
 <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">

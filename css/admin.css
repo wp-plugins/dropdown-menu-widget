@@ -1,6 +1,7 @@
 /** Dropdown Menu Widget Admin Styles */
 .shailan_dm_input{padding:10px;}
 .shailan_dm_input.shailan_dm_paragraph{ background: #ddd; padding:10px; }
+.shailan_dm_input.shailan_dm_splitter{ border-top:1px solid #ddd; font-size:1px; line-height:1px; height:1px; margin-top:12px; margin-bottom:12px; padding:0; }
 .shailan_dm_paragraph p{ margin:0; line-height:1.5em; }
 .shailan_dm_input small{font-style:italic; font-size:smaller; color:#666;}
 .shailan_dm_input label{	font-size:12px;
@@ -31,3 +32,13 @@ input.color-error{border:1px solid #f00;}
 
 #widgets-right .shailan-dropdown, #widgets-left .shailan-dropdown .widget-top{ border-color: #F90; }
 #widgets-right .shailan-dropdown-multi, #widgets-left .shailan-dropdown-multi .widget-top{ border-color: #F90; }
+
+.ads{
+	background-color: #F1F1F1;
+	border: 1px solid #DDDDDD;
+	padding: 10px;
+	text-align:center;
+	border-radius: 8px 8px;
+	-moz-border-radius: 8px 8px;
+	-webkit-border-radius: 8px 8px;
+}

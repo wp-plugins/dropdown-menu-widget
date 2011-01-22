@@ -5,7 +5,45 @@ function pickColor(obj, color) {
 	jQuery("#" + obj).val(color);
 }
 
+jQuery.fn.enable = function(){
+	return jQuery(this).removeAttr('disabled');
+}
+
+jQuery.fn.disable = function(){
+	return jQuery(this).attr('disabled', 'disabled');
+}
+
 jQuery(document).ready(function() {
+
+	/*if(jQuery('#shailan_dm_active_theme').val() == '*url*'){
+			jQuery('#shailan_dm_theme_url').enable();
+		} else {
+			jQuery('#shailan_dm_theme_url').disable();
+	}*/
+
+	function shailan_dm_active_theme_change(){
+		if(jQuery('#shailan_dm_active_theme').val() == '*url*'){
+			jQuery('#shailan_dm_theme_url').enable();
+		} else {
+			jQuery('#shailan_dm_theme_url').disable();
+		}
+	}
+	
+	jQuery('#shailan_dm_active_theme').change(function(){ shailan_dm_active_theme_change() });
+	shailan_dm_active_theme_change();
+	
+	function shailan_dm_effects_change(){
+		if(jQuery('#shailan_dm_effects').attr('checked') == true){
+			jQuery('#shailan_dm_effect').enable();
+			jQuery('#shailan_dm_effect_speed').enable();
+		} else {
+			jQuery('#shailan_dm_effect').disable();
+			jQuery('#shailan_dm_effect_speed').disable();
+		}
+	}
+	
+	jQuery('#shailan_dm_effects').change(function(){ shailan_dm_effects_change() });
+	shailan_dm_effects_change();
 	
 	var f = jQuery.farbtastic('#picker');
 	var p = jQuery('#picker').fadeOut();
@@ -56,4 +94,8 @@ jQuery(document).ready(function() {
 				jQuery(this).fadeOut(10);
 		});
 	});
+	
+	
+	
+	
 });
