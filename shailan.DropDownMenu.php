@@ -4,13 +4,13 @@ Plugin Name: Dropdown Menu Widget
 Plugin URI: http://shailan.com/wordpress/plugins/dropdown-menu
 Description: A multi widget to generate drop-down menus from your pages, categories & navigation menus. You can find more widgets, plugins and themes at <a href="http://shailan.com">shailan.com</a>.
 Tags: dropdown, menu, css, css-dropdown, navigation, widget, dropdown-menu, customization, theme
-Version: 1.6.1
+Version: 1.6.2
 Author: Matt Say
 Author URI: http://shailan.com
 Text Domain: shailan-dropdown-menu
 */
 
-define('SHAILAN_DM_VERSION','1.6.1');
+define('SHAILAN_DM_VERSION','1.6.2');
 define('SHAILAN_DM_TITLE', 'Dropdown Menu');
 define('SHAILAN_DM_FOLDER', 'dropdown-menu-widget');
 
@@ -327,20 +327,21 @@ class shailan_DropdownWidget extends WP_Widget {
 	function adminMenu(){
 		global $pluginname, $pluginshortname, $pluginoptions;
 		
-		if(is_admin()){ 
-			// Styles
-			wp_admin_css( 'widgets' ); 
-			wp_enqueue_style( 'dropdownMenuStyles', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/css/admin.css' );
-			
-			// Scripts
-			wp_enqueue_script( 'admin-widgets' ); 
+		if( is_admin() ){ 
+			wp_enqueue_style( 'dropdown-widget-styles', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/css/widgets.css' );
 			wp_enqueue_script( 'dropdown-widgets', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/js/widgets.js', array('jquery') );
 		};
  
 		if ( isset($_GET['page']) && $_GET['page'] == 'dropdown-menu' ) {
 		
+			// Styles
+			wp_admin_css( 'widgets' ); 
 			wp_enqueue_style('farbtastic'); 
-			wp_enqueue_script('farbtastic'); 
+			wp_enqueue_style( 'dropdownMenuStyles', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/css/admin.css' );
+			
+			// Scripts
+			wp_enqueue_script( 'admin-widgets' ); 
+			wp_enqueue_script( 'farbtastic' ); 
 			wp_enqueue_script( 'dropdown-colorpick', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/js/admin.js', array('jquery') );
 		
 			if ( @$_REQUEST['action'] && 'save' == $_REQUEST['action'] ) {

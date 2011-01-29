@@ -21,17 +21,12 @@
 
 #picker{ position:absolute; top:10px; right:10px; }
 
-
-
 .sidebar-name{overflow:auto; display:block;}
 .sidebar-name h3{float:left;}
 .sidebar-name span{float:right;}
 
 input.selected{border:1px solid #f93}
 input.color-error{border:1px solid #f00;}
-
-#widgets-right .shailan-dropdown, #widgets-left .shailan-dropdown .widget-top{ border-color: #F90; }
-#widgets-right .shailan-dropdown-multi, #widgets-left .shailan-dropdown-multi .widget-top{ border-color: #F90; }
 
 .ads{
 	background-color: #F1F1F1;
