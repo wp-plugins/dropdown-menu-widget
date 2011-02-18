@@ -733,6 +733,19 @@ class shailan_DropdownWidget extends WP_Widget {
 		<?php
 		}
 		
+		?>
+  jQuery.fn.alignSubs = function ( args ) {
+	return this.each(function(){
+		var $this = jQuery(this);
+		oleft = ( $this.parent().width() - $this.width() ) / 2;		
+		$this.css('left', oleft);
+	});
+  };
+  
+  jQuery('ul.dropdown li ul:first').alignSubs();
+		
+		<?php
+		
 		// Remove links from top-level elements
 		if($remove_top_level_links){
 		?>
