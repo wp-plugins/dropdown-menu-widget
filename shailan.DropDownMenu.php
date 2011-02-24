@@ -724,12 +724,12 @@ class shailan_DropdownWidget extends WP_Widget {
 		
 		echo "\n\n<!-- Dropdown Menu Widget Effects by shailan (http://shailan.com) v".SHAILAN_DM_VERSION." on wp".get_bloginfo( 'version' )." -->"; // For debug
 		echo "\n<script type=\"text/javascript\">/* <![CDATA[ */";
-		echo "\njQuery(document).ready(function(){ \n";
+		echo "\n(function($){ \n";
 		
 		// Remove title attributes from links
 		if($remove_title_attributes){
 		?>
-  jQuery('ul.dropdown li a').removeAttr('title');
+  $('ul.dropdown li a').removeAttr('title');
 		<?php
 		}
 		
@@ -749,42 +749,42 @@ class shailan_DropdownWidget extends WP_Widget {
 		// Remove links from top-level elements
 		if($remove_top_level_links){
 		?>
-  jQuery('ul.children').parent().find('a:first').removeAttr('href');
+  $('ul.children').parent().find('a:first').removeAttr('href');
 		<?php
 		}
 		
 		// Dropdown FX
 		if( 'fade' == $effect ){
 		?>
-  jQuery(".dropdown li").hover(function(){
-	jQuery(this).find("ul:first").fadeIn('<?php echo $speed; ?>');
+  $(".dropdown li").hover(function(){
+	$(this).find("ul:first").fadeIn('<?php echo $speed; ?>');
   },
   function(){
-	jQuery(this).find("ul:first").fadeOut('<?php echo $speed; ?>');
+	$(this).find("ul:first").fadeOut('<?php echo $speed; ?>');
   }); 
 		<?php
 		} elseif( 'slide' == $effect ) { ?>
-  jQuery(".dropdown li").hover(function(){
-	jQuery(this).find("ul:first").slideDown('<?php echo $speed; ?>');
+  $(".dropdown li").hover(function(){
+	$(this).find("ul:first").slideDown('<?php echo $speed; ?>');
   },
   function(){
-	jQuery(this).find("ul:first").slideUp('<?php echo $speed; ?>');
+	$(this).find("ul:first").slideUp('<?php echo $speed; ?>');
   }); 
 		<?php 
 		} elseif( 'fade2' == $effect ) { ?>
 		
-  jQuery(".dropdown li").hover(function(){
-	h = jQuery(this).height() + 'px';
-	jQuery(this).find("ul:first").animate( {opacity:'show', top:h}, '<?php echo $speed; ?>');
+  $(".dropdown li").hover(function(){
+	h = $(this).height() + 'px';
+	$(this).find("ul:first").animate( {opacity:'show', top:h}, '<?php echo $speed; ?>');
   },
   function(){
-	h = jQuery(this).height() + 5 + 'px';
-	jQuery(this).find("ul:first").animate( {opacity:'hide', top:h}, '<?php echo $speed; ?>');
+	h = $(this).height() + 5 + 'px';
+	$(this).find("ul:first").animate( {opacity:'hide', top:h}, '<?php echo $speed; ?>');
   }); 
   
 	<?php }
 		
-		echo "\n});";
+		echo "\n})(jQuery);";
 		echo "\n/* ]]> */</script>";
 		echo "\n<!-- /Dropdown Menu Widget Styles -->";
 		echo "\n\n ";
