@@ -734,6 +734,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		}
 		
 		?>
+		
   jQuery.fn.alignSubs = function ( args ) {
 	return this.each(function(){
 		var $this = jQuery(this);
