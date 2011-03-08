@@ -23,7 +23,7 @@ class shailan_DropdownWidget extends WP_Widget {
 	function shailan_DropdownWidget(){
 		global $pluginname, $pluginshortname, $pluginoptions;
 		
-		$widget_ops = array('classname' => 'shailan-dropdown-menu', 'description' => __( 'Dropdown page/category menu', 'shailan-dropdown-menu' ) );
+		$widget_ops = array('classname' => 'shailan-dropdown-menu-widget', 'description' => __( 'Dropdown page/category menu', 'shailan-dropdown-menu' ) );
 		$this->WP_Widget('dropdown-menu', __('Dropdown Menu', 'shailan-dropdown-menu'), $widget_ops);
 		$this->alt_option_name = 'widget_dropdown_menu';
 		
@@ -395,6 +395,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		
 		echo $nl . "<!-- Dropdown Menu Widget by shailan (http://shailan.com)  v".SHAILAN_DM_VERSION." on wp".get_bloginfo( 'version' )." -->";
 		echo $nl . "<!-- Menu Type : " . $type . " -->";
+		echo $nl . "<div class=\"shailan-dropdown-menu\">";
 			
 			$dropdown_wrapper_open = $nl . '<div id="shailan-dropdown-wrapper-' . $this->number . '" >';
 					
@@ -515,6 +516,7 @@ class shailan_DropdownWidget extends WP_Widget {
 					
 				} // switch ($type)
 
+			echo $nl . "</div>";
 			echo "\n\n<!--/ Dropdown Menu Widget -->";		?>
 			
               <?php echo $after_widget; ?>
@@ -836,7 +838,7 @@ function shailan_dropdown_menu( $args = array() ){
 		'align' => $align
 	);
 	
-	$args = array_merge( $args, $opts );
+	$args = array_merge( $opts, $args );
 
 	the_widget('shailan_DropdownWidget', $args);
 }
