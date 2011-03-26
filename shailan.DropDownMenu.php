@@ -64,8 +64,6 @@ class shailan_DropdownWidget extends WP_Widget {
 			$available_themes['Dropdown.css (theme)'] = get_template_directory_uri() . '/dropdown.css';
 		}
 		
-		// ksort($available_themes);
-		
 		// Swap array for options page
 		$themes = array();
 		while(list($Key,$Val) = each($available_themes))
@@ -84,13 +82,15 @@ class shailan_DropdownWidget extends WP_Widget {
 		$effects = array('fade'=>'Fade In/Out', 'slide'=>'Slide Up/Down'/*, 'fade2'=>'Fade In/Out Moving Up'*/);
 		$speed = array('400'=>'Normal', 'fast'=>'Fast', 'slow'=>'Slow');
 		
-		if(function_exists('wp_nav_menu')){
+		if( function_exists('wp_nav_menu') ){
 			// Get available menus
 			$menus = get_terms( 'nav_menu', array( 'hide_empty' => false ) );
+			
 			$navmenus = array();
+			
 			if($menus){
-				foreach($menus as $menu){
-					$navmenus['navmenu_' . $menu->term_id] = $menu->name;
+				foreach( $menus as $menu ){
+					$navmenus[ 'navmenu_' . $menu->term_id ] = $menu->name;
 				}
 			}
 			
@@ -483,10 +483,28 @@ class shailan_DropdownWidget extends WP_Widget {
 				
 				/** WP3 Nav menu */
 				default:
-					$menu_id = substr($type, 8, 3);
 					
+					$location = '';
+					$menu = '';
+					
+				
+					// Replace navmenu_
+					if( FALSE !== strpos( $type, 'navmenu_' ) ){
+						$menu_id = str_replace( 'navmenu_', '', $type );
+					}
+					
+					// Check if a menu exists with this id
+					$menu = wp_get_nav_menu_object( $menu_id );
+					if( $menu ){ $menu = $menu_id; }
+					
+					// Is that a location?
+					if ( ! $menu && ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_id ] ) ){
+						$location = $menu_id;
+						$menu = '';
+					}
+						
 					$menu_args = array(
-					  'menu'            => $menu_id, 
+					  'menu'            => $menu, 
 					  'container'       => false, 
 					  'container_class' => '', 
 					  'container_id'    => '', 
@@ -500,7 +518,7 @@ class shailan_DropdownWidget extends WP_Widget {
 					  'link_after'      => '',
 					  'depth'           => 0,
 					  'walker'          => '',
-					  'theme_location'  => '');
+					  'theme_location'  => $location );
 					  
 				if($custom_walkers){
 					$page_walker = new shailan_PageWalker();
@@ -818,6 +836,7 @@ include('shailan-multi-dropdown.php'); // Load multi-dropdown widget
 
 // Template tag support
 function shailan_dropdown_menu( $args = array() ){
+
 	$type = get_option('shailan_dm_type');
 	$exclude = get_option('shailan_dm_exclude');
 	$inline_style = get_option('shailan_dm_style');
@@ -838,9 +857,11 @@ function shailan_dropdown_menu( $args = array() ){
 		'align' => $align
 	);
 	
-	$args = array_merge( $opts, $args );
+	$options = wp_parse_args( $args, $opts );
+	
+	if(!empty($args['menu'])){ $options['type'] == $args['menu']; }
 
-	the_widget('shailan_DropdownWidget', $args);
+	the_widget( 'shailan_DropdownWidget', $options );
 }
 
 function get_latest_tweet($username){
