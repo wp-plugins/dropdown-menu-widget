@@ -4,13 +4,13 @@ Plugin Name: Dropdown Menu Widget
 Plugin URI: http://shailan.com/wordpress/plugins/dropdown-menu
 Description: A multi widget to generate drop-down menus from your pages, categories & navigation menus. You can find more widgets, plugins and themes at <a href="http://shailan.com">shailan.com</a>.
 Tags: dropdown, menu, css, css-dropdown, navigation, widget, dropdown-menu, customization, theme
-Version: 1.6.2
+Version: 1.6.3
 Author: Matt Say
 Author URI: http://shailan.com
 Text Domain: shailan-dropdown-menu
 */
 
-define('SHAILAN_DM_VERSION','1.6.2');
+define('SHAILAN_DM_VERSION', '1.6.3');
 define('SHAILAN_DM_TITLE', 'Dropdown Menu');
 define('SHAILAN_DM_FOLDER', 'dropdown-menu-widget');
 
@@ -486,12 +486,13 @@ class shailan_DropdownWidget extends WP_Widget {
 					
 					$location = '';
 					$menu = '';
-					
 				
 					// Replace navmenu_
 					if( FALSE !== strpos( $type, 'navmenu_' ) ){
-						$menu_id = str_replace( 'navmenu_', '', $type );
+						$type = str_replace( 'navmenu_', '', $type );
 					}
+					
+					$menu_id = $type;
 					
 					// Check if a menu exists with this id
 					$menu = wp_get_nav_menu_object( $menu_id );
@@ -754,7 +755,9 @@ class shailan_DropdownWidget extends WP_Widget {
 		}
 		
 		?>
-		
+	/* 	
+	
+	
   jQuery.fn.alignSubs = function ( args ) {
 	return this.each(function(){
 		var $this = jQuery(this);
@@ -765,6 +768,8 @@ class shailan_DropdownWidget extends WP_Widget {
   
   jQuery('ul.dropdown li ul:first').alignSubs();
 		
+	*/ 
+	
 		<?php
 		
 		// Remove links from top-level elements
@@ -859,7 +864,7 @@ function shailan_dropdown_menu( $args = array() ){
 	
 	$options = wp_parse_args( $args, $opts );
 	
-	if(!empty($args['menu'])){ $options['type'] == $args['menu']; }
+	if(!empty( $args['menu'] )){ $options['type'] = $args['menu']; }
 
 	the_widget( 'shailan_DropdownWidget', $options );
 }
