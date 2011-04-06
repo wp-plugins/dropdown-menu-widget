@@ -7,11 +7,9 @@ div.shailan-dropdown-menu table, div.shailan-dropdown-menu tbody, div.shailan-dr
 ul.dropdown, ul.dropdown li, ul.dropdown ul { list-style: none; margin: 0; padding: 0; }
 
 /* Z-index */
-ul.dropdown, ul.dropdown li, ul.dropdown ul li, ul.dropdown li.hover, ul.dropdown li:hover { position: relative; }
-ul.dropdown li { /*z-index: 598;*/ }
+ul.dropdown li{ position: relative; }
 ul.dropdown ul { position:absolute; z-index: 597; } 
 ul.dropdown ul li { z-index: 598; } 
-
 ul.dropdown li.hover, ul.dropdown li:hover{ cursor: default; } 
 
 /* Top level */
