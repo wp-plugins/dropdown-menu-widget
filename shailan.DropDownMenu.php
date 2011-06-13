@@ -38,6 +38,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		if(!is_admin()){ 
 			wp_enqueue_script( 'jquery' ); 
 			wp_enqueue_script( 'dropdown-ie-support', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/js/include.js', array('jquery') ); 
+			wp_enqueue_script( 'hover-intent', WP_PLUGIN_URL . '/' . SHAILAN_DM_FOLDER . '/js/hoverIntent.js', array('jquery') ); 
 		}
 		
 		// Define themes
@@ -81,6 +82,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		$types = array('pages'=>'Pages', 'categories'=>'Categories');
 		$effects = array('fade'=>'Fade In/Out', 'slide'=>'Slide Up/Down'/*, 'fade2'=>'Fade In/Out Moving Up'*/);
 		$speed = array('400'=>'Normal', 'fast'=>'Fast', 'slow'=>'Slow');
+		$delay = array('100'=>'100', '200'=>'200', '300'=>'300');
 		
 		if( function_exists('wp_nav_menu') ){
 			// Get available menus
@@ -145,6 +147,12 @@ class shailan_DropdownWidget extends WP_Widget {
 			"id" => "shailan_dm_effect_speed",
 			"type" => "select",
 			"options" => $speed ),
+			
+			array(  "name" => "Effect delay",
+			"desc" => "Select effect delay",
+			"id" => "shailan_dm_effect_delay",
+			"type" => "select",
+			"options" => $delay ),
 			
 			array("type" => "splitter"),
 			
@@ -740,6 +748,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		$is_fx_active = (bool) get_option('shailan_dm_effects');
 		$speed = get_option('shailan_dm_effect_speed', '400');
 		$effect = get_option('shailan_dm_effect', 'fade');
+		$delay = get_option('shailan_dm_effect_delay', '100');
 		
 		if( $is_fx_active || $remove_title_attributes || $remove_top_level_links ){
 		
@@ -782,31 +791,31 @@ class shailan_DropdownWidget extends WP_Widget {
 		// Dropdown FX
 		if( 'fade' == $effect ){
 		?>
-  $(".dropdown li").hover(function(){
-	$(this).find("ul:first").fadeIn('<?php echo $speed; ?>');
-  },
-  function(){
-	$(this).find("ul:first").fadeOut('<?php echo $speed; ?>');
-  }); 
+ 
+  var config = {
+	over : function(){ $(this).find("ul:first").fadeIn('<?php echo $speed; ?>'); },  
+	out : function(){ $(this).find("ul:first").fadeOut('<?php echo $speed; ?>'); },
+	timeout : <?php echo $delay; ?>
+  }
+ 
+  $(".dropdown li").hoverIntent( config );
 		<?php
 		} elseif( 'slide' == $effect ) { ?>
-  $(".dropdown li").hover(function(){
-	$(this).find("ul:first").slideDown('<?php echo $speed; ?>');
-  },
-  function(){
-	$(this).find("ul:first").slideUp('<?php echo $speed; ?>');
-  }); 
+
+  var config = {
+	over : function(){	$(this).find("ul:first").slideDown('<?php echo $speed; ?>'); },  
+	out : function(){	$(this).find("ul:first").slideUp('<?php echo $speed; ?>'); },
+	timeout : <?php echo $delay; ?>
+  }
+ 
+  $(".dropdown li").hoverIntent( config ); 
 		<?php 
 		} elseif( 'fade2' == $effect ) { ?>
-		
-  $(".dropdown li").hover(function(){
-	h = $(this).height() + 'px';
-	$(this).find("ul:first").animate( {opacity:'show', top:h}, '<?php echo $speed; ?>');
-  },
-  function(){
-	h = $(this).height() + 5 + 'px';
-	$(this).find("ul:first").animate( {opacity:'hide', top:h}, '<?php echo $speed; ?>');
-  }); 
+	
+  $(".dropdown li").hoverIntent(
+	function(){	h = $(this).height() + 'px'; $(this).find("ul:first").animate( {opacity:'show', top:h}, '<?php echo $speed; ?>'); },
+	function(){	h = $(this).height() + 5 + 'px'; $(this).find("ul:first").animate( {opacity:'hide', top:h}, '<?php echo $speed; ?>'); }
+  ); 
   
 	<?php }
 		
