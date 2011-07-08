@@ -33,7 +33,7 @@ jQuery(document).ready(function() {
 	shailan_dm_active_theme_change();
 	
 	function shailan_dm_effects_change(){
-		if(jQuery('#shailan_dm_effects').attr('checked') == true){
+		if( jQuery('#shailan_dm_effects').attr('checked') == true || jQuery('#shailan_dm_effects').attr('checked') == 'checked' ){
 			jQuery('#shailan_dm_effect').enable();
 			jQuery('#shailan_dm_effect_speed').enable();
 		} else {
