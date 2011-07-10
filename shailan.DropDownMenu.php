@@ -4,13 +4,13 @@ Plugin Name: Dropdown Menu Widget
 Plugin URI: http://shailan.com/wordpress/plugins/dropdown-menu
 Description: A multi widget to generate drop-down menus from your pages, categories & navigation menus. You can find more widgets, plugins and themes at <a href="http://shailan.com">shailan.com</a>.
 Tags: dropdown, menu, css, css-dropdown, navigation, widget, dropdown-menu, customization, theme
-Version: 1.6.3
+Version: 1.6.4
 Author: Matt Say
 Author URI: http://shailan.com
 Text Domain: shailan-dropdown-menu
 */
 
-define('SHAILAN_DM_VERSION', '1.6.3');
+define('SHAILAN_DM_VERSION', '1.6.4');
 define('SHAILAN_DM_TITLE', 'Dropdown Menu');
 define('SHAILAN_DM_FOLDER', 'dropdown-menu-widget');
 
@@ -82,7 +82,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		$types = array('pages'=>'Pages', 'categories'=>'Categories');
 		$effects = array('fade'=>'Fade In/Out', 'slide'=>'Slide Up/Down'/*, 'fade2'=>'Fade In/Out Moving Up'*/);
 		$speed = array('400'=>'Normal', 'fast'=>'Fast', 'slow'=>'Slow');
-		$delay = array('100'=>'100', '200'=>'200', '300'=>'300');
+		$delay = array('100'=>'1s', '200'=>'2s', '300'=>'3s', '400'=>'4s', '500'=>'5s');
 		
 		if( function_exists('wp_nav_menu') ){
 			// Get available menus
@@ -318,7 +318,8 @@ class shailan_DropdownWidget extends WP_Widget {
 			'vertical' => false,
 			'align' => 'left',
 			'theme' => 'none',
-			'show_title' => false
+			'show_title' => false,
+			'width' => 'empty'
 		);
 		
 		$pluginname = $this->pluginname;
@@ -394,6 +395,12 @@ class shailan_DropdownWidget extends WP_Widget {
 		$custom_walkers = false; // (bool) get_option('shailan_dm_customwalkers'); disabled
 		$show_empty = (bool) get_option('shailan_dm_show_empty');
 		
+		$width = (int) $width;
+		
+		$width_attr = '';
+		if( $width > 0 )
+			$width_attr = 'style="width:' . $width . 'px;"';
+		
         echo $args['before_widget']; 
 		
 		// Show title if option checked
@@ -408,7 +415,7 @@ class shailan_DropdownWidget extends WP_Widget {
 			$dropdown_wrapper_open = $nl . '<div id="shailan-dropdown-wrapper-' . $this->number . '" >';
 					
 			$dropdown_open = $indent . '<div align="' . $align . '" class="'.$orientation.'-container dm-align-'.$align.'"><table cellpadding="0" cellspacing="0"><tr><td>';
-			$list_open = $indent2 . '<ul id="dropdown-'. $this->number .'" class="dropdown dropdown-'. $this->number .' '. $orientation . ' dropdown-align-'.$align.'">' . $nl . "<!-- Menu elements start -->\n";
+			$list_open = $indent2 . '<ul id="dropdown-'. $this->number .'" class="dropdown dropdown-'. $this->number .' '. $orientation . ' dropdown-align-'.$align.'"  '. $width_attr .' >' . $nl . "<!-- Menu elements start -->\n";
 			
 			if($home && ($type == 'pages' || $type == 'categories')){ 
 			
@@ -561,6 +568,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		$widget_options = wp_parse_args( $instance, $this->defaults );
 		extract( $widget_options, EXTR_SKIP );
 		
+		$width = (int) $width;
 		$show_title = (bool) $show_title;
 		$home = (bool) $home;
 		$login = (bool) $login;
@@ -583,6 +591,9 @@ class shailan_DropdownWidget extends WP_Widget {
 			
 		<p><label for="<?php echo $this->get_field_id('exclude'); ?>"><?php _e('Exclude:', 'shailan-dropdown-menu'); ?> <input class="widefat" id="<?php echo $this->get_field_id('exclude'); ?>" name="<?php echo $this->get_field_name('exclude'); ?>" type="text" value="<?php echo $exclude; ?>" /></label><br /> 
 		<small>Page IDs, separated by commas.</small></p>
+		
+		<p><label for="<?php echo $this->get_field_id('width'); ?>"><?php _e('Menu Width:', 'shailan-dropdown-menu'); ?> <input class="widefat" id="<?php echo $this->get_field_id('width'); ?>" name="<?php echo $this->get_field_name('width'); ?>" type="text" value="<?php echo $width; ?>" /></label><br /> 
+		<small>Menu width, leave blank for default.</small></p>
 			
 		<p>
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('home'); ?>" name="<?php echo $this->get_field_name('home'); ?>"<?php checked( $home ); ?> />
