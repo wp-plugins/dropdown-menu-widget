@@ -743,7 +743,7 @@ function get_dropdown_setting( $key, $default = '' ) {
 	$settings = get_option('shailan_dropdown_menu');
 	
 	if( array_key_exists($key, $settings) ){
-		return $settings[$key];
+		return $settings[ $key ];
 	} else {
 		return $default;
 	}
