@@ -1,9 +1,35 @@
 @charset "UTF-8";
+@import url('http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold&v1');
 
 /** Container */
-.shailan-dropdown-menu .dropdown-horizontal-container{ background:#60a3da url('images/default1.jpg') repeat-x bottom; }
+.shailan-dropdown-menu .dropdown-horizontal-container{ 
+    background: #eee;
+    background: -moz-linear-gradient(top, #eee 0%, #ddd 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eee), color-stop(100%,#ddd));
+    background: -webkit-linear-gradient(top, #eee 0%,#ddd 100%);
+    background: -o-linear-gradient(top, #eee 0%,#ddd 100%);
+    background: -ms-linear-gradient(top, #eee 0%,#ddd 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#dddddd',GradientType=0 );
+    background: linear-gradient(top, #eee 0%,#ddd 100%);
+	
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    -webkit-border-radius: 4px;
+	
+    box-shadow: inset #eee 1px 1px 0, inset #eee -1px -1px 0;
+    -moz-box-shadow: inset #eee 1px 1px 0, inset #eee -1px -1px 0;
+    -o-box-shadow: inset #eee 1px 1px 0, inset #eee -1px -1px 0;
+	
+    border: 1px solid #ccc;
+    padding: 4px;
+    position: relative;
+	
+	font-family:'Droid Sans', Arial, sans-serif;
+	font-size: 12px;
+}
 
-ul.dropdown li { color: #4283b9; text-align:center; background:#60a3da url('images/default1.jpg') repeat-x bottom; }
+ul.dropdown li { color: #4283b9; text-align:center; }
 ul.dropdown-vertical li{ border-top:1px solid #4283b9; }
 ul.dropdown li { border-left:1px solid #4283b9; }
 
