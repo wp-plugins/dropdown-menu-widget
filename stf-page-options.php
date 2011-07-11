@@ -68,7 +68,7 @@
 	<?php
 		foreach ($options as $field) {
 			if ( $field['type'] == "section" ) {
-				echo "<li><a href=\"#" . sanitize_title( $field['name'] ) . "\" class=\"" . sanitize_title( $field['name'] ) . "\">".$field['name']."</a></li>";
+				echo "<li><a href=\"#" . sanitize_title( $field['name'] ) . "\" class=\"" . sanitize_title( $field['name'] ) . "\">".$field['label']."</a></li>";
 			}
 		}
 	?>
@@ -86,9 +86,17 @@ switch ( $field['type'] ) {
 	case 'close': ?>
 
 </div>
-</div>
  
 <?php break;
+
+	case 'paragraph': ?>
+
+<div class="stf_paragraph clearfix">
+	<?php echo $field['desc']; ?>
+</div>
+
+<?php
+break;
 	
 	case 'text': ?>
 
@@ -166,10 +174,6 @@ case "section":
 ?>
 
 <div class="stf_section tab_content" id="<?php echo sanitize_title( $field['name'] ); ?>">
-<!-- <div class="stf_title"><h3><?php echo $field['name']; ?></h3><span class="submit">
-</span><div class="clear"></div></div> -->
-<div class="stf_options">
-
  
 <?php break;
 

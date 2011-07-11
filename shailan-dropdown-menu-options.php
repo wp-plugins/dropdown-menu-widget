@@ -6,6 +6,7 @@ $available_themes = array(
 	'From URL' => '*url*',
 	'Custom CSS' => '*custom*',
 	'Color Scheme' => 'color-scheme',
+	'Web 2.0' => plugins_url('/themes/web20.css', __FILE__),
 	'Simple White' => plugins_url('/themes/simple.css', __FILE__),
 	'Wordpress Default' => plugins_url('/themes/wpdefault.css', __FILE__),
 	'Grayscale' => plugins_url('/themes/grayscale.css', __FILE__),
@@ -67,10 +68,11 @@ $this->menu_types = $types; // Back it up
 // Define plugin options	
 $options = array(
 	
-	array(
-		"name" => "General",
-		"type" => "section"
-	),
+array(
+	"name" => "General",
+	"label" => __("General"),
+	"type" => "section"
+),
 
 	array(  "name" => "Dropdown Menu Theme",
 	"desc" => "Skin for the menu",
@@ -91,7 +93,28 @@ $options = array(
 	"std" => __("Home"),
 	"type" => "text"),
 	
-	array("type" => "splitter"),
+	array(  "name" => "Wrap long menu items",
+	"desc" => "If checked long menu items will wrap",
+	"id" => "shailan_dm_allowmultiline",
+	"type" => "checkbox"),
+	
+	array(  "name" => "Remove title attributes from menu items",
+	"desc" => "This will remove 'View all posts under..' title attributes from menu links",
+	"id" => "shailan_dm_remove_title_attributes",
+	"type" => "checkbox"),
+	
+	array(  "name" => "Remove links from top levels",
+	"desc" => "This will remove links from top level pages/categories. So user can only click to sub-level menu.",
+	"id" => "shailan_dm_remove_top_level_links",
+	"type" => "checkbox"),
+	
+array( "type" => "close" ),
+	
+array(
+	"name" => "Effects",
+	"label" => __("Effects"),
+	"type" => "section"
+),
 	
 	array(  "name" => "Enable dropdown effects",
 	"desc" => "If checked sub menus will use effects below",
@@ -116,29 +139,13 @@ $options = array(
 	"type" => "select",
 	"options" => $delay ),
 	
-	array("type" => "splitter"),
-	
-	array(  "name" => "Wrap long menu items",
-	"desc" => "If checked long menu items will wrap",
-	"id" => "shailan_dm_allowmultiline",
-	"type" => "checkbox"),
-	
-	array(  "name" => "Remove title attributes from menu items",
-	"desc" => "This will remove 'View all posts under..' title attributes from menu links",
-	"id" => "shailan_dm_remove_title_attributes",
-	"type" => "checkbox"),
-	
-	array(  "name" => "Remove links from top levels",
-	"desc" => "This will remove links from top level pages/categories. So user can only click to sub-level menu.",
-	"id" => "shailan_dm_remove_top_level_links",
-	"type" => "checkbox"),
-	
-	array( "type" => "close" ),
-	
-	array(
-		"name" => "Colors",
-		"type" => "section"
-	),
+array( "type" => "close" ),
+
+array(
+	"name" => "Colors",
+	"label" => __("Colors"),
+	"type" => "section"
+),
 	
 	array(  "name" => "Use custom colors",
 	"desc" => "If not checked custom colors won't work.",
@@ -183,6 +190,7 @@ $options = array(
 	
 	array(
 		"name" => "Advanced",
+		"label" => __("Advanced"),
 		"type" => "section"
 	),
 	
@@ -214,6 +222,7 @@ $options = array(
 	
 	array(
 		"name" => "Template Tag",
+		"label" => __("Template Tag"),
 		"type" => "section"
 	),
 	

@@ -264,7 +264,7 @@ function options_page(){
 		Like this plugin? 
 	</div>
 	<div class="share-button tweet">
-		<a href="http://twitter.com/share" class="twitter-share-button" data-url="http://shailan.com/wordpress/plugins/dropdown-menu/" data-text="I am using #adsense #widget on my #wordpress blog, Check this out!" data-count="horizontal" data-via="shailancom">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+		<a href="http://twitter.com/share" class="twitter-share-button" data-url="http://shailan.com/wordpress/plugins/dropdown-menu/" data-text="I am using #dropdown-menu-widget by shailan on my #wordpress blog, Check this out!" data-count="horizontal" data-via="shailancom">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 	</div>
 	<div class="share-button facebook">
 		<script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
@@ -313,7 +313,7 @@ function options_page(){
 			
 			$dropdown_wrapper_open = $nl . '<div id="shailan-dropdown-wrapper-' . $this->number . '" >';
 					
-			$dropdown_open = $indent . '<div class="'.$orientation.'-container dm-align-'.$align.'"><table cellpadding="0" cellspacing="0"><tr><td>';
+			$dropdown_open = $indent . '<div align="'.$align.'" class="'.$orientation.'-container dm-align-'.$align.' clearfix"><table cellpadding="0" cellspacing="0"><tr><td>';
 			$list_open = $indent2 . '<ul id="dropdown-'. $this->number .'" class="dropdown dropdown-'. $this->number .' '. $orientation . ' dropdown-align-'.$align.'"  '. $width_attr .' >' . $nl . "<!-- Menu elements start -->\n";
 			
 			if($home && ($type == 'pages' || $type == 'categories')){ 
@@ -604,6 +604,7 @@ function options_page(){
 	<?php } else {/* unidentified overlay ? */} ?>
 	
 	.shailan-dropdown-menu .dropdown-horizontal-container, ul.dropdown li{ background-color:<?php echo $shailan_dm_color_menubg; ?>; }
+	ul.dropdown a,
 	ul.dropdown a:link,
 	ul.dropdown a:visited,
 	ul.dropdown li { color: <?php echo $shailan_dm_color_link; ?>; }
@@ -692,7 +693,7 @@ function options_page(){
 		// Remove links from top-level elements
 		if($remove_top_level_links){
 		?>
-  $('ul.children').parent().find('a:first').removeAttr('href');
+  $('ul.dropdown>li>ul.children').parent().find('a:first').removeAttr('href');
 		<?php
 		}
 		
@@ -797,3 +798,12 @@ function shailan_dropdown_menu( $args = array() ){
 
 	the_widget( 'shailan_DropdownWidget', $options );
 }
+
+function shailan_dropdown_button() {
+    global $wp_admin_bar, $wpdb;
+    if ( !is_super_admin() || !is_admin_bar_showing() )
+        return;
+
+    $wp_admin_bar->add_menu( array( 'parent' => 'appearance', 'title' => 'Dropdown Menu', 'href' => admin_url('options-general.php?page=dropdown-menu') ) );
+}
+add_action( 'admin_bar_menu', 'shailan_dropdown_button', 1000 );
