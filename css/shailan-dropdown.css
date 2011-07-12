@@ -1,12 +1,15 @@
 /* Reset */
 div.shailan-dropdown-menu table, div.shailan-dropdown-menu tbody, div.shailan-dropdown-menu tr, div.shailan-dropdown-menu td, div.shailan-dropdown-menu ul, div.shailan-dropdown-menu li, div.dropdown-horizontal-container, ul.dropdown * { margin:0; padding:0; border:0; }  
+
+.shailan-dropdown-menu { position:relative; z-index:597; }
+
 /* .dropdown-horizontal-container{ width:100%; } */
 /* Remove list styling */
 ul.dropdown, ul.dropdown li, ul.dropdown ul { list-style: none; margin: 0; padding: 0; }
 
 /* Z-index */
 ul.dropdown li{ position: relative; }
-ul.dropdown li ul { position:absolute; z-index: 497; } 
+ul.dropdown li ul { position:absolute; z-index: 598; } 
 ul.dropdown li.hover, ul.dropdown li:hover{ cursor: default; } 
 
 /* Top level */
