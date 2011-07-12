@@ -4,13 +4,13 @@ Plugin Name: Dropdown Menu Widget
 Plugin URI: http://shailan.com/wordpress/plugins/dropdown-menu
 Description: A multi widget to generate drop-down menus from your pages, categories & navigation menus. You can find more widgets, plugins and themes at <a href="http://shailan.com">shailan.com</a>.
 Tags: dropdown, menu, css, css-dropdown, navigation, widget, dropdown-menu, customization, theme, jquery, template, multi-color, theme
-Version: 1.7.1
+Version: 1.7.2
 Author: Matt Say
 Author URI: http://shailan.com
 Text Domain: shailan-dropdown-menu
 */
 
-define('VERSION', '1.7.1');
+define('VERSION', '1.7.2');
 
 class shailan_DropdownWidget extends WP_Widget {
 
@@ -289,10 +289,10 @@ function options_page(){
 		extract( $widget_options, EXTR_SKIP );
 		
 		// On and off
-		$show_title = (bool) $show_title;		
-		$orientation = ($vertical ? 'dropdown-vertical' : 'dropdown-horizontal');
+		$show_title = (bool) ( 'on' == $show_title );		
+		$orientation = ( (bool) ( 'on' == $vertical) ? 'dropdown-vertical' : 'dropdown-horizontal');
 		$custom_walkers = false; // (bool) get_option('shailan_dm_customwalkers'); disabled
-		$show_empty = (bool) get_option('shailan_dm_show_empty');
+		$show_empty = (bool) ( 'on' == $this->get_plugin_setting('shailan_dm_show_empty') );
 		
 		$width = (int) $width;
 		
@@ -456,7 +456,7 @@ function options_page(){
         <?php
     }
 	
-    function update($new_instance, $old_instance) {				
+    function update($new_instance, $old_instance) {	
         return $new_instance;
     }
 	
