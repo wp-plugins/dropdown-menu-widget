@@ -773,10 +773,10 @@ function shailan_dropdown_menu( $args = array() ){
 	$type = get_dropdown_setting('shailan_dm_type');
 	$exclude = get_dropdown_setting('shailan_dm_exclude');
 	$inline_style = get_dropdown_setting('shailan_dm_style');
-	$login = (bool) get_dropdown_setting('shailan_dm_login');
-	$admin = (bool) get_dropdown_setting('shailan_dm_admin');
-	$vertical = (bool) get_dropdown_setting('shailan_dm_vertical');
-	$home = (bool) get_dropdown_setting('shailan_dm_home');
+	$login = (bool) ( 'on' == get_dropdown_setting('shailan_dm_login') );
+	$admin = (bool) ( 'on' == get_dropdown_setting('shailan_dm_admin') );
+	$vertical = (bool) ( 'on' == get_dropdown_setting('shailan_dm_vertical') );
+	$home = (bool) ( 'on' == get_dropdown_setting('shailan_dm_home') );
 	$align = get_dropdown_setting('shailan_dm_align');
 	$width = get_dropdown_setting('shailan_dm_width');
 	
