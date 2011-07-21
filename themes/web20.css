@@ -30,6 +30,7 @@
 }
 
 ul.dropdown li { color: #555; text-align:center; }
+ul.dropdown ul li { text-align: left; }
 ul.dropdown-vertical>li{ border-top:1px solid #4283b9; }
 ul.dropdown-horizontal.dropdown-align-left>li { border-right:1px solid #ccc; }
 ul.dropdown-horizontal.dropdown-align-left>li:last-child { border-right:0; }
