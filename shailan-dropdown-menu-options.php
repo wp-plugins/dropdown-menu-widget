@@ -42,11 +42,11 @@ $overlays = array(
 	'soft' =>'soft'
 );
 
-$alignment = array('left'=>'left', 'center' => 'center', 'right'=> 'right');
-$types = array('pages'=>'Pages', 'categories'=>'Categories');
+$alignment = array( 'left'=>'left', 'center' => 'center', 'right'=> 'right' );
+$types = array( 'pages'=>'Pages', 'categories'=>'Categories' );
 $effects = array('fade'=>'Fade In/Out', 'slide'=>'Slide Up/Down');
-$speed = array('400'=>'Normal', 'fast'=>'Fast', 'slow'=>'Slow');
-$delay = array('100'=>'100', '200'=>'200', '300'=>'300');
+$speed = array( '400'=>'Normal', 'fast'=>'Fast', 'slow'=>'Slow' );
+$delay = array('100'=>'100', '200'=>'200', '300'=>'300', '400'=>'400', '500'=>'500', '600'=>'600','700'=>'700');
 
 if( function_exists('wp_nav_menu') ){
 	// Get available menus
@@ -93,6 +93,12 @@ array(
 	"std" => __("Home"),
 	"type" => "text"),
 	
+	array(  "name" => "Show arrow pointers",
+	"desc" => "This option will enable arrow pointers for parent items.",
+	"id" => "shailan_dm_arrows",
+	"type" => "checkbox",
+	"std" => "on" ),
+	
 	array(  "name" => "Wrap long menu items",
 	"desc" => "If checked long menu items will wrap",
 	"id" => "shailan_dm_allowmultiline",
@@ -134,7 +140,7 @@ array(
 	"options" => $speed ),
 	
 	array(  "name" => "Effect delay",
-	"desc" => "Select effect delay",
+	"desc" => "Select effect delay (hoverIntent script used for delayed effects.)",
 	"id" => "shailan_dm_effect_delay",
 	"type" => "select",
 	"options" => $delay ),

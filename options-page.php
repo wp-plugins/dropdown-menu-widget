@@ -223,10 +223,6 @@ $i++;
 	<li><a href="http://shailan.com/wordpress/plugins/dropdown-menu/">Commenting on plugin page</a></li>
 	<li><a href="http://wordpress.org/extend/plugins/dropdown-menu-widget/">Rating it on wordpress plugin page</a></li>
 	<li><a href="http://shailan.com/wordpress/plugins/dropdown-menu/" title="Permanent link to Dropdown menu widget" >Writing a post about it</a></li>
-	<!-- <li><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fshailan.com%2Fwordpress%2Fplugins%2Fdropdown-menu&amp;layout=button_count&amp;show_faces=false&amp;width=200&amp;action=like&amp;font=segoe+ui&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:21px;" allowTransparency="true"></iframe></li>
-	<li><script type="text/javascript">
-tweetmeme_url = 'http://shailan.com/wordpress/plugins/dropdown-menu/'; tweetmeme_style = 'compact'; tweetmeme_source = 'mattsay';
-</script><script type="text/javascript" src="http://tweetmeme.com/i/scripts/button.js"></script></li> -->
 	</ul>
 
 	<p>You can also buy me a coffee here: <form action="https://www.paypal.com/cgi-bin/webscr" method="post">

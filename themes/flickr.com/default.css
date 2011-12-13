@@ -1,31 +1,5 @@
 @charset "UTF-8";
 
-/** 
- * Flickr CSS Drop-Down Menu Theme
- *
- * @file		default.css
- * @name		Flickr
- * @version		beta
- * @type		transitional
- * @browsers	Windows: IE5+, Opera7+, Firefox1+
- *				Mac OS: Safari2+, Firefox2+
- *
- * @link		http://www.lwis.net/
- * @copyright	2008 Live Web Institute. All Rights Reserved.
- *
- */
-
-
-
-/*-------------------------------------------------/
- * @section		Base Drop-Down Styling
- * @structure	ul (unordered list)
- *				ul li (list item)
- *				ul li a (links)
- *				/*\.class|(li|a):hover/
- * @level sep	ul
- */
-
 .dropdown-horizontal-container table{
  padding-bottom: 1px;
  background: url(images/pattern1.png) 0 100% repeat-x;
@@ -52,9 +26,6 @@
 	ul.dropdown a:hover		{ color: #0063dc; text-decoration: underline; }
 	ul.dropdown a:active	{ color: #ff0084; }
 
-
-	/* -- level mark -- */
-
 	ul.dropdown ul {
 	 width: 150px;
 	 padding: 3px 6px;
@@ -70,14 +41,7 @@
 		}
 
 
-
-/*-------------------------------------------------/
- * @section		Support Class `dir`
- * @level sep	ul, .class
- */
-
-
-ul.dropdown *.dir, ul.dropdown *.parent {
+ul.dropdown *.dir {
  padding-right: 25px;
  background-image: url(images/nav-arrow-down.png);
  background-position: 95% 50%;

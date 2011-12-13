@@ -264,7 +264,7 @@ function options_page(){
 		Like this plugin? 
 	</div>
 	<div class="share-button tweet">
-		<a href="http://twitter.com/share" class="twitter-share-button" data-url="http://shailan.com/wordpress/plugins/dropdown-menu/" data-text="I am using #dropdown-menu-widget by shailan on my #wordpress blog, Check this out!" data-count="horizontal" data-via="shailancom">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+		<a href="http://twitter.com/share" class="twitter-share-button" data-url="http://shailan.com/wordpress/plugins/dropdown-menu/" data-text="I am using #dropdownmenu #widget by shailan on my #wordpress blog, Check this out!" data-count="horizontal" data-via="shailancom">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 	</div>
 	<div class="share-button facebook">
 		<script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
@@ -636,6 +636,29 @@ function options_page(){
 				
 			<?php }
 			
+// Arrow pointers
+
+if( 'on' == $this->get_plugin_setting('shailan_dm_arrows') ){
+
+?>
+ul.dropdown li.parent>a{
+	padding-right:25px;
+}
+ul.dropdown li.parent>a:after{ 
+	content:""; position:absolute; top: 45%; right:6px;width:0;height:0; 
+	border-top:4px solid rgba(0,0,0,0.3);border-right:4px solid transparent;border-left:4px solid transparent }
+ul.dropdown li.parent:hover>a:after{
+	content:"";position:absolute; top: 45%; right:6px; width:0; height:0;
+	border-top:4px solid rgba(0,0,0,0.4);border-right:4px solid transparent;border-left:4px solid transparent }
+ul.dropdown li li.parent>a:after{
+	content:"";position:absolute;top: 40%; right:5px;width:0;height:0;
+	border-left:4px solid rgba(0,0,0,0.3);border-top:4px solid transparent;border-bottom:4px solid transparent }
+ul.dropdown li li.parent:hover>a:after{
+	content:"";position:absolute;top: 40%; right:5px;width:0;height:0;
+	border-left:4px solid rgba(0,0,0,0.4);border-top:4px solid transparent;border-bottom:4px solid transparent }
+
+<?php } 
+			
 			// Insert Custom CSS last
 			$custom_css = stripslashes( $this->get_plugin_setting('shailan_dm_custom_css') );
 			if(!empty($custom_css)){ echo $custom_css; }
@@ -663,41 +686,26 @@ function options_page(){
 		
 		echo "\n\n<!-- Dropdown Menu Widget Effects by shailan (http://shailan.com) v". VERSION ." on wp".get_bloginfo( 'version' )." -->"; // For debug
 		echo "\n<script type=\"text/javascript\">/* <![CDATA[ */";
-		echo "\n(function($){ \n";
+		echo "\njQuery(document).ready(function($) { \n";
 		
-		// Remove title attributes from links
+// Remove title attributes from links
+
 		if($remove_title_attributes){
 		?>
   $('ul.dropdown li a').removeAttr('title');
 		<?php
 		}
 		
-		?>
-	/* 	
-	
-	
-  jQuery.fn.alignSubs = function ( args ) {
-	return this.each(function(){
-		var $this = jQuery(this);
-		oleft = ( $this.parent().width() - $this.width() ) / 2;		
-		$this.css('left', oleft);
-	});
-  };
-  
-  jQuery('ul.dropdown li ul:first').alignSubs();
-		
-	*/ 
-	
-		<?php
-		
-		// Remove links from top-level elements
+// Remove links from top-level elements
+
 		if($remove_top_level_links){
 		?>
   $('ul.dropdown>li>ul.children').parent().find('a:first').removeAttr('href');
 		<?php
 		}
 		
-		// Dropdown FX
+// Dropdown FX
+
 		if( 'fade' == $effect ){
 		?>
  
@@ -728,7 +736,7 @@ function options_page(){
   
 	<?php }
 		
-		echo "\n})(jQuery);";
+		echo "\n});";
 		echo "\n/* ]]> */</script>";
 		echo "\n<!-- /Dropdown Menu Widget Styles -->";
 		echo "\n\n ";
