@@ -37,8 +37,8 @@ class shailan_DropdownWidget extends WP_Widget {
 		// Hook up scripts 
 		if(!is_admin()){ 
 			wp_enqueue_script( 'jquery' ); 
+			wp_enqueue_script( 'hoverIntent' );
 			wp_enqueue_script( 'dropdown-ie-support', plugins_url( '/scripts/include.js' , __FILE__ ) , array('jquery') ); 
-			wp_enqueue_script( 'hoverIntent', plugins_url( '/scripts/hoverIntent.js' , __FILE__ ) , array('jquery') ); 
 		}
 		
 		// Include options array
