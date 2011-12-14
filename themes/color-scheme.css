@@ -3,7 +3,7 @@
 .shailan-dropdown-menu .dropdown-horizontal-container{ background-image:url('images/overlay.png'); }
 * html .shailan-dropdown-menu .dropdown-horizontal-container{ background-image:none; }
 
-ul.dropdown li a{padding:6px 12px;}
+ul.dropdown li a{ padding:6px 12px; display:block; text-decoration: none; }
 ul.dropdown li.hover, ul.dropdown li:hover { cursor: default; }
 ul.dropdown ul { border:0 }
 ul.dropdown ul ul { top: 1px; left: 100%; }
@@ -22,7 +22,7 @@ ul.dropdown li.hover ul li a, ul.dropdown li:hover ul li a{ background: transpar
 
 /** Link colors */
 ul.dropdown a:link,
-ul.dropdown a:visited	{ color: #000; text-decoration: none; display:block; }
+ul.dropdown a:visited	{ color: #000; }
 ul.dropdown a:hover	{ color: #000; }
 ul.dropdown a:active	{ color: #ed008c; }
 

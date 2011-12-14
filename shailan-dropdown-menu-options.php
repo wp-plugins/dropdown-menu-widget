@@ -73,19 +73,6 @@ array(
 	"label" => __("General"),
 	"type" => "section"
 ),
-
-	array(  "name" => "Dropdown Menu Theme",
-	"desc" => "Skin for the menu",
-	"id" => "shailan_dm_active_theme",
-	"std" => "None",
-	"options" => $themes,
-	"type" => "select"),
-	
-	array(  "name" => "Theme URL",
-	"desc" => "If From URL is selected you can specify theme URL here. <br />Warning : Please make sure this file only modifies dropdown theme. Otherwise your theme may be affected by this css file.",
-	"id" => "shailan_dm_theme_url",
-	"std" => "http://",
-	"type" => "text"),
 	
 	array(  "name" => "Rename Homepage",
 	"desc" => "You can change your homepage link here",
@@ -93,8 +80,8 @@ array(
 	"std" => __("Home"),
 	"type" => "text"),
 	
-	array(  "name" => "Show arrow pointers",
-	"desc" => "This option will enable arrow pointers for parent items.",
+	array(  "name" => "Show parent indicators",
+	"desc" => "This option will enable arrows next to parent items.",
 	"id" => "shailan_dm_arrows",
 	"type" => "checkbox",
 	"std" => "on" ),
@@ -104,7 +91,7 @@ array(
 	"id" => "shailan_dm_allowmultiline",
 	"type" => "checkbox"),
 	
-	array(  "name" => "Remove title attributes from menu items",
+	array(  "name" => "Remove title attributes",
 	"desc" => "This will remove 'View all posts under..' title attributes from menu links",
 	"id" => "shailan_dm_remove_title_attributes",
 	"type" => "checkbox"),
@@ -148,10 +135,28 @@ array(
 array( "type" => "close" ),
 
 array(
-	"name" => "Colors",
-	"label" => __("Colors"),
+	"name" => "Theme",
+	"label" => __("Theme"),
 	"type" => "section"
 ),
+
+	array(  "name" => "Dropdown Menu Theme",
+	"desc" => "Skin for the menu",
+	"id" => "shailan_dm_active_theme",
+	"std" => "None",
+	"options" => $themes,
+	"type" => "select"),
+	
+	array(  "name" => "Theme URL",
+	"desc" => "If <strong>From URL</strong> is selected you can specify theme URL here. ",
+	"id" => "shailan_dm_theme_url",
+	"std" => "http://",
+	"type" => "text"),
+	
+	array(
+		"desc" => "Using options below you can customize certain elements of current theme. If you choose <strong>Color Scheme</strong> as theme, you will have full control over colors.",
+		"type" => "paragraph"
+	),
 	
 	array(  "name" => "Use custom colors",
 	"desc" => "If not checked custom colors won't work.",
@@ -212,11 +217,13 @@ array(
 	"std" => '',
 	"type" => "text"),
 	
-	array(  "name" => "Custom css",
-	"desc" => "You can paste your own customization file here.",
-	"id" => "shailan_dm_custom_css",
-	"std" => '',
-	"type" => "textarea"),
+	array(  
+		"name" => "Custom CSS",
+		"desc" => "You can paste your own customization file here.",
+		"id" => "shailan_dm_custom_css",
+		"std" => '',
+		"type" => "textarea"
+	),
 	
 	array(  "name" => "Show Empty Categories",
 	"desc" => "If checked categories with no posts will be shown.",

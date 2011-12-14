@@ -187,7 +187,7 @@ font-size: 16px !important; font-weight:normal; text-shadow: #1A5B77 1px 1px 1px
 
 .stf_options ul.tabs li a.general { padding-left:28px; background-image: url('images/cog.png'); }
 .stf_options ul.tabs li a.advanced { padding-left:28px; background-image: url('images/wrench_orange.png'); }
-.stf_options ul.tabs li a.colors { padding-left:28px; background-image: url('images/color_wheel.png'); }
+.stf_options ul.tabs li a.theme { padding-left:28px; background-image: url('images/color_wheel.png'); }
 .stf_options ul.tabs li a.effects { padding-left:28px; background-image: url('images/lightning.png'); }
 .stf_options ul.tabs li a.template-tag { padding-left:28px; background-image: url('images/tag.png'); }
 

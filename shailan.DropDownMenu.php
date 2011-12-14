@@ -4,7 +4,7 @@ Plugin Name: Dropdown Menu Widget
 Plugin URI: http://shailan.com/wordpress/plugins/dropdown-menu
 Description: A multi widget to generate drop-down menus from your pages, categories & navigation menus. You can find more widgets, plugins and themes at <a href="http://shailan.com">shailan.com</a>.
 Tags: dropdown, menu, css, css-dropdown, navigation, widget, dropdown-menu, customization, theme, jquery, template, multi-color, theme
-Version: 1.8
+Version: 1.8.1
 Author: Matt Say
 Author URI: http://shailan.com
 Text Domain: shailan-dropdown-menu
@@ -37,7 +37,7 @@ class shailan_DropdownWidget extends WP_Widget {
 		// Hook up scripts 
 		if(!is_admin()){ 
 			wp_enqueue_script( 'jquery' ); 
-			wp_enqueue_script( 'hoverIntent' );
+			wp_enqueue_script( 'hoverIntent', plugins_url( '/scripts/hoverIntent.js' , __FILE__ ) , array('jquery') );
 			wp_enqueue_script( 'dropdown-ie-support', plugins_url( '/scripts/include.js' , __FILE__ ) , array('jquery') ); 
 		}
 		
@@ -806,12 +806,3 @@ function shailan_dropdown_menu( $args = array() ){
 
 	the_widget( 'shailan_DropdownWidget', $options );
 }
-
-function shailan_dropdown_button() {
-    global $wp_admin_bar, $wpdb;
-    if ( !is_super_admin() || !is_admin_bar_showing() )
-        return;
-
-    $wp_admin_bar->add_menu( array( 'parent' => 'appearance', 'title' => 'Dropdown Menu', 'href' => admin_url('options-general.php?page=dropdown-menu') ) );
-}
-add_action( 'admin_bar_menu', 'shailan_dropdown_button', 1000 );

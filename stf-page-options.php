@@ -211,9 +211,6 @@ case 'picker':
 </div>
 </div>
 
-
-
-
 <script type="text/javascript">
 jQuery(document).ready(function($) {
 
@@ -236,4 +233,9 @@ jQuery(document).ready(function($) {
 
 });
 </script>
+
+<?php if(WP_DEBUG){ ?>
+<h3>Debug information</h3>
+<pre><?php print_r($current) ?></pre>
+<?php } ?>
 </div> 
