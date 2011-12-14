@@ -49,6 +49,7 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 
 = 1.8.1 = 
 * Fixed: HoverIntent hotfix for older version users. (Thanks to Karsten)
+* Fixed: Various theme problems with vertical menus.
 
 = 1.8 =
 * Fixed: HoverIntent hotfix for Wordpress 3.3
