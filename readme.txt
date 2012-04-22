@@ -4,7 +4,7 @@ Donate link: http://shailan.com/donate
 Tags: css, dropdown, menu, widget, pages, categories, multi, jquery, navigation, category list, themes, custom-styles, options-page, animations, effects
 Requires at least: 2.8  
 Tested up to: 3.3
-Stable tag: 1.8.1
+Stable tag: 1.9
 
 This widget adds a beatiful vertical/horizontal CSS only dropdown menu of Pages, Categories or Custom navigation menus of your blog.
 
@@ -46,6 +46,14 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 1. Brand new dropdown menu options page.
 
 == Changelog ==
+
+= 1.9 =
+* Changed: Minimized included CSS file.
+* Added: Support for changing arrow colors.
+* Added: Help links next to options settings fields.
+* Added: New Theme Rounded Corners.
+* Added: New Theme Rounded Corners Light.
+* Added: New Theme Pills.
 
 = 1.8.1 = 
 * Fixed: HoverIntent hotfix for older version users. (Thanks to Karsten)

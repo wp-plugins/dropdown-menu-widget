@@ -1,5 +1,9 @@
 <?php 
 
+function help_icon($hash){
+	return " <a href=\"http://shailan.com/wordpress/plugins/dropdown-menu/help//#".$hash."\" class=\"help-icon\">(?)</a>";
+}
+
 // Define themes
 $available_themes = array(
 	'None' => '*none*',
@@ -17,7 +21,10 @@ $available_themes = array(
 	'Nvidia theme' =>  plugins_url('/themes/nvidia.com/default.advanced.css', __FILE__),
 	'Adobe theme' => plugins_url('/themes/adobe.com/default.advanced.css', __FILE__),
 	'MTV theme' =>  plugins_url('/themes/mtv.com/default.ultimate.css', __FILE__),
-	'Hulu theme' =>  plugins_url('/themes/hulu/hulu.css', __FILE__)
+	'Hulu theme' =>  plugins_url('/themes/hulu/hulu.css', __FILE__),
+	'Rounded Corners by Shailan' => plugins_url('/themes/rounded-corners.css', __FILE__),
+	'Rounded Corners Light by Shailan' => plugins_url('/themes/rounded-corners-light.css', __FILE__),
+	'Pills by Shailan' => plugins_url('/themes/pills.css', __FILE__)
 );
 
 // Check for theme style file
@@ -75,29 +82,35 @@ array(
 ),
 	
 	array(  "name" => "Rename Homepage",
-	"desc" => "You can change your homepage link here",
+	"desc" => "You can change your homepage link text here " . help_icon("rename-homepage"),
 	"id" => "shailan_dm_home_tag",
 	"std" => __("Home"),
 	"type" => "text"),
 	
 	array(  "name" => "Show parent indicators",
-	"desc" => "This option will enable arrows next to parent items.",
+	"desc" => "This option will enable arrows next to parent items.". help_icon("parent-indicators"),
 	"id" => "shailan_dm_arrows",
 	"type" => "checkbox",
 	"std" => "on" ),
 	
+	array(  "name" => "Indicator color",
+	"desc" => "Change indicator color (eg. #000000).". help_icon("indicator-color"),
+	"id" => "shailan_dm_arrow_color",
+	"std" => "rgba(0,0,0,0.5)",
+	"type" => "text"),
+	
 	array(  "name" => "Wrap long menu items",
-	"desc" => "If checked long menu items will wrap",
+	"desc" => "If checked long menu items will wrap". help_icon("wrap-long-menu-items"),
 	"id" => "shailan_dm_allowmultiline",
 	"type" => "checkbox"),
 	
 	array(  "name" => "Remove title attributes",
-	"desc" => "This will remove 'View all posts under..' title attributes from menu links",
+	"desc" => "This will remove 'View all posts under..' title attributes from menu links". help_icon("remove-title-attributes"),
 	"id" => "shailan_dm_remove_title_attributes",
 	"type" => "checkbox"),
 	
 	array(  "name" => "Remove links from top levels",
-	"desc" => "This will remove links from top level pages/categories. So user can only click to sub-level menu.",
+	"desc" => "This will remove links from top level pages/categories. So user can only click to sub-level menu.". help_icon("remove-links-from-top-levels"),
 	"id" => "shailan_dm_remove_top_level_links",
 	"type" => "checkbox"),
 	
@@ -110,24 +123,24 @@ array(
 ),
 	
 	array(  "name" => "Enable dropdown effects",
-	"desc" => "If checked sub menus will use effects below",
+	"desc" => "If checked sub menus will use effects below". help_icon("enable-dropdown-effects"),
 	"id" => "shailan_dm_effects",
 	"type" => "checkbox"),
 	
 	array(  "name" => "Effect",
-	"desc" => "Select effect you want to use",
+	"desc" => "Select effect you want to use".help_icon("effect"),
 	"id" => "shailan_dm_effect",
 	"type" => "select",
 	"options" => $effects ),
 	
 	array(  "name" => "Effect Speed",
-	"desc" => "Select effect speed",
+	"desc" => "Select effect speed".help_icon("effect-speed"),
 	"id" => "shailan_dm_effect_speed",
 	"type" => "select",
 	"options" => $speed ),
 	
 	array(  "name" => "Effect delay",
-	"desc" => "Select effect delay (hoverIntent script used for delayed effects.)",
+	"desc" => "Select effect delay (uses hoverIntent)".help_icon("effect-delay"),
 	"id" => "shailan_dm_effect_delay",
 	"type" => "select",
 	"options" => $delay ),
@@ -141,14 +154,14 @@ array(
 ),
 
 	array(  "name" => "Dropdown Menu Theme",
-	"desc" => "Skin for the menu",
+	"desc" => "Skin for the menu".help_icon("menu-theme"),
 	"id" => "shailan_dm_active_theme",
 	"std" => "None",
 	"options" => $themes,
 	"type" => "select"),
 	
 	array(  "name" => "Theme URL",
-	"desc" => "If <strong>From URL</strong> is selected you can specify theme URL here. ",
+	"desc" => "If <strong>From URL</strong> is selected you can specify theme URL here. ".help_icon("theme-url"),
 	"id" => "shailan_dm_theme_url",
 	"std" => "http://",
 	"type" => "text"),
@@ -159,7 +172,7 @@ array(
 	),
 	
 	array(  "name" => "Use custom colors",
-	"desc" => "If not checked custom colors won't work.",
+	"desc" => "If not checked custom colors won't work.".help_icon("use-custom-colors"),
 	"id" => "shailan_dm_custom_colors",
 	"std" => true,
 	"type" => "checkbox"),
@@ -167,31 +180,31 @@ array(
 	array("type"=>"picker"),
 	
 	array(  "name" => "Menu Background Color",
-	"desc" => "Background color of the dropdown menu",
+	"desc" => "Background color of the dropdown menu".help_icon("menu-background-color"),
 	"id" => "shailan_dm_color_menubg",
 	"std" => '#000000',
 	"type" => "text"),
 	
 	array(  "name" => "Hover Background Color",
-	"desc" => "Background color of list item link.",
+	"desc" => "Background color of list item link.".help_icon("hover-background-color"),
 	"id" => "shailan_dm_color_lihover",
 	"std" => '#333333',
 	"type" => "text"),
 	
 	array(  "name" => "Link Text Color",
-	"desc" => "Default link color",
+	"desc" => "Default link color".help_icon("link-text-color"),
 	"id" => "shailan_dm_color_link",
 	"std" => '#FFFFFF',
 	"type" => "text"),
 	
 	array(  "name" => "Link Text Color on mouse over",
-	"desc" => "Secondary link color",
+	"desc" => "Secondary link color".help_icon("link-text-color-on-mouse-over"),
 	"id" => "shailan_dm_color_hoverlink",
 	"std" => '#FFFFFF',
 	"type" => "text"),
 	
 	array(  "name" => "Overlay",
-	"desc" => "Menu overlay (Works on browsers that support png transparency only.)",
+	"desc" => "Menu overlay (Works on browsers that support png transparency only.)".help_icon("overlay"),
 	"id" => "shailan_dm_overlay",
 	"std" => "glass",
 	"type" => "select",
@@ -206,27 +219,27 @@ array(
 	),
 	
 	array(  "name" => "Dropdown Menu Font",
-	"desc" => "Font family for the menu<br />Please leave blank to use your wordpress theme font.",
+	"desc" => "Font family for the menu<br />Please leave blank to use your wordpress theme font.".help_icon("dropdown-menu-font"),
 	"id" => "shailan_dm_font",
 	"std" => '',
 	"type" => "text"),
 	
 	array(  "name" => "Dropdown Menu Font Size",
-	"desc" => "Font size of the menu items (Eg: 12px OR 1em) <br />Please leave blank to use your wordpress theme font-size.",
+	"desc" => "Font size of the menu items (Eg: 12px OR 1em) <br />Please leave blank to use your wordpress theme font-size.".help_icon("dropdown-menu-font-size"),
 	"id" => "shailan_dm_fontsize",
 	"std" => '',
 	"type" => "text"),
 	
 	array(  
 		"name" => "Custom CSS",
-		"desc" => "You can paste your own customization file here.",
+		"desc" => "You can paste your own customization file here.".help_icon("custom-css"),
 		"id" => "shailan_dm_custom_css",
 		"std" => '',
 		"type" => "textarea"
 	),
 	
 	array(  "name" => "Show Empty Categories",
-	"desc" => "If checked categories with no posts will be shown.",
+	"desc" => "If checked categories with no posts will be shown.".help_icon("show-empty-categories"),
 	"id" => "shailan_dm_show_empty",
 	"std" => false,
 	"type" => "checkbox"),
@@ -240,49 +253,49 @@ array(
 	),
 	
 	array(
-		"desc" => "Settings here only effect menus inserted with template tag : <code>&lt;?php shailan_dropdown_menu(); ?&gt;</code>. Widget settings are NOT affected by these settings. ",
+		"desc" => "Settings here only effect menus inserted with template tag : <code>&lt;?php shailan_dropdown_menu(); ?&gt;</code>. Widget settings are NOT affected by these settings. ".help_icon("template-tag"),
 		"type" => "paragraph"
 	),
 	
 	array(  "name" => "Menu Type",
-	"desc" => "Dropdown Menu Type",
+	"desc" => "Dropdown Menu Type".help_icon("menu-type"),
 	"id" => "shailan_dm_type",
 	"std" => "pages",
 	"options" => $types,
 	"type" => "select"),
 	
 	array(  "name" => "Home link",
-	"desc" => "If checked dropdown menu displays home link",
+	"desc" => "If checked dropdown menu displays home link".help_icon("home-link"),
 	"id" => "shailan_dm_home",
 	"std" => true,
 	"type" => "checkbox"),
 	
 	array(  "name" => "Login",
-	"desc" => "If checked dropdown menu displays login link",
+	"desc" => "If checked dropdown menu displays login link".help_icon("login"),
 	"id" => "shailan_dm_login",
 	"std" => true,
 	"type" => "checkbox"),
 	
 	array(  "name" => "Register / Site Admin",
-	"desc" => "If checked dropdown menu displays register/site admin link.",
+	"desc" => "If checked dropdown menu displays register/site admin link.".help_icon("register-site-admin"),
 	"id" => "shailan_dm_login",
 	"std" => true,
 	"type" => "checkbox"),
 	
 	array(  "name" => "Vertical menu",
-	"desc" => "If checked dropdown menu is displayed vertical.",
+	"desc" => "If checked dropdown menu is displayed vertical.".help_icon("vertical-menu"),
 	"id" => "shailan_dm_vertical",
 	"std" => true,
 	"type" => "checkbox"),
 	
 	array(  "name" => "Exclude Pages",
-	"desc" => "Excluded page IDs.",
+	"desc" => "Excluded page IDs.".help_icon("exclude-pages"),
 	"id" => "shailan_dm_exclude",
 	"std" => "",
 	"type" => "text"),
 	
 	array(  "name" => "Alignment",
-	"desc" => "Menu alignment.",
+	"desc" => "Menu alignment.".help_icon("alignment"),
 	"id" => "shailan_dm_align",
 	"std" => "left",
 	"options" => $alignment,

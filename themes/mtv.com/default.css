@@ -53,7 +53,7 @@
 
 		ul.dropdown ul {
 		 /*left: auto;*/
-		 right: 0; 
+		 /* right: 0; Removed because it was causing problems */ 
 		 margin-top: -1px;
 		 border-top: 1px solid #1a1a1a;
 		 border-left: solid 1px #4c4c4c;

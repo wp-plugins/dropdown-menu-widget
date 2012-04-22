@@ -4,20 +4,20 @@ Plugin Name: Dropdown Menu Widget
 Plugin URI: http://shailan.com/wordpress/plugins/dropdown-menu
 Description: A multi widget to generate drop-down menus from your pages, categories & navigation menus. You can find more widgets, plugins and themes at <a href="http://shailan.com">shailan.com</a>.
 Tags: dropdown, menu, css, css-dropdown, navigation, widget, dropdown-menu, customization, theme, jquery, template, multi-color, theme
-Version: 1.8.1
+Version: 1.9
 Author: Matt Say
 Author URI: http://shailan.com
 Text Domain: shailan-dropdown-menu
 */
 
-define('VERSION', '1.7.2');
+define('VERSION', '1.9');
 
 class shailan_DropdownWidget extends WP_Widget {
 
 	function shailan_DropdownWidget(){
 		$widget_ops = array(
 			'classname' => 'shailan-dropdown-menu-widget', 
-			'description' => __( 'Dropdown page/category menu', 'shailan-dropdown-menu' ) 
+			'description' => __( 'Dropdown page/category/custom menu', 'shailan-dropdown-menu' ) 
 		);
 		
 		$this->WP_Widget('dropdown-menu', __('Dropdown Menu', 'shailan-dropdown-menu'), $widget_ops);
@@ -25,6 +25,8 @@ class shailan_DropdownWidget extends WP_Widget {
 		
 		$this->pluginname = "Dropdown Menu";
 		$this->shortname = "shailan_dm";
+		
+		$this->help_url = "http://shailan.com/wordpress/plugins/dropdown-menu/help/";
 		
 		$this->version = VERSION; 
 		$this->settings_key = "shailan_dropdown_menu";
@@ -307,9 +309,9 @@ function options_page(){
 		
 		$nl = "\n"; $indent = "\n\t"; $indent2 = "\n\t\t";
 		
-		echo $nl . "<!-- Dropdown Menu Widget by shailan (http://shailan.com)  v". VERSION ." on wp".get_bloginfo( 'version' )." -->";
+		echo $nl . "<!-- Dropdown Menu Widget by Shailan.com (http://shailan.com)  v". VERSION ." on wp".get_bloginfo( 'version' )." -->";
 		echo $nl . "<!-- Menu Type : " . $type . " -->";
-		echo $nl . "<div class=\"shailan-dropdown-menu\">";
+		echo $nl . "<div class=\"shailan-dropdown-menu\" >";
 			
 			$dropdown_wrapper_open = $nl . '<div id="shailan-dropdown-wrapper-' . $this->number . '" >';
 					
@@ -475,40 +477,75 @@ function options_page(){
 		$vertical = (bool) $vertical;
 		
         ?>		
-		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title :', 'shailan-dropdown-menu'); ?> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label></p>
+		
+		<style type="text/css">.help-link{ padding:2px 5px; text-decoration:none; }</style>
+		
+		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title :', 'shailan-dropdown-menu'); ?> <?php $this->help_link('widget-title'); ?><input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></label> </p>
 		
 		<p>
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('show_title'); ?>" name="<?php echo $this->get_field_name('show_title'); ?>"<?php checked( $show_title ); ?> />
-		<label for="<?php echo $this->get_field_id('show_title'); ?>"><?php _e( 'Show widget title' , 'shailan-dropdown-menu' ); ?></label><br />
+		<label for="<?php echo $this->get_field_id('show_title'); ?>"><?php _e( 'Show widget title' , 'shailan-dropdown-menu' ); ?></label><?php $this->help_link('show-title'); ?> <br />
 			
-		<p><label for="<?php echo $this->get_field_id('type'); ?>"><?php _e('Menu:'); ?>
+		<p><label for="<?php echo $this->get_field_id('type'); ?>"><?php _e('Menu Type:'); ?>
 		<select name="<?php echo $this->get_field_name('type'); ?>" id="<?php echo $this->get_field_id('type'); ?>">
 		<?php foreach ($this->menu_types as $key=>$option) { ?>
 				<option <?php if ($type == $key) { echo 'selected="selected"'; } ?> value="<?php echo $key; ?>"><?php echo $option; ?></option><?php } ?>
 		</select>
-		</label></p>
+		</label><?php $this->help_link('widget-menu-type'); ?> </p>
 			
-		<p><label for="<?php echo $this->get_field_id('exclude'); ?>"><?php _e('Exclude:', 'shailan-dropdown-menu'); ?> <input class="widefat" id="<?php echo $this->get_field_id('exclude'); ?>" name="<?php echo $this->get_field_name('exclude'); ?>" type="text" value="<?php echo $exclude; ?>" /></label><br /> 
+		<p><label for="<?php echo $this->get_field_id('exclude'); ?>"><?php _e('Exclude:', 'shailan-dropdown-menu'); ?> <?php $this->help_link('exclude'); ?> <input class="widefat" id="<?php echo $this->get_field_id('exclude'); ?>" name="<?php echo $this->get_field_name('exclude'); ?>" type="text" value="<?php echo $exclude; ?>" /></label><br /> 
 		<small>Page IDs, separated by commas.</small></p>
 		
-		<p><label for="<?php echo $this->get_field_id('width'); ?>"><?php _e('Menu Width:', 'shailan-dropdown-menu'); ?> <input class="widefat" id="<?php echo $this->get_field_id('width'); ?>" name="<?php echo $this->get_field_name('width'); ?>" type="text" value="<?php echo $width; ?>" /></label><br /> 
+		<p><label for="<?php echo $this->get_field_id('width'); ?>"><?php _e('Menu Width:', 'shailan-dropdown-menu'); ?> <?php $this->help_link('widget-width'); ?><input class="widefat" id="<?php echo $this->get_field_id('width'); ?>" name="<?php echo $this->get_field_name('width'); ?>" type="text" value="<?php echo $width; ?>" /></label><br /> 
 		<small>Menu width, leave blank for default.</small></p>
 			
 		<p>
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('home'); ?>" name="<?php echo $this->get_field_name('home'); ?>"<?php checked( $home ); ?> />
-		<label for="<?php echo $this->get_field_id('home'); ?>"><?php _e( 'Add homepage link' , 'shailan-dropdown-menu' ); ?></label><br />
+		<label for="<?php echo $this->get_field_id('home'); ?>"><?php _e( 'Add homepage link' , 'shailan-dropdown-menu' ); ?></label><?php $this->help_link('homepage-link'); ?><br />
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('login'); ?>" name="<?php echo $this->get_field_name('login'); ?>"<?php checked( $login ); ?> />
-		<label for="<?php echo $this->get_field_id('login'); ?>"><?php _e( 'Add login/logout' , 'shailan-dropdown-menu' ); ?></label><br />
+		<label for="<?php echo $this->get_field_id('login'); ?>"><?php _e( 'Add login/logout' , 'shailan-dropdown-menu' ); ?></label><?php $this->help_link('login-logout-link'); ?><br />
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('admin'); ?>" name="<?php echo $this->get_field_name('admin'); ?>"<?php checked( $admin ); ?> />
-		<label for="<?php echo $this->get_field_id('admin'); ?>"><?php _e( 'Add Register/Site Admin' , 'shailan-dropdown-menu' ); ?></label><br />
+		<label for="<?php echo $this->get_field_id('admin'); ?>"><?php _e( 'Add Register/Site Admin' , 'shailan-dropdown-menu' ); ?></label><?php $this->help_link('site-admin-link'); ?><br />
 		<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id('vertical'); ?>" name="<?php echo $this->get_field_name('vertical'); ?>"<?php checked( $vertical ); ?> />
-		<label for="<?php echo $this->get_field_id('vertical'); ?>"><?php _e( 'Vertical menu' , 'shailan-dropdown-menu' ); ?></label>
+		<label for="<?php echo $this->get_field_id('vertical'); ?>"><?php _e( 'Vertical menu' , 'shailan-dropdown-menu' ); ?><?php $this->help_link('vertical-menu'); ?></label>
 		</p>
 		
-		<p><?php _e('Align:', 'shailan-dropdown-menu'); ?> <label for="left"><input type="radio" id="left" name="<?php echo $this->get_field_name('align'); ?>" value="left" <?php if($align=='left'){ echo 'checked="checked"'; } ?> /> <?php _e('Left', 'shailan-dropdown-menu'); ?></label> <label for="center"><input type="radio" id="center" name="<?php echo $this->get_field_name('align'); ?>" value="center" <?php if($align=='center'){ echo 'checked="checked"'; } ?>/> <?php _e('Center', 'shailan-dropdown-menu'); ?></label> <label for="right"><input type="radio" id="right" name="<?php echo $this->get_field_name('align'); ?>" value="right" <?php if($align=='right'){ echo 'checked="checked"'; } ?>/> <?php _e('Right', 'shailan-dropdown-menu'); ?></label></p>
+		<p><?php _e('Align:', 'shailan-dropdown-menu'); ?> <?php $this->help_link('alignment'); ?><label for="left"><input type="radio" id="left" name="<?php echo $this->get_field_name('align'); ?>" value="left" <?php if($align=='left'){ echo 'checked="checked"'; } ?> /> <?php _e('Left', 'shailan-dropdown-menu'); ?></label> <label for="center"><input type="radio" id="center" name="<?php echo $this->get_field_name('align'); ?>" value="center" <?php if($align=='center'){ echo 'checked="checked"'; } ?>/> <?php _e('Center', 'shailan-dropdown-menu'); ?></label> <label for="right"><input type="radio" id="right" name="<?php echo $this->get_field_name('align'); ?>" value="right" <?php if($align=='right'){ echo 'checked="checked"'; } ?>/> <?php _e('Right', 'shailan-dropdown-menu'); ?></label></p>
+		
+		<p><?php _e('Current Theme:', 'shailan-dropdown-menu') ?><br />
+			<?php $theme = $this->get_plugin_setting('shailan_dm_active_theme');
+				
+				$available_themes = array(
+					'None' => '*none*',
+					'From URL' => '*url*',
+					'Custom CSS' => '*custom*',
+					'Color Scheme' => 'color-scheme',
+					'Web 2.0 by Shailan' => plugins_url('/themes/web20.css', __FILE__),
+					'Simple White' => plugins_url('/themes/simple.css', __FILE__),
+					'Wordpress Default' => plugins_url('/themes/wpdefault.css', __FILE__),
+					'Grayscale' => plugins_url('/themes/grayscale.css', __FILE__),
+					'Aqua' => plugins_url('/themes/aqua.css', __FILE__),
+					'Blue gradient' => plugins_url('/themes/simple-blue.css', __FILE__),
+					'Shiny Black' => plugins_url('/themes/shiny-black.css', __FILE__),
+					'Flickr theme' =>  plugins_url('/themes/flickr.com/default.ultimate.css', __FILE__),
+					'Nvidia theme' =>  plugins_url('/themes/nvidia.com/default.advanced.css', __FILE__),
+					'Adobe theme' => plugins_url('/themes/adobe.com/default.advanced.css', __FILE__),
+					'MTV theme' => plugins_url('/themes/mtv.com/default.ultimate.css', __FILE__),
+					'Hulu theme' => plugins_url('/themes/hulu/hulu.css', __FILE__),
+					'Rounded Corners by Shailan' => plugins_url('/themes/rounded-corners.css', __FILE__),
+					'Rounded Corners Light by Shailan' => plugins_url('/themes/rounded-corners-light.css', __FILE__),
+					'Pills by Shailan' => plugins_url('/themes/pills.css', __FILE__)
+				);
+				
+				$theme_names = array_flip($available_themes);				
+				$theme_name = $theme_names[$theme];				
+				echo "<strong>" . $theme_name . "</strong>";
+			?>
+			<a href="options-general.php?page=dropdown-menu" style="text-decoration:none;"><?php esc_attr_e('Change theme &rarr;', 'shailan-dropdown-menu'); ?></a>
+		</p>
 			
-		<div class="widget-control-actions alignright">
-		<p><small><a href="options-general.php?page=dropdown-menu"><?php esc_attr_e('Menu Style', 'shailan-dropdown-menu'); ?></a> | <a href="http://shailan.com/wordpress/plugins/dropdown-menu"><?php esc_attr_e('Visit plugin site', 'shailan-dropdown-menu'); ?></a></small></p>
+		<div class="widget-control-actions">
+			<p><small>Powered by <a href="http://shailan.com/wordpress/plugins/dropdown-menu/" title="Wordpress Tips and tricks, Freelancing, Web Design">Shailan.com</a> | <a href="http://shailan.com/wordpress/" title="Get more wordpress widgets and themes" target="_blank" >Get more..</a></small></p>
 		</div>
 		<br class="clear" />
 			
@@ -537,7 +574,7 @@ function options_page(){
 			$is_fx_active = (bool) ( 'on' == $this->get_plugin_setting('shailan_dm_effects') );
 			
 			echo "\n\n<!-- Dropdown Menu Widget Styles by shailan (http://shailan.com) v" . VERSION . " on wp" . get_bloginfo( 'version' ) . " -->"; // For debug
-			echo "\n<link rel=\"stylesheet\" href=\"". plugins_url( '/css/shailan-dropdown.css' , __FILE__ ) . "\" type=\"text/css\" />";
+			echo "\n<link rel=\"stylesheet\" href=\"". plugins_url( '/css/shailan-dropdown.min.css' , __FILE__ ) . "\" type=\"text/css\" />";
 			
 			if( $theme!='*none*' && $theme != '*custom*' ){
 				if( false === strpos($theme, 'http') ){
@@ -639,6 +676,7 @@ function options_page(){
 // Arrow pointers
 
 if( 'on' == $this->get_plugin_setting('shailan_dm_arrows') ){
+	$clr = $this->get_plugin_setting('shailan_dm_arrow_color');
 
 ?>
 ul.dropdown li.parent>a{
@@ -646,16 +684,16 @@ ul.dropdown li.parent>a{
 }
 ul.dropdown li.parent>a:after{ 
 	content:""; position:absolute; top: 45%; right:6px;width:0;height:0; 
-	border-top:4px solid rgba(0,0,0,0.3);border-right:4px solid transparent;border-left:4px solid transparent }
+	border-top:4px solid <?php echo $clr; ?>;border-right:4px solid transparent;border-left:4px solid transparent }
 ul.dropdown li.parent:hover>a:after{
 	content:"";position:absolute; top: 45%; right:6px; width:0; height:0;
-	border-top:4px solid rgba(0,0,0,0.4);border-right:4px solid transparent;border-left:4px solid transparent }
+	border-top:4px solid <?php echo $clr; ?>;border-right:4px solid transparent;border-left:4px solid transparent }
 ul.dropdown li li.parent>a:after{
 	content:"";position:absolute;top: 40%; right:5px;width:0;height:0;
-	border-left:4px solid rgba(0,0,0,0.3);border-top:4px solid transparent;border-bottom:4px solid transparent }
+	border-left:4px solid <?php echo $clr; ?>;border-top:4px solid transparent;border-bottom:4px solid transparent }
 ul.dropdown li li.parent:hover>a:after{
 	content:"";position:absolute;top: 40%; right:5px;width:0;height:0;
-	border-left:4px solid rgba(0,0,0,0.4);border-top:4px solid transparent;border-bottom:4px solid transparent }
+	border-left:4px solid <?php echo $clr; ?>;border-top:4px solid transparent;border-bottom:4px solid transparent }
 
 <?php } 
 			
@@ -744,6 +782,10 @@ ul.dropdown li li.parent:hover>a:after{
 		} // fx active
 		
 	}
+	
+	function help_link($key, $text = '(?)'){
+		echo '<a href="'.$this->help_url.'#' . $key. '" target="_blank" class="help-link">' . $text . '</a>';
+	}
 
 } 
 // *** END OF CLASS ***
@@ -759,7 +801,6 @@ function get_dropdown_setting( $key, $default = '' ) {
 	
 	return FALSE;
 }
-
 
 // Register widget
 add_action('widgets_init', create_function('', 'return register_widget("shailan_DropdownWidget");'));
@@ -805,4 +846,5 @@ function shailan_dropdown_menu( $args = array() ){
 	if(!empty( $args['menu'] )){ $options['type'] = $args['menu']; }
 
 	the_widget( 'shailan_DropdownWidget', $options );
+	
 }

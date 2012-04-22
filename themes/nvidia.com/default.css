@@ -3,7 +3,7 @@ ul.dropdown li { background-color: #000; color: #fff; line-height: normal; }
 ul.dropdown a, ul.dropdown a:link, ul.dropdown a:visited { color: #fff; text-decoration: none; }
 ul.dropdown a:hover { color: #76b900; text-decoration: none; } ul.dropdown a:active { color: #fff; }
 	ul.dropdown ul {
-	 width: 170px;
+	/* width: 170px; Removed width because of indicator problem */
 	 background-color: #333;
 	 color: #fff;
 	 font-size: 11px;

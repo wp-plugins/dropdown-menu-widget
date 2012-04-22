@@ -50,7 +50,7 @@ ul.dropdown li a {
 
 	ul.dropdown ul a {
 	 padding: 4px 5px 4px 14px;
-	 width: 151px; /* Especially for IE */
+	 /* width: 151px; */ /* Especially for IE */
 	}
 
 	ul.dropdown ul a:hover {
