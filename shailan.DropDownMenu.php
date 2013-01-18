@@ -301,6 +301,14 @@ function options_page(){
 		$width_attr = '';
 		if( $width > 0 )
 			$width_attr = 'style="width:' . $width . 'px;"';
+			
+		if( !isset($align) || $align == '') {
+			$align = 'left';
+		}
+		
+		if( !isset($type) || $type == '') {
+			$type = 'pages';
+		}
 		
         echo $args['before_widget']; 
 		
@@ -428,18 +436,14 @@ function options_page(){
 					  'menu_class'      => 'dropdown '. $orientation . ' dropdown-align-'.$align, 
 					  'menu_id'         => '',
 					  'echo'            => true,
-					  'fallback_cb'     => 'wp_page_menu',
-					  'before'          => '',
-					  'after'           => '',
-					  'link_before'     => '',
-					  'link_after'      => '',
-					  'depth'           => 0,
-					  'walker'          => '',
-					  'theme_location'  => $location );
+					  'theme_location'  => $location,
+					  'is_shailan_dropdown_callback' => 'yes'
+					  );
 					  
-				if($custom_walkers){
-					$page_walker = new shailan_PageWalker();
-					$menu_args = wp_parse_args( array('walker'=>$page_walker) , $menu_args ); }
+					if($custom_walkers){
+						$page_walker = new shailan_PageWalker();
+						$menu_args = wp_parse_args( array('walker'=>$page_walker) , $menu_args ); 
+					}
 					
 					echo $dropdown_wrapper_open;
 					do_action('dropdown_before');
@@ -564,6 +568,8 @@ function options_page(){
 		
 			$theme = $this->get_plugin_setting('shailan_dm_active_theme');
 			if($theme == '*url*'){ $theme = $this->get_plugin_setting('shailan_dm_theme_url'); }
+			if($theme == ''){ $theme = "web20"; }
+			
 			$allow_multiline = (bool) ( 'on' == $this->get_plugin_setting('shailan_dm_allowmultiline') );
 			// Colors
 			$custom_colors = (bool) ( 'on' == $this->get_plugin_setting('shailan_dm_custom_colors') );
@@ -603,6 +609,8 @@ function options_page(){
 				echo $indent. "ul.dropdown { white-space: nowrap;	}";
 			}
 				
+			echo "custom colors:" . $custom_colors;	
+			
 			if($custom_colors){
 			// Custom color scheme is active
 			
@@ -848,3 +856,44 @@ function shailan_dropdown_menu( $args = array() ){
 	the_widget( 'shailan_DropdownWidget', $options );
 	
 }
+
+/**
+* Replaces nav menu callback function to use dropdown menu.
+*
+* @since 1.9.2
+*/
+function shailan_nav_menu_args_filter( $args ){
+
+	if( !isset( $args[ 'is_shailan_dropdown_callback' ] ) ){
+	
+		$defaults = array( 
+			'menu' => '', 
+			'container' => 'div', 
+			'container_class' => '', 
+			'container_id' => '', 
+			'menu_class' => 'menu', 
+			'menu_id' => '',
+			'echo' => true, 
+			'fallback_cb' => 'wp_page_menu', 
+			'before' => '', 
+			'after' => '', 
+			'link_before' => '', 
+			'link_after' => '', 
+			'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>'
+		);
+		
+		$args['fallback_cb'] = 'shailan_dropdown_menu';
+		$args['container_class'] = 'shailan-dropdown-menu';
+		$args['menu_class'] = 'dropdown';
+		
+		$args['items_wrap'] = '<div class="dropdown-horizontal-container dm-align-left clearfix"><ul id="%1$s" class="%2$s">%3$s</ul></div>';
+	
+	}
+	
+	return $args;
+} add_filter('wp_nav_menu_args', 'shailan_nav_menu_args_filter', 90, 1);
+
+function shailan_nav_menu_output_filter( $nav_menu_html, $args ){
+	// FILTER NAV MENU OUTPUT
+	return $nav_menu_html;
+} add_filter('wp_nav_menu', 'shailan_nav_menu_output_filter', 90, 2);

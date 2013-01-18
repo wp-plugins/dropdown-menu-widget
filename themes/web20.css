@@ -46,7 +46,7 @@ ul.dropdown li a {
 }
 
 /** Link colors */
-ul.dropdown a, ul.dropdown a:link, ul.dropdown a:visited { color: #888; text-shadow:#fff 1px 1px 1px; text-decoration: none; display:block; margin:1px; }
+ul.dropdown a, ul.dropdown a:link, ul.dropdown a:visited { background: transparent; border: 0; color: #888; text-shadow:#fff 1px 1px 1px; text-decoration: none; display:block; margin:1px; font-weight: normal; }
 ul.dropdown a:hover	{ color: #444; }
 ul.dropdown a:active	{ color: #27d; }
 
@@ -81,8 +81,8 @@ ul.dropdown ul li {
 /** Current menu item */
 li.current-cat>a, li.current_page_item>a, li.current-menu-item>a,
 li.current-cat>a:link, li.current_page_item>a:link, li.current-menu-item>a:link,
-li.current-cat>a:visited, li.current_page_item>a:visited, li.current-menu-item>a:visited{ color: #444; }
+li.current-cat>a:visited, li.current_page_item>a:visited, li.current-menu-item>a:visited{ color: #444; font-weight: normal; }
 
 /** Ancestor */
-li.current_page_ancestor>a,li.current_page_ancestor>a:visited, li.current_page_ancestor>a:link { color: #444; }
-li.current-menu-ancestor>a,li.current-menu-ancestor>a:visited, li.current-menu-ancestor>a:link { color: #444; }
+li.current_page_ancestor>a,li.current_page_ancestor>a:visited, li.current_page_ancestor>a:link { color: #444; font-weight: normal; }
+li.current-menu-ancestor>a,li.current-menu-ancestor>a:visited, li.current-menu-ancestor>a:link { color: #444; font-weight: normal; }

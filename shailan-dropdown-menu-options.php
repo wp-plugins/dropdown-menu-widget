@@ -156,7 +156,7 @@ array(
 	array(  "name" => "Dropdown Menu Theme",
 	"desc" => "Skin for the menu".help_icon("menu-theme"),
 	"id" => "shailan_dm_active_theme",
-	"std" => "None",
+	"std" => "web20",
 	"options" => $themes,
 	"type" => "select"),
 	
@@ -174,7 +174,7 @@ array(
 	array(  "name" => "Use custom colors",
 	"desc" => "If not checked custom colors won't work.".help_icon("use-custom-colors"),
 	"id" => "shailan_dm_custom_colors",
-	"std" => true,
+	"std" => 'off',
 	"type" => "checkbox"),
 	
 	array("type"=>"picker"),
@@ -241,7 +241,7 @@ array(
 	array(  "name" => "Show Empty Categories",
 	"desc" => "If checked categories with no posts will be shown.".help_icon("show-empty-categories"),
 	"id" => "shailan_dm_show_empty",
-	"std" => false,
+	"std" => 'on',
 	"type" => "checkbox"),
 	
 	array( "type" => "close" ),
@@ -267,25 +267,25 @@ array(
 	array(  "name" => "Home link",
 	"desc" => "If checked dropdown menu displays home link".help_icon("home-link"),
 	"id" => "shailan_dm_home",
-	"std" => true,
+	"std" => 'on',
 	"type" => "checkbox"),
 	
 	array(  "name" => "Login",
 	"desc" => "If checked dropdown menu displays login link".help_icon("login"),
 	"id" => "shailan_dm_login",
-	"std" => true,
+	"std" => 'on',
 	"type" => "checkbox"),
 	
 	array(  "name" => "Register / Site Admin",
 	"desc" => "If checked dropdown menu displays register/site admin link.".help_icon("register-site-admin"),
 	"id" => "shailan_dm_login",
-	"std" => true,
+	"std" => 'on',
 	"type" => "checkbox"),
 	
 	array(  "name" => "Vertical menu",
 	"desc" => "If checked dropdown menu is displayed vertical.".help_icon("vertical-menu"),
 	"id" => "shailan_dm_vertical",
-	"std" => true,
+	"std" => 'off',
 	"type" => "checkbox"),
 	
 	array(  "name" => "Exclude Pages",
