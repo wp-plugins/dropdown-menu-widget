@@ -177,7 +177,10 @@ border-radius: 8px;
 -webkit-border-radius: 8px;
 -moz-border-radius: 5px;
 font-family: 'Droid Sans', serif;
-font-size: 16px !important; font-weight:normal; text-shadow: #1A5B77 1px 1px 1px;}
+font-size: 16px !important; font-weight:normal; text-shadow: #1A5B77 1px 1px 1px;
+line-height: 16px;
+height: 40px;
+}
 	
 .stf_options #options-tabs .button-primary:hover{ background-color: #298CBA; }
 .stf_options #options-tabs .button-primary:active{ background-color: #21759B; }
