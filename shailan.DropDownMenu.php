@@ -166,7 +166,7 @@ function install_default_settings(){
 	
 	// Set default values
 	foreach($this->options as $option){
-		if( array_key_exists( 'id', $option ) )
+		if( array_key_exists( 'id', $option ) && array_key_exists( 'std', $option ) )
 			$settings[ $option['id'] ] = $option['std'];
 	}
 	
@@ -890,36 +890,11 @@ function shailan_dropdown_menu( $args = array() ){
 */
 function shailan_nav_menu_args_filter( $args ){
 
-	if( !isset( $args[ 'is_shailan_dropdown_callback' ] ) ){
-	
-		$defaults = array( 
-			'menu' => '', 
-			'container' => 'div', 
-			'container_class' => '', 
-			'container_id' => '', 
-			'menu_class' => 'menu', 
-			'menu_id' => '',
-			'echo' => true, 
-			'fallback_cb' => 'wp_page_menu', 
-			'before' => '', 
-			'after' => '', 
-			'link_before' => '', 
-			'link_after' => '', 
-			'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>'
-		);
-		
-		$args['fallback_cb'] = 'shailan_dropdown_menu';
-		$args['container_class'] = 'shailan-dropdown-menu';
-		$args['menu_class'] = 'dropdown';
-		
-		$args['items_wrap'] = '<div class="dropdown-horizontal-container dm-align-left clearfix"><ul id="%1$s" class="%2$s">%3$s</ul></div>';
-	
-	}
+	$args['fallback_cb'] = 'shailan_dropdown_menu';
 	
 	return $args;
 } add_filter('wp_nav_menu_args', 'shailan_nav_menu_args_filter', 90, 1);
 
-function shailan_nav_menu_output_filter( $nav_menu_html, $args ){
-	// FILTER NAV MENU OUTPUT
-	return $nav_menu_html;
-} add_filter('wp_nav_menu', 'shailan_nav_menu_output_filter', 90, 2);
+function shailan_nav_menu_output_filter( $nav_menu, $args ){
+	return $nav_menu;
+} add_filter( 'wp_nav_menu', 'shailan_nav_menu_output_filter', 10, 2);

@@ -72,6 +72,9 @@ if( function_exists('wp_nav_menu') ){
 
 $this->menu_types = $types; // Back it up
 
+// Registered menu locations
+global $_wp_registered_nav_menus;
+
 // Define plugin options	
 $options = array(
 	
@@ -99,20 +102,29 @@ array(
 	"std" => "rgba(0,0,0,0.5)",
 	"type" => "text"),
 	
-	array(  "name" => "Wrap long menu items",
-	"desc" => "If checked long menu items will wrap". help_icon("wrap-long-menu-items"),
-	"id" => "shailan_dm_allowmultiline",
-	"type" => "checkbox"),
+	array(  
+		"name" => "Wrap long menu items",
+		"desc" => "If checked long menu items will wrap". help_icon("wrap-long-menu-items"),
+		"id" => "shailan_dm_allowmultiline",
+		"type" => "checkbox",
+		"std" => "off"
+	),
 	
-	array(  "name" => "Remove title attributes",
-	"desc" => "This will remove 'View all posts under..' title attributes from menu links". help_icon("remove-title-attributes"),
-	"id" => "shailan_dm_remove_title_attributes",
-	"type" => "checkbox"),
+	array(  
+		"name" => "Remove title attributes",
+		"desc" => "This will remove 'View all posts under..' title attributes from menu links". help_icon("remove-title-attributes"),
+		"id" => "shailan_dm_remove_title_attributes",
+		"type" => "checkbox",
+		"std" => "off"
+	),
 	
-	array(  "name" => "Remove links from top levels",
-	"desc" => "This will remove links from top level pages/categories. So user can only click to sub-level menu.". help_icon("remove-links-from-top-levels"),
-	"id" => "shailan_dm_remove_top_level_links",
-	"type" => "checkbox"),
+	array(  
+		"name" => "Remove links from top levels",
+		"desc" => "This will remove links from top level pages/categories. So user can only click to sub-level menu.". help_icon("remove-links-from-top-levels"),
+		"id" => "shailan_dm_remove_top_level_links",
+		"type" => "checkbox",
+		"std" => "off"
+	),
 	
 array( "type" => "close" ),
 	
@@ -303,4 +315,4 @@ array(
 	
 	array( "type" => "close" )
 	
-);
+); 
