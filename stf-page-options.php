@@ -26,13 +26,7 @@
 		</div>
 	</div>
 
-	<div id="stf_tweet_wrap">
-	<div id="stf_tweet"></div><script type="text/javascript"> 
-	jQuery(document).ready(function($) {
-		$('#stf_tweet').tweetable({username: 'shailancom', time: false, limit: 1, replies: false});
-	});
-	</script>
-	
+	<div id="stf_tweet_wrap">	
 	<a href="http://twitter.com/shailancom" class="follow-link">Follow Shailan.com on twitter!</a>
 	</div>
 
@@ -58,8 +52,16 @@
 
 <div id="nav"><?php if(!empty($navigation)){echo $navigation;} ?></div>
 
+
+
 <div class="stf_opts_wrap">
 <div class="stf_options">
+
+
+<div id="demo"><h3>Menu Demo:</h3><?php shailan_dropdown_menu(); ?><br />
+<em>Please note, demo uses <a href="http://shailan.com/2773/dropdown-menu-widget-template-tag-usage-explained/" target="_blank">php template tag</a>.</em></div>
+
+
 <form method="post">
 <div id="options-tabs">
 

@@ -3,14 +3,14 @@
 
 /** Container */
 .shailan-dropdown-menu .dropdown-horizontal-container{ 
-    background: #eee;
-    background: -moz-linear-gradient(top, #eee 0%, #ddd 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eee), color-stop(100%,#ddd));
-    background: -webkit-linear-gradient(top, #eee 0%,#ddd 100%);
-    background: -o-linear-gradient(top, #eee 0%,#ddd 100%);
-    background: -ms-linear-gradient(top, #eee 0%,#ddd 100%);
+    background: #efefef;
+    background: -moz-linear-gradient(top, #efefef 0%, #ddd 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#efefef), color-stop(100%,#ddd));
+    background: -webkit-linear-gradient(top, #efefef 0%,#ddd 100%);
+    background: -o-linear-gradient(top, #efefef 0%,#ddd 100%);
+    background: -ms-linear-gradient(top, #efefef 0%,#ddd 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#dddddd',GradientType=0 );
-    background: linear-gradient(top, #eee 0%,#ddd 100%);
+    background: linear-gradient(top, #efefef 0%,#ddd 100%);
 	
     border-radius: 4px;
     -moz-border-radius: 4px;
@@ -41,7 +41,8 @@ ul.dropdown-horizontal.dropdown-align-right>li:first-child { border-left:0; }
 ul.dropdown-align-right li{ border-width: 0px 0px 0px 1px; }
 
 ul.dropdown li a {
-	padding: 3px 10px;
+	text-transform: uppercase;
+	padding: 3px 15px;
 	line-height: 22px;
 }
 
@@ -79,10 +80,10 @@ ul.dropdown ul li {
 }
 
 /** Current menu item */
-li.current-cat>a, li.current_page_item>a, li.current-menu-item>a,
-li.current-cat>a:link, li.current_page_item>a:link, li.current-menu-item>a:link,
-li.current-cat>a:visited, li.current_page_item>a:visited, li.current-menu-item>a:visited{ color: #444; font-weight: normal; }
+ul.dropdown li.current-cat>a, ul.dropdown li.current_page_item>a, ul.dropdown li.current-menu-item>a,
+ul.dropdown li.current-cat>a:link, ul.dropdown li.current_page_item>a:link, ul.dropdown li.current-menu-item>a:link,
+ul.dropdown li.current-cat>a:visited, ul.dropdown li.current_page_item>a:visited, ul.dropdown li.current-menu-item>a:visited{ color: #444; font-weight: normal; }
 
 /** Ancestor */
-li.current_page_ancestor>a,li.current_page_ancestor>a:visited, li.current_page_ancestor>a:link { color: #444; font-weight: normal; }
-li.current-menu-ancestor>a,li.current-menu-ancestor>a:visited, li.current-menu-ancestor>a:link { color: #444; font-weight: normal; }
+ul.dropdown li.current_page_ancestor>a, ul.dropdown li.current_page_ancestor>a:visited, ul.dropdown li.current_page_ancestor>a:link { color: #444; font-weight: normal; }
+ul.dropdown li.current-menu-ancestor>a, ul.dropdown li.current-menu-ancestor>a:visited, ul.dropdown li.current-menu-ancestor>a:link { color: #444; font-weight: normal; }
