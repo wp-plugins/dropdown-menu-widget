@@ -37,7 +37,7 @@
 	</div>
 
 	<div id="headlines">
-	<h3>Latest headlines from Shailan.com</h3>
+	<h3>Shailan Design Blog</h3>
 		<?php
 				//echo get_latest_tweet('mattsay');			
 				
@@ -194,16 +194,15 @@ case 'picker':
 
 <div id="tabs-footer" class="clearfix">
 	<p class="submit">
-		<input name="save" type="submit" class="button-primary" value="Save changes" />
+		<?php submit_button( 'Save Changes', 'primary', 'save', false ); ?>
 		<input type="hidden" name="action" value="save" />
 	</p>
 	</form>
 	
 	<form method="post">
-		<input name="reset" type="submit" class="button-secondary" value="Reset Options" />
+		<?php submit_button( 'Reset Options', 'secondary', 'reset', false ); ?>
 		<input type="hidden" name="action" value="reset" />
 	</form>
-
 
 	<div class="copyright"><?php if(!empty($footer_text)){echo $footer_text;} ?></div>
 </div>

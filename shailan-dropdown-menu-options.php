@@ -5,7 +5,7 @@ function help_icon($hash){
 }
 
 // Define themes
-$available_themes = array(
+$default_themes = array(
 	'None' => '*none*',
 	'From URL' => '*url*',
 	'Custom CSS' => '*custom*',
@@ -27,6 +27,8 @@ $available_themes = array(
 	'Pills by Shailan' => plugins_url('/themes/pills.css', __FILE__)
 );
 
+$available_themes = array();
+
 // Check for theme style file
 if( file_exists( trailingslashit( get_stylesheet_directory() ) . 'dropdown.css') ){
 	$available_themes['Dropdown.css (theme)'] = get_stylesheet_directory_uri() . '/dropdown.css';
@@ -35,6 +37,8 @@ if( file_exists( trailingslashit( get_stylesheet_directory() ) . 'dropdown.css')
 if( file_exists( trailingslashit( get_template_directory() ) . 'dropdown.css') ){
 	$available_themes['Dropdown.css (template)'] = get_template_directory_uri() . '/dropdown.css';
 }
+
+$available_themes = array_merge( $available_themes, $default_themes );
 
 // Swap array for options page
 $themes = array();
