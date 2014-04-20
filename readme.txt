@@ -3,8 +3,8 @@ Contributors: mattsay
 Donate link: http://shailan.com/donate  
 Tags: css, dropdown, menu, widget, pages, categories, multi, jquery, navigation, category list, themes, custom-styles, options-page, animations, effects
 Requires at least: 2.8  
-Tested up to: 3.5
-Stable tag: 1.9.2
+Tested up to: 3.9
+Stable tag: 1.9.3
 
 Pages/Categories/Custom dropdown navigation menus with nice jQuery effects. Comes with various customizable CSS themes!
 
@@ -54,6 +54,9 @@ You can submit errors and bugs using the [online form](http://shailan.com/contac
 1. Brand new dropdown menu options page.
 
 == Changelog ==
+
+= 1.9.3 =
+* Updated WordPress version for compatibility.
 
 = 1.9.2 =
 * Added: Settings link on plugins page.
