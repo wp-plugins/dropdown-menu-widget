@@ -30,7 +30,7 @@ class shailan_PageWalker extends Walker {
 	 * @param string $output Passed by reference. Used to append additional content.
 	 * @param int $depth Depth of page. Used for padding.
 	 */
-	function start_lvl(&$output, $depth) {
+	function start_lvl(&$output, $depth=0, $args=Array()) {
 		$indent = str_repeat("\t", $depth);
 		$output .= "\n$indent<ul>\n";
 	}
@@ -42,7 +42,7 @@ class shailan_PageWalker extends Walker {
 	 * @param string $output Passed by reference. Used to append additional content.
 	 * @param int $depth Depth of page. Used for padding.
 	 */
-	function end_lvl(&$output, $depth) {
+	function end_lvl(&$output, $depth=0, $args=Array()) {
 		$indent = str_repeat("\t", $depth);
 		$output .= "$indent</ul>\n";
 	}
@@ -56,7 +56,7 @@ class shailan_PageWalker extends Walker {
 	 * @param int $depth Depth of page in reference to parent pages. Used for padding.
 	 * @param array $args Uses 'selected' argument for selected page to set selected HTML attribute for option element.
 	 */
-	function start_el(&$output, $page, $depth, $args=array(), $current_page=NULL) {
+	function start_el(&$output, $page, $depth=0, $args=array(), $current_page=NULL) {
 		if ( $depth )
 			$indent = str_repeat("\t", $depth);
 		else
@@ -105,7 +105,9 @@ class shailan_PageWalker extends Walker {
 	 * @param object $page Page data object. Not used.
 	 * @param int $depth Depth of page. Not Used.
 	 */
-	function end_el(&$output, $page, $depth) {
+	function end_el(&$output, $page, $depth=0, $args=Array()) {
 		$output .= "</li>\n";
 	}
 }
+
+?>
